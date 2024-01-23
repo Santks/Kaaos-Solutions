@@ -1,11 +1,11 @@
 # Scrum-ohje projektille
 Tähän tulee tekstiä.
-
+Tehdään työt hyvin
 
 
 ## Mikä on Scrum?
 Tähän tulee tekstiä.
-
+Scrum on jännä homma
 
 
 ## Scrum-syklin yleiskuvaus
@@ -14,7 +14,7 @@ Tähän tulee tekstiä.
 
 
 ## Sprintit
-Tähän tulee tekstiä.
+On scrumin ydin, enintään kuukauden pituinen tai sitä lyhyempi aikaraja, jonka sisällä tuotetaan “valmiin” määritelmän täyttävä, käyttökelpoinen ja potentiaalisesti julkaisukelpoinen tuoteversio. Sprinteillä on sama pituus koko kehityksen ajan. Uusi sprintti alkaa välittömästi edellisen päätyttyä.
 
 
 
@@ -29,7 +29,7 @@ Tähän tulee tekstiä.
 
 
 ## Kokoukset
-Tähän tulee tekstiä.
+Voisi olla vaikka torstai kokouspäivä
 
 
 
@@ -41,4 +41,6 @@ Tähän tulee tekstiä.
 ## Lähteet
 Tähän tulee tekstiä.
 
-TESTING! 23.01.2024 kello 16:13 feat-ihaap -> develop
+Tämä on testi! 16:33 feat-ihaap ---> develop (merge)
+
+HH moodle ohjelmistoprojekti 1
