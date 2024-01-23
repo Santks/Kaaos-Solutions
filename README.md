@@ -29,7 +29,7 @@ Tähän tulee tekstiä.
 
 
 ## Kokoukset
-Tähän tulee tekstiä.
+Voisi olla vaikka torstai kokouspäivä
 
 
 
@@ -39,4 +39,4 @@ Tähän tulee tekstiä.
 
 
 ## Lähteet
-Tähän tulee tekstiä.
+HH moodle ohjelmistoprojekti 1
