@@ -4,7 +4,7 @@ Tähän tulee tekstiä.
 
 
 ## Mikä on Scrum?
-Tähän tulee tekstiä.
+- Scrum on ketterä kehitysmenetelmä
 
 
 
