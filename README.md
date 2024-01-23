@@ -1,6 +1,6 @@
 # Scrum-ohje projektille
 Tähän tulee tekstiä.
-Tehdään työt hyvin
+Tehdään työt hyvin ja ajallaan
 
 
 ## Mikä on Scrum?
@@ -29,7 +29,7 @@ Tähän tulee tekstiä.
 
 
 ## Kokoukset
-Voisi olla vaikka torstai kokouspäivä
+Kokouspäivä päätetään yhdessä ja jos ei pääse kokoukseen siitä ilmoitetaan ryhmälle
 
 
 
