@@ -29,7 +29,7 @@ Tähän tulee tekstiä.
 
 
 ## Kokoukset
-Tähän tulee tekstiä.
+Voisi olla vaikka torstai kokouspäivä
 
 
 
@@ -39,6 +39,10 @@ Tähän tulee tekstiä.
 
 
 ## Lähteet
+<<<<<<< HEAD
 Tähän tulee tekstiä.
 
 TESTING! 23.01.2024 kello 16:13 feat-ihaap -> develop
+=======
+HH moodle ohjelmistoprojekti 1
+>>>>>>> d31a045fdd8bb801e8aed738133ca55ca5c96683
