@@ -1,11 +1,11 @@
 # Scrum-ohje projektille
 Tähän tulee tekstiä.
-
+Tehdään työt hyvin
 
 
 ## Mikä on Scrum?
 Tähän tulee tekstiä.
-
+Scrum on jännä homma
 
 
 ## Scrum-syklin yleiskuvaus
