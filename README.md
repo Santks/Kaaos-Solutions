@@ -14,7 +14,7 @@ Tähän tulee tekstiä.
 
 
 ## Sprintit
-Tähän tulee tekstiä.
+On scrumin ydin, enintään kuukauden pituinen tai sitä lyhyempi aikaraja, jonka sisällä tuotetaan “valmiin” määritelmän täyttävä, käyttökelpoinen ja potentiaalisesti julkaisukelpoinen tuoteversio. Sprinteillä on sama pituus koko kehityksen ajan. Uusi sprintti alkaa välittömästi edellisen päätyttyä.
 
 
 
