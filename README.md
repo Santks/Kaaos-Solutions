@@ -4,8 +4,12 @@ Tehdään työt hyvin
 
 
 ## Mikä on Scrum?
-Tähän tulee tekstiä.
-Scrum on jännä homma
+### Scrum-menetelmä
+- Scrum on yleisimmin käytössä oleva ketterä (agile) ohjelmistoprojektimalli, mutta ei ainoa.
+- Scrum-projekti etenee määrämittaisissa sprinteissä. Sprintin kesto on tavallisesti 2-4 viikkoa.
+- Scrum (kuten kaikki ketterät menetelmät) on siis iteratiivinen ja inkrementaalinen:
+lopputulos muodostuu toistuvissa ajallisesti lyhyissä kehityssykleissä syntyneiden pienten
+lisäysten kautta.
 
 
 ## Scrum-syklin yleiskuvaus
@@ -14,9 +18,13 @@ Tähän tulee tekstiä.
 
 
 ## Sprintit
-On scrumin ydin, enintään kuukauden pituinen tai sitä lyhyempi aikaraja, jonka sisällä tuotetaan “valmiin” määritelmän täyttävä, käyttökelpoinen ja potentiaalisesti julkaisukelpoinen tuoteversio. Sprinteillä on sama pituus koko kehityksen ajan. Uusi sprintti alkaa välittömästi edellisen päätyttyä.
-
-
+- Työ jaksotetaan määrämittaisiksi, lyhyiksi iteraatioiksi, joita Scrum-menetelmässä
+kutsutaan sprinteiksi.
+- Sprinttiin otetaan tavoitteeksi tuotteen työjonosta päällimmäisiä (eli tärkeimpiä)
+asioita. Ne pyritään tekemään sprintissä niin valmiiksi, että ne voitaisiin julkaista.
+- Sprintin tavoite on siis määriteltävä niin pieneksi, että se voidaan tehdä yhdessä
+iteraatiossa valmiiksi. Jos aika uhkaa loppua kesken, sprinttiä ei pidennetä vaan
+tekemättä jäänyt työ työ siirtyy seuraaville sprinteille.
 
 ## Työjonot
 Tähän tulee tekstiä.
