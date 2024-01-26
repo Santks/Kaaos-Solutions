@@ -27,7 +27,15 @@ iteraatiossa valmiiksi. Jos aika uhkaa loppua kesken, sprinttiä ei pidennetä v
 tekemättä jäänyt työ työ siirtyy seuraaville sprinteille.
 
 ## Työjonot
-Tähän tulee tekstiä.
+- Työjono on olennainen osa Scrum-menetelmää. Työjonon avulla organisoimme tehtäviä, jotta ryhmä voi keskittyä tehokkaaseen työskentelyyn.
+### Periaatteet
+- Työjonolla organisoidaan ja priorisoidaan tehtäviä.
+- Sprintin alussa ryhmä valitsee tehtäviä työjonoon tehtävien tärkeyden perusteella.
+- Työjonon visualisointiin voidaan käyttää erilaisia työkaluja, kuten Kanban-taulua.
+- Ryhmä päättää työjonon visualisointiin käytettävän työkalun yhdessä.
+- Työjonoa päivitetään jatkuvasti projektin edetessä.
+- Tärkeimmät tehtävät pidetään työjonon kärjessä.
+- Työjonosta valitaan tehtäviä, jotka ovat saavutettavia sprintin aikana.
 
 
 
