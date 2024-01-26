@@ -65,7 +65,8 @@ Tähän tulee tekstiä.
 
 
 ## Miksi Scrum toimii?
-Tähän tulee tekstiä.
+- Scrum-menetelmä on joustava, mahdollistaen tehtävien helpon priorisoinnin. Se nopeuttaa tuotantoa tarjoten tehokkaan tavan tuottaa käyttövamiin lopputuotteen. Menetelmässä tiimi toimii itseohjautuvasti ja ketterästi, keskittyen lopputuotteen laatuun. Menetelmä korostaa myös yhteistyön merkitystä ja pyrkii parantamaan työntekijöiden tyytyväisyyttä, mikä tekee siitä erinomaisen valinnan etenkin pieniin ja keskisuuriin projekteihin.
+
 
 
 
