@@ -37,8 +37,13 @@ Tähän tulee tekstiä.
 
 
 ## Kokoukset
-Kokouspäivä päätetään yhdessä ja jos ei pääse kokoukseen siitä ilmoitetaan ryhmälle
-
+- Kokouspäivä päätetään yhdessä.
+- Jos ryhmän jäsen ei pysty osallistumaan kokoukseen hänen täytyy ilmoittaa asiasta ryhmälle. 
+- Kokoukset pyritään sopimaan ajankohdalle, jolloin kaikki tai mahdollisimman moni pääsee osallistumaan.
+- Ryhmän kokoukset järjestetään pääsääntöisesti ryhmän omalla Teams-kanavalla.
+- Kokouksissa käydään läpi muutoksia, joita on tapahtunut edellisen kokouksen jälkeen.
+- Ryhmän jäsenet päättävät projektin seuraavat askeleet yhdessä kokouksissa. 
+- Sprintin päätyttyä käydään ryhmän kanssa läpi sprintin tulokset ja aletaan suunnittelemaan seuraavaa sprinttiä.
 
 
 ## Miksi Scrum toimii?
