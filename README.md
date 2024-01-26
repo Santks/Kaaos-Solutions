@@ -1,6 +1,5 @@
 # Scrum-ohje projektille
-Tähän tulee tekstiä.
-Tehdään työt hyvin ja ajallaan
+Tämä pikaopas perustuu 11/2020 päivitettyyn ja 02/2021 Agile Finlandin toimesta suomennettuun uusimpaan Scrum-versioon.
 
 
 
