@@ -70,4 +70,4 @@ Tähän tulee tekstiä.
 
 
 ## Lähteet
-Tähän tulee tekstiä.
+- Scrum Guides. (2020). Scrum Guide. Luettavissa: https://scrumguides.org/docs/scrumguide/v1/Scrum-Guide-FI.pdf. Viitattu: 26.01.2024.
