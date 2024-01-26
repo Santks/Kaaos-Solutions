@@ -3,6 +3,7 @@ Tähän tulee tekstiä.
 Tehdään työt hyvin ja ajallaan
 
 
+
 ## Mikä on Scrum?
 ### Scrum-menetelmä
 - Scrum on yleisimmin käytössä oleva ketterä (agile) ohjelmistoprojektimalli, mutta ei ainoa.
@@ -12,8 +13,14 @@ lopputulos muodostuu toistuvissa ajallisesti lyhyissä kehityssykleissä syntyne
 lisäysten kautta.
 
 
-## Scrum-syklin yleiskuvaus
-Tähän tulee tekstiä.
+
+## Scrum-syklin (sprint) yleiskuvaus
+- Ennen sprintin aloittamista, tiimi kokoontuu sprintin suunnittelukokoukseen. Tässä kokouksessa määritellään sprintin sisältö sekä tavoitteet. Tavoitteet asetetaan liiketoiminnan vaatimusten mukaiseen järjestykseen tuotejonoksi. Tuotejono on priorisoitu luettelo ominaisuuksista, jotka on tarkoitus toteuttaa projektin aikana. Kokouksessa keskustellaan myös parhaista menetelmistä ja tavoista, joilla tiimi voi suorittaa tehtävät tehokkaasti ja laadukkaasti.
+- Sprintin aikana tiimi työskentelee päivittäin jaksoissa, joissa keskitytään sprintin tuotejonon tehtävien toteuttamiseen. Päivittäin pidetään Scrum-kokous, jossa tiimi keskustelee edistymisestään, esteistä ja seuraavista vaiheista.
+- Sprintin lopussa pidetään loppukatselmointi. Tässä kokouksessa tiimi esittelee työnsä tulokset ja tarkistaa saavutetun tason toimivuuden ja mahdollisen tuotantokelpoisuuden. Lisäksi arvioidaan, tarvitaanko vielä lisää sprinttejä tavoitteiden saavuttamiseksi. 
+- Tarvittaessa suunnitellaan uuden sprintin tuotejono sekä tavoitteet ja aloitetaan uusi sprintti. Tämä prosessi toistuu, kunnes kaikki tuotejonon tehtävät on suoritettu ja varsinainen lopputuote on valmis.
+
+![Sprint](sprint.png "Sprint")
 
 
 
@@ -25,6 +32,8 @@ asioita. Ne pyritään tekemään sprintissä niin valmiiksi, että ne voitaisii
 - Sprintin tavoite on siis määriteltävä niin pieneksi, että se voidaan tehdä yhdessä
 iteraatiossa valmiiksi. Jos aika uhkaa loppua kesken, sprinttiä ei pidennetä vaan
 tekemättä jäänyt työ työ siirtyy seuraaville sprinteille.
+
+
 
 ## Työjonot
 - Työjono on olennainen osa Scrum-menetelmää. Työjonon avulla organisoimme tehtäviä, jotta ryhmä voi keskittyä tehokkaaseen työskentelyyn.
@@ -54,6 +63,7 @@ Tähän tulee tekstiä.
 - Sprintin päätyttyä käydään ryhmän kanssa läpi sprintin tulokset ja aletaan suunnittelemaan seuraavaa sprinttiä.
 
 
+
 ## Miksi Scrum toimii?
 Tähän tulee tekstiä.
 
@@ -61,13 +71,3 @@ Tähän tulee tekstiä.
 
 ## Lähteet
 Tähän tulee tekstiä.
-
-<<<<<<< HEAD
-Tämä on testi! 16:33 feat-ihaap ---> develop (merge)
-
-HH moodle ohjelmistoprojekti 1
-=======
-TESTING! 23.01.2024 kello 16:13 feat-ihaap -> develop
-HH moodle ohjelmistoprojekti 1
-<>
->>>>>>> develop
