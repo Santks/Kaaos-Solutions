@@ -32,7 +32,13 @@ Tähän tulee tekstiä.
 
 
 ## Roolit
-Tähän tulee tekstiä.
+- Yhdessä scrum-tiimissä on kolme eri roolia.
+
+| Rooli | Kuvaus |
+| --- | --- | 
+| Product Owner | Tuoteomistaja. Yhden henkilön vastuutehtävä. Vastaa kehitysjonosta, sen tärkeysjärjestyksen organisoinnista. Edustaa asiakkaita ja käyttäjiä. Pyrkimyksenä tiimin työpanoksen, sekä itse tuotteen arvon maksimointi.  |
+| Scrum Master | Vastaa siitä, että Scrum-menetelmää käytetään kehityksessä. Käytännössä siis hän varmistaa, että näitä menetelmän sääntöjä noudatetaan työskentelyssä. Roolissa on myös olennaista kommunikointi kehitystiimin ja tuoteomistajan kanssa mm. asetetuista tavoitteista. Scrum Master pyrkii edesauttamaan kehitystiimin työtä tekemällä siitä mahdollisimman sujuvaa ja häiriövapaata.  |
+| Development Team | Kehitystiimi on yhteisvastuullinen ryhmä, jonka tehtävänä on sprintin tavoitteiden saavuttaminen. Täten kehitystiimin osaamisen tulisikin vastata tähän tarpeeseen. |
 
 
 
