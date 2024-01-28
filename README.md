@@ -4,12 +4,14 @@ Tämä pikaopas perustuu 11/2020 päivitettyyn ja 02/2021 Agile Finlandin toimes
 
 
 ## Mikä on Scrum?
+<<<<<<< HEAD
 ### Scrum-menetelmä
 - Scrum on yleisimmin käytössä oleva ketterä (agile) ohjelmistoprojektimalli, mutta ei ainoa.
 - Scrum-projekti etenee määrämittaisissa sprinteissä. Sprintin kesto on tavallisesti 2-4 viikkoa.
 - Scrum (kuten kaikki ketterät menetelmät) on siis iteratiivinen ja inkrementaalinen:
 lopputulos muodostuu toistuvissa ajallisesti lyhyissä kehityssykleissä syntyneiden pienten
 lisäysten kautta.
+
 
 
 
