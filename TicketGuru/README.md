@@ -1,24 +1,47 @@
 # TicketGuru – Kaaos Solutions
 Tiimi: Ilja Haapanen, Leonid Petrov, Sampsa Loukkola, Santeri Kuronen
 
+
 ## Johdanto
-Projektin aiheena on lipunmyyntijärjestelmä TicketGuru (alustava nimi). 
+Projektin tarkoituksena on tuottaa TicketGuru -lipunmyyntijärjestelmä. Asiakkaana on lipputoimisto, joka on tilannut lipunmyyntijärjestelmän lippujen myymiseen myyntipisteessään. Alustava nimi järjestelmälle on TicketGuru.
 
-Johdantoon kirjoitetaan lyhyt, ytimekäs kuvaus siitä, mikä on projektin aihe, kuka on asiakas (käyttäjä), mitä hän haluaa ja saa järjestelmältä, mitä tekniikoita käytetään ja mitä konkreettisesti on valmiina, kun projekti päättyy.
+Asiakas, eli lipputoimisto, määrittelee TicketGurussa tapahtumat, joihin lippuja myydään. Sovelluksella hallinnoidaan ja seurataan lipunmyyntiä. Lipunmyyjät ja toimiston henkilökunta käyttävät sovellusta, asiakkaat eivät voi ostaa lippuja suoraan järjestelmästä omatoimisesti. Tapahtumia voi lisätä, muokata ja niihin voi luoda erilaisia lipputyyppejä.
+Lippuja pitää voida myydä ja tulostaa, ja lippujen on sisällettävä helposti tarkastettava yksilöivä koodi, jotta lippu voidaan varmentaa aidoksi sekä merkitä käytetyksi. Ennakkomyynnin jälkeen jäljellä olevat liput tulee pystyä tulostamaan, jotta ne voidaan myydä ovella.
 
-- Järjestelmän tarkoitus ja tiivis kuvaus siitä, mistä on kyse ja kenelle järjestelmä on tarkoitettu.
-- Toteutus- ja toimintaympäristö lyhyesti:
-- Palvelinpuolen ratkaisut ja teknologiat (esim. palvelinteknologia, mikä tietokantajärjestelmä on käytössä)
-- Käyttöliittymäratkaisut ja teknologiat (esim. päätelaitteet: puhelin, täppäri, desktop)
+Myytyjen lippujen määrää voidaan seurata raporteilta tapahtumakohtaisesti. Järjestelmä on tarkoitettu käytettäväksi selaimen kautta päätteellä, ja sen on tarkoitus olla täysin responsiivinen ja selainriippumaton.
+
+Asiakkaan tarkoituksena on jatkokehittää ja laajentaa palveluitaan myös verkkokaupan suuntaan, mutta se ei ole osa tätä projektia.
+
 
 ## Järjestelmän määrittely
-Määrittelyssä järjestelmää tarkastellaan käyttäjän näkökulmasta. Järjestelmän toiminnot hahmotellaan käyttötapausten tai käyttäjätarinoiden kautta, ja kuvataan järjestelmän käyttäjäryhmät.
+Lipunmyyntijärjestelmä on määritelty erikseen käyttäjäryhminä, käyttäjätarinoina sekä käyttötapauskaaviona.
 
-- Lyhyt kuvaus käyttäjäryhmistä (rooleista)
-- Käyttäjäroolit ja roolien tarvitsemat toiminnot, esim. käyttötapauskaaviona (use case diagram) tai käyttäjätarinoina.
-- Lyhyt kuvaus käyttötapauksista tai käyttäjätarinat
 
-Kuvauksissa kannattaa harkita, mikä on toteuttajalle ja asiakkaalle oleellista tietoa ja keskittyä siihen.
+### Käyttäjäryhmät
+Tilaaja / Tuoteomistaja
+- Lipputoimisto, joka on tilannut lipumyyntijärjestelmän
+
+Pääkäyttäjä
+- Pääkäyttäjä voi lisätä, muokata sekä poistaa käyttäjäoikeuksia
+
+Ylläpitäjä
+- Ylläpitäjä syöttää järjestelmään tapahtumia
+
+Myyjä
+- Myyjä lisää järjestelmään tilauksia ja tarkastaa lippuja
+
+Asiakas
+- Asiakas ostaa lipun tiettyyn tapahtumaan
+
+
+### Käyttäjätarinat
+- Lorem Ipsum
+- Lorem Ipsum
+
+
+### Käyttötapauskaavio
+- Kuva tulee tähän
+
 
 ## Käyttöliittymä
 Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona.
