@@ -10,7 +10,7 @@ Lippuja pitää voida myydä ja tulostaa, ja lippujen on sisällettävä helpost
 
 Myytyjen lippujen määrää voidaan seurata raporteilta tapahtumakohtaisesti. Järjestelmä on tarkoitettu käytettäväksi selaimen kautta päätteellä, ja sen on tarkoitus olla täysin responsiivinen ja selainriippumaton.
 
-Asiakkaan tarkoituksena on jatkokehittää ja laajentaa palveluitaan myös verkkokaupan suuntaan, mutta se ei ole osa tätä projektia.
+Asiakas haluaa jatkokehittää ja laajentaa palveluitaan myös verkkokaupan suuntaan, mutta jatkokehitys ei ole osa tätä projektia.
 
 
 ## Järjestelmän määrittely
