@@ -12,6 +12,7 @@ lopputulos muodostuu toistuvissa ajallisesti lyhyissä kehityssykleissä syntyne
 lisäysten kautta.
 
 
+
 ## Scrum-syklin (sprint) yleiskuvaus
 - Ennen sprintin aloittamista, tiimi kokoontuu sprintin suunnittelukokoukseen. Tässä kokouksessa määritellään sprintin sisältö sekä tavoitteet. Tavoitteet asetetaan liiketoiminnan vaatimusten mukaiseen järjestykseen tuotejonoksi. Tuotejono on priorisoitu luettelo ominaisuuksista, jotka on tarkoitus toteuttaa projektin aikana. Kokouksessa keskustellaan myös parhaista menetelmistä ja tavoista, joilla tiimi voi suorittaa tehtävät tehokkaasti ja laadukkaasti.
 - Sprintin aikana tiimi työskentelee päivittäin jaksoissa, joissa keskitytään sprintin tuotejonon tehtävien toteuttamiseen. Päivittäin pidetään Scrum-kokous, jossa tiimi keskustelee edistymisestään, esteistä ja seuraavista vaiheista.
