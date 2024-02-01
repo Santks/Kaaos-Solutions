@@ -18,25 +18,24 @@ Lipunmyyntijärjestelmä on määritelty erikseen käyttäjäryhminä, käyttäj
 
 
 ### Käyttäjäryhmät
-Tilaaja / Tuoteomistaja
+**Tilaaja / Tuoteomistaja**
 - Lipputoimisto, joka on tilannut lipumyyntijärjestelmän
 
-Pääkäyttäjä
+**Pääkäyttäjä**
 - Pääkäyttäjä voi lisätä, muokata sekä poistaa käyttäjäoikeuksia
 
-Ylläpitäjä
+**Ylläpitäjä**
 - Ylläpitäjä syöttää järjestelmään tapahtumia
 
-Myyjä
+**Myyjä**
 - Myyjä lisää järjestelmään tilauksia ja tarkastaa lippuja
 
-Asiakas
+**Asiakas**
 - Asiakas ostaa lipun tiettyyn tapahtumaan
 
 
 ### Käyttäjätarinat
-- Lorem Ipsum
-- Lorem Ipsum
+Käyttäjätarinat löytyvät projektin SCRUM-taulun vasemmasta laidasta. [Linkki tauluun](https://github.com/users/Santks/projects/3/views/1).
 
 
 ### Käyttötapauskaavio
