@@ -13,11 +13,6 @@ lopputulos muodostuu toistuvissa ajallisesti lyhyissä kehityssykleissä syntyne
 lisäysten kautta.
 
 
-
-<<<<<<<<< Temporary merge branch 1
-
-=========
->>>>>>>>> Temporary merge branch 2
 ## Scrum-syklin (sprint) yleiskuvaus
 - Ennen sprintin aloittamista, tiimi kokoontuu sprintin suunnittelukokoukseen. Tässä kokouksessa määritellään sprintin sisältö sekä tavoitteet. Tavoitteet asetetaan liiketoiminnan vaatimusten mukaiseen järjestykseen tuotejonoksi. Tuotejono on priorisoitu luettelo ominaisuuksista, jotka on tarkoitus toteuttaa projektin aikana. Kokouksessa keskustellaan myös parhaista menetelmistä ja tavoista, joilla tiimi voi suorittaa tehtävät tehokkaasti ja laadukkaasti.
 - Sprintin aikana tiimi työskentelee päivittäin jaksoissa, joissa keskitytään sprintin tuotejonon tehtävien toteuttamiseen. Päivittäin pidetään Scrum-kokous, jossa tiimi keskustelee edistymisestään, esteistä ja seuraavista vaiheista.
@@ -76,10 +71,6 @@ tekemättä jäänyt työ työ siirtyy seuraaville sprinteille.
 
 ## Miksi Scrum toimii?
 - Scrum-menetelmä on joustava, mahdollistaen tehtävien helpon priorisoinnin. Se nopeuttaa tuotantoa tarjoten tehokkaan tavan tuottaa käyttövalmiin lopputuotteen. Menetelmässä tiimi toimii itseohjautuvasti ja ketterästi, keskittyen lopputuotteen laatuun. Menetelmä korostaa myös yhteistyön merkitystä ja pyrkii parantamaan työntekijöiden tyytyväisyyttä, mikä tekee siitä erinomaisen valinnan etenkin pieniin ja keskisuuriin projekteihin.
-<<<<<<< HEAD
-=======
-
->>>>>>> 6f4129ca8ef0f5d03c312269daacaaeae326d805
 
 
 
