@@ -3,40 +3,38 @@ Tiimi: Ilja Haapanen, Leonid Petrov, Sampsa Loukkola, Santeri Kuronen
 
 
 ## Johdanto
-Projektin tarkoituksena on tuottaa TicketGuru -lipunmyyntijärjestelmä. Asiakkaana on lipputoimisto, joka on tilannut lipunmyyntijärjestelmän lippujen myymiseen myyntipisteessään. Alustava nimi järjestelmälle on TicketGuru.
+Projektin tarkoituksena on tuottaa lipunmyyntijärjestelmä. Asiakkaana on lipputoimisto, joka on tilannut lipunmyyntijärjestelmän lippujen myymiseen myyntipisteessään. Alustava nimi järjestelmälle on TicketGuru.
 
-Asiakas, eli lipputoimisto, määrittelee TicketGurussa tapahtumat, joihin lippuja myydään. Sovelluksella hallinnoidaan ja seurataan lipunmyyntiä. Lipunmyyjät ja toimiston henkilökunta käyttävät sovellusta, asiakkaat eivät voi ostaa lippuja suoraan järjestelmästä omatoimisesti. Tapahtumia voi lisätä, muokata ja niihin voi luoda erilaisia lipputyyppejä.
-Lippuja pitää voida myydä ja tulostaa, ja lippujen on sisällettävä helposti tarkastettava yksilöivä koodi, jotta lippu voidaan varmentaa aidoksi sekä merkitä käytetyksi. Ennakkomyynnin jälkeen jäljellä olevat liput tulee pystyä tulostamaan, jotta ne voidaan myydä ovella.
+Lipputoimisto määrittelee TicketGurussa tapahtumat, joihin lippuja myydään. Sovelluksella hallinnoidaan sekä seurataan lipunmyyntiä. Lipunmyyjät ja toimiston henkilökunta käyttävät sovellusta, asiakkaat eivät voi ostaa lippuja suoraan järjestelmästä omatoimisesti vaan myynti tapahtuu ennakkoon myyjän kautta tai tapahtuman ovelta. Tapahtumia voi lisätä, muokata ja niihin voi luoda erilaisia lipputyyppejä. Lippuja pitää voida myydä ja tulostaa ja lippujen on sisällettävä helposti tarkastettava yksilöivä koodi, jotta lippu voidaan varmentaa aidoksi sekä merkitä käytetyksi. Ennakkomyynnin jälkeen jäljellä olevat liput tulee pystyä tulostamaan, jotta ne voidaan myydä tapahtuman ovella.
 
 Myytyjen lippujen määrää voidaan seurata raporteilta tapahtumakohtaisesti. Järjestelmä on tarkoitettu käytettäväksi selaimen kautta päätteellä, ja sen on tarkoitus olla täysin responsiivinen ja selainriippumaton.
 
-Asiakkaan tarkoituksena on jatkokehittää ja laajentaa palveluitaan myös verkkokaupan suuntaan, mutta se ei ole osa tätä projektia.
+Asiakas haluaa jatkokehittää ja laajentaa palveluitaan myös verkkokaupan suuntaan, mutta jatkokehitys ei ole osa tätä projektia.
 
 
 ## Järjestelmän määrittely
-Lipunmyyntijärjestelmä on määritelty erikseen käyttäjäryhminä, käyttäjätarinoina sekä käyttötapauskaaviona.
+Lipunmyyntijärjestelmä on määritelty alla erikseen käyttäjäryhminä, käyttäjätarinoina sekä käyttötapauskaaviona.
 
 
 ### Käyttäjäryhmät
-Tilaaja / Tuoteomistaja
+**Tilaaja / Tuoteomistaja**
 - Lipputoimisto, joka on tilannut lipumyyntijärjestelmän
 
-Pääkäyttäjä
+**Pääkäyttäjä**
 - Pääkäyttäjä voi lisätä, muokata sekä poistaa käyttäjäoikeuksia
 
-Ylläpitäjä
+**Ylläpitäjä**
 - Ylläpitäjä syöttää järjestelmään tapahtumia
 
-Myyjä
+**Myyjä**
 - Myyjä lisää järjestelmään tilauksia ja tarkastaa lippuja
 
-Asiakas
+**Asiakas**
 - Asiakas ostaa lipun tiettyyn tapahtumaan
 
 
 ### Käyttäjätarinat
-- Lorem Ipsum
-- Lorem Ipsum
+Käyttäjätarinat löytyvät projektin SCRUM-taulun vasemmasta laidasta. [Linkki tauluun](https://github.com/users/Santks/projects/3/views/1).
 
 
 ### Käyttötapauskaavio
