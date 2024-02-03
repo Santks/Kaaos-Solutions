@@ -45,6 +45,7 @@ Käyttäjätarinat löytyvät projektin SCRUM-taulun vasemmasta laidasta. [Linkk
 Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona.
 
 Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
+* alustavat tekstikuvaukset käyttöliittymän näkymistä rautalankamallien perusteella*
 
 ## Tietokanta
 Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet kuvataan käsitekaaviolla. Käsitemalliin sisältyy myös taulujen välisten viiteyhteyksien ja avainten määritykset. Tietokanta kuvataan käyttäen jotain kuvausmenetelmää, joko ER-kaaviota ja UML-luokkakaaviota.
