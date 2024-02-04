@@ -46,6 +46,19 @@ Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden v�
 
 Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 
+**alustavat tekstikuvaukset käyttöliittymän näkymistä rautalankamallien perusteella**
+
+| Näkymä | Kuvaus |
+|--------|--------|
+| Lipunmyynti | Listaus tapahtumista, joihin lippuja myynnissä. Tapahtumista tiedot (Nimi,PVM,klonaika). Valitusta tapahtumasta näkyviin tulee myös lippujen kategoriat ja hinnat. Ostettavien lippujen määrää voi vaihtaa. Lippujen kokonaissumma näytetään myyntitapahtumaan johtavan painikkeen läheisyydessä. |
+| Myyntitapahtuma | - Ostetuista lipuista näytetään yhteenveto, josta tulee ilmi myyntitapahtuman yksilöivä tunnus, maksupvm ja klonaika, sekä maksettu summa. - Lisäksi taulukko ostetuista tuotteista kategorisoituna (Tapahtuma, lipputyyppi, hinta, yksilöivä tunnus). - Painike lippujen tulostusta varten. |
+| Tapahtumien hallinta (listaus) | Ylläpidon näkymä listauksena tapahtumista ja niiden tiedoista. Jokaisen tapahtuman yhteydessä painikkeet, joista siirtymä eri näkymiin: (muokkaus), (lipputyypit), Myyntiraportti. Painike uuden tapahtuman luontia varten. |
+| Tapahtumien hallinta (muokkaus) | Näkymä, jossa kaikkia tapahtuman tietoja voi muokata poislukien lipputyypit. Tallennus-painike. |
+| Tapahtumien hallinta (uusi) | Näkymä yhtenäinen (muokkaus)-näkymän kanssa. |
+| Tapahtumien hallinta (lipputyypit) | Yhden tapahtuman lipputyypit ja niiden tiedot listaava näkymä. Jokaisen listatun yhteydessä painike tietojen muokkausta varten. Uuden lipputyypin lisäystä varten lomake-tyyppinen ratkaisu. |
+| Myyntiraportti | Yhden tapahtuman yhteenveto, josta selviää tapahtumaan myytyjen lippujen tyypit ja kappalemäärät. Painike, josta siirtymä näkymään Tapahtuma (myyntitapahtumat). |
+| Tapahtuma (myyntitapahtumat) | Näkymä, jossa listaus kaikista yhden tapahtuman myyntitapahtumista. Kategorisoitu (aika, yksilöivä tunnus, kokonaissumma, toiminnot). Toiminnot-sarakkeessa painike näkymään, jossa tarkemmat tiedot yhdestä myyntitapahtumasta. |
+
 ## Tietokanta
 Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet kuvataan käsitekaaviolla. Käsitemalliin sisältyy myös taulujen välisten viiteyhteyksien ja avainten määritykset. Tietokanta kuvataan käyttäen jotain kuvausmenetelmää, joko ER-kaaviota ja UML-luokkakaaviota.
 
