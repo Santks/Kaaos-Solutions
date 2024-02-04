@@ -45,7 +45,9 @@ Käyttäjätarinat löytyvät projektin SCRUM-taulun vasemmasta laidasta. [Linkk
 Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona.
 
 Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
+
 **alustavat tekstikuvaukset käyttöliittymän näkymistä rautalankamallien perusteella**
+
 | Näkymä | Kuvaus |
 |--------|--------|
 | Lipunmyynti | Listaus tapahtumista, joihin lippuja myynnissä. Tapahtumista tiedot (Nimi,PVM,klonaika). Valitusta tapahtumasta näkyviin tulee myös lippujen kategoriat ja hinnat. Ostettavien lippujen määrää voi vaihtaa. Lippujen kokonaissumma näytetään myyntitapahtumaan johtavan painikkeen läheisyydessä. |
