@@ -38,7 +38,7 @@ Käyttäjätarinat löytyvät projektin SCRUM-taulun vasemmasta laidasta. [Linkk
 
 
 ### Käyttötapauskaavio
-![Käyttötapauskaavio](ktt-kaavio.png)
+![Käyttötapauskaavio](kayttotapauskaavio.png)
 
 
 ## Käyttöliittymä
