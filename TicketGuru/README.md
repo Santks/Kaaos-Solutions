@@ -55,20 +55,38 @@ Alustava tekstimuotoinen mallikuvaus käyttöliittymästä rautalankamallin peru
 | Myyntiraportti | Yhden tapahtuman yhteenveto, josta selviää tapahtumaan myytyjen lippujen tyypit ja kappalemäärät. Painike, josta siirtymä näkymään "Tapahtuma (myyntitapahtumat)". |
 | Tapahtuma (myyntitapahtumat) | Näkymä, jossa listaus kaikista yhden tapahtuman myyntitapahtumista. Kategorisoitu (aika, yksilöivä tunnus, kokonaissumma, toiminnot). Toiminnot-sarakkeessa painike näkymään, jossa tarkemmat tiedot yhdestä myyntitapahtumasta. |
 
+### Käyttöliittymäkaavio
+Kirjautumisen yhdeydessä tarkistetaan käyttäjän oikeudet ja sen mukaan määräytyy, mitä etusivulla näytetään. Esimerkiksi vain pääkäyttäjä pääsee muokkaamaan käyttäjiä ja käyttäjäoikeuksia, kun taas myyjällä on oikeudet vain lippujen myymiseen ja lipuntarkastajalla on vain mahdollisuus tarkastaa lipun voimassaolo.
+
+![Käyttöliittymäkaavio](kayttoliittymakaavio.png)
+
+
 ## Tietokanta
-Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet kuvataan käsitekaaviolla. Käsitemalliin sisältyy myös taulujen välisten viiteyhteyksien ja avainten määritykset. Tietokanta kuvataan käyttäen jotain kuvausmenetelmää, joko ER-kaaviota ja UML-luokkakaaviota.
+Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet on kuvattu alla UML-kaaviona sekä tietohakemistona.
 
-Lisäksi kukin järjestelmän tietoelementti ja sen attribuutit kuvataan tietohakemistossa. Tietohakemisto tarkoittaa yksinkertaisesti vain jokaisen elementin (taulun) ja niiden attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän tyyliin:
+### UML-kaavio
+** Kuva tähän **
 
-### Tilit
-Tilit-taulu sisältää käyttäjätilit. Käyttäjällä voi olla monta tiliä. Tili kuuluu aina vain yhdelle käyttäjälle.
+### TG_1
+1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+**tähän atribuutit taulukkona**
 
-| Kenttä      | Tyyppi          | Kuvaus                           |
-|-------------|-----------------|----------------------------------|
-| id          | int PK          | Tilin id                         |
-| nimimerkki  | varchar(30)     | Tilin nimimerkki                 |
-| avatar      | int FK          | Tilin avatar, viittaus avatar-tauluun |
-| kayttaja    | int FK          | Viittaus käyttäjään käyttäjä-taulussa |
+### TG_2
+1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+**tähän atribuutit taulukkona**
+
+### TG_3
+1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+**tähän atribuutit taulukkona**
+
+### TG_4
+1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+**tähän atribuutit taulukkona**
+
+### TG_5
+1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+**tähän atribuutit taulukkona**
+
 
 ## Tekninen kuvaus
 Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim.
