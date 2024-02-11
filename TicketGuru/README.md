@@ -29,6 +29,9 @@ Lipunmyyntijärjestelmä on määritelty alla erikseen käyttäjäryhminä, käy
 **Myyjä**
 - Myyjä lisää järjestelmään tilauksia ja tarkastaa lippuja
 
+**Lipuntarkastaja**
+- Lipuntarkastaja tarkastaa tapahtuman ovella asiakkaiden lippuja.
+
 **Asiakas**
 - Asiakas ostaa lipun tiettyyn tapahtumaan
 
