@@ -75,11 +75,11 @@ TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event
 **tähän atribuutit taulukkona**
 
 ### TG_Event
-TG_Event sisältää tapahtumat. TG_Eventista on OneToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä ManyToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
+TG_Event sisältää tapahtumat. TG_Eventista on ManyToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä OneToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
 **tähän atribuutit taulukkona**
 
 ### TG_Organiser
-TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on OneToMany-viittaus TG_EventOrganiser-tauluun.
+TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on ManyToMany-viittaus TG_EventOrganiser-tauluun.
 **tähän atribuutit taulukkona**
 
 ### TG_Payment
@@ -87,7 +87,7 @@ TG_Payment sisältää maksutiedot. TG_Paymentilla on ManyToOne-viittaus TG_User
 **tähän atribuutit taulukkona**
 
 ### TG_Ticket
-TG_Ticket sisältää myytävät liput. TG_Ticketilla on OneToMany-viittaus TG_TicketEvent-tauluun sekä ManyToOne-viittaukset TG_TicketType- ja TG_Order-tauluihin.
+TG_Ticket sisältää myytävät liput. TG_Ticketilla on ManyToMany-viittaus TG_TicketEvent-tauluun sekä ManyToOne-viittaukset TG_TicketType- ja TG_Order-tauluihin.
 **tähän atribuutit taulukkona**
 
 ### TG_TicketType
@@ -119,11 +119,11 @@ TG_EventOrganiser yhdistää tapahtumat ja järjestäjät. TG_EventOrganiserilla
 **tähän atribuutit taulukkona**
 
 ### TG_EventStatus
-TG_EventStatus sisältää tapahtumien statuksen. TG_EventStatusilla on OneToMany-viittaus TG_Event-tauluun.
+TG_EventStatus sisältää tapahtumien statuksen. TG_EventStatusilla on OneToOne-viittaus TG_Event-tauluun.
 **tähän atribuutit taulukkona**
 
 ### TG_EventCategory
-TG_EventCategory sisältää tapahtumakategoriat. TG_EventCategorylla on OneToMany-viittaus TG_Event-tauluun.
+TG_EventCategory sisältää tapahtumakategoriat. TG_EventCategorylla on OneToOne-viittaus TG_Event-tauluun.
 **tähän atribuutit taulukkona**
 
 
