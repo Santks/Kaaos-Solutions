@@ -25,6 +25,30 @@ public class TicketEvent {
 	@ManyToOne
 	@JoinColumn(name="Event_id")
 	private Event ticevent;
+
+	public Long getTicketEventId() {
+		return ticketEventId;
+	}
+
+	public void setTicketEventId(Long ticketEventId) {
+		this.ticketEventId = ticketEventId;
+	}
+
+	public Ticket getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
+	}
+
+	public Event getTicevent() {
+		return ticevent;
+	}
+
+	public void setTicevent(Event ticevent) {
+		this.ticevent = ticevent;
+	}
 	
 	
 }
