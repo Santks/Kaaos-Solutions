@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PostalCodeRepository extends CrudRepository<PostalCode, Long>{
+public interface OrganiserRepository extends CrudRepository<Organiser, Long> {
 
 }
