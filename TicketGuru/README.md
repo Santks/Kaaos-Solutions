@@ -75,16 +75,38 @@ TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| Venue_id | AN | Tapahtumapaikan id |
-| Name | C | Tapahtumapaikan nimi |
+| Venue_id | AN (PK)| Paikan id |
+| Name | C | Paikan nimi |
+| Address | C | Osoite |
+| Phone | C | Puhelinnumero |
+| Email | C | Sähköpostiosoite |
+| Capasity | N | Paikan kapasiteetti |
+| PostalCode | C | Postinumero |
 
 ### TG_Event
 TG_Event sisältää tapahtumat. TG_Eventista on ManyToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä OneToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Event_id | AN (PK) | Tapahtuman id |
+| Venue_id | N (FK) | Paikan id |
+| Name | C | Tapahtuman nimi |
+| Description | C | Kuvaus |
+| EventStatus_id | N (FK) | Statuksen id |
+| StartDate | D | Alkamispäivä |
+| EndDate | D | Päättymispäivä |
+| EventCategory_id | N (FK) | Kategorian id |
+
 
 ### TG_Organiser
 TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on ManyToMany-viittaus TG_EventOrganiser-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Organiser_id | AN (PK) | Järjestäjän id |
+| Name | C | Järjestäjän nimi |
+| Email | C | Sähköpostiosoite |
+| Phone | C | Puhelinnumero |
 
 ### TG_Payment
 TG_Payment sisältää maksutiedot. TG_Paymentilla on ManyToOne-viittaus TG_User-tauluun.
