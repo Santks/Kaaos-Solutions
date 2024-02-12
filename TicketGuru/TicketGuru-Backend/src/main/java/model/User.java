@@ -98,16 +98,16 @@ public class User {
 		this.activeUser = activeUser;
 	}
 
-	public PostalCode getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(PostalCode postalCode) {
-		this.postalCode = postalCode;
-	}
+//	public PostalCode getPostalCode() {
+//		return postalCode;
+//	}
+//
+//	public void setPostalCode(PostalCode postalCode) {
+//		this.postalCode = postalCode;
+//	}
 
 	public User(Long userId, String firstName, String lastName, String phone, String email, String address,
-			char userRole, boolean activeUser, PostalCode postalCode) {
+			char userRole, boolean activeUser) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -117,7 +117,7 @@ public class User {
 		this.address = address;
 		this.userRole = userRole;
 		this.activeUser = activeUser;
-		this.postalCode = postalCode;
+
 	}
 
 }
