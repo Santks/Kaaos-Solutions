@@ -72,59 +72,167 @@ Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väl
 
 ### TG_Venue
 TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Venue_id | AN (PK)| Paikan id |
+| Name | C/100 | Paikan nimi |
+| Address | C/100 | Osoite |
+| Phone | C/20 | Puhelinnumero |
+| Email | C/50 | Sähköpostiosoite |
+| Capasity | N | Paikan kapasiteetti |
+| PostalCode | C/5 | Postinumero |
+
 
 ### TG_Event
 TG_Event sisältää tapahtumat. TG_Eventista on ManyToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä OneToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Event_id | AN (PK) | Tapahtuman id |
+| Venue_id | N (FK) | Paikan id |
+| Name | C/100 | Tapahtuman nimi |
+| Description | C/1000 | Kuvaus |
+| EventStatus_id | N (FK) | Statuksen id |
+| StartDate | D | Alkamispäivä |
+| EndDate | D | Päättymispäivä |
+| EventCategory_id | N (FK) | Kategorian id |
+
 
 ### TG_Organiser
 TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on ManyToMany-viittaus TG_EventOrganiser-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Organiser_id | AN (PK) | Järjestäjän id |
+| Name | C/100 | Järjestäjän nimi |
+| Email | C/50 | Sähköpostiosoite |
+| Phone | C/20 | Puhelinnumero |
+
 
 ### TG_Payment
 TG_Payment sisältää maksutiedot. TG_Paymentilla on ManyToOne-viittaus TG_User-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Payment_id | AN (PK) | Maksun id |
+| User_id | N (FK) | Käyttäjän id |
+| Order_id | N (FK) | Tilauksen id |
+| Amount | Double | Summa |
+| PaymentDate | D | Maksupäivä |
+| PaymentMethod | C/20 | Maksutapa |
+
 
 ### TG_Ticket
 TG_Ticket sisältää myytävät liput. TG_Ticketilla on ManyToMany-viittaus TG_TicketEvent-tauluun sekä ManyToOne-viittaukset TG_TicketType- ja TG_Order-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Ticket_id | AN (PK) | Lipun id |
+| Event_id | N (FK) | Tapahtuman id |
+| TicketType_id | N (FK) | Lipputyypin id |
+| Order_id | N (FK) | Tilauksen id |
+| Price | Double | Hinta |
+| TicketUsed | Boolean | Onko lippu käytetty (True / False) |
+
 
 ### TG_TicketType
 TG_TicketType sisältää eri lipputyypit. TG_TicketTypella on OneToMany-viittaus TG_Ticket-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| TicketType_id | AN (PK) | Lipputyypin id |
+| Name | C/100 | Lipputyypin nimi |
+| Description | C/500 | Kuvaus |
+
 
 ### TG_Order
 TG_Order sisältää tilaukset. TG_Orderilla on OneToMany-viittaus TG_Ticket-tauluun ja ManyToOne-viittaukset TG_User- ja TG_Payment-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| Order_id | AN (PK) | Tilauksen id |
+| User_id | N (FK) | Käyttäjän id |
+| Date | D | Päivämäärä |
+| TotalPrice | Double | Kokonaishinta |
+| OrderPaid | Boolean | Onko tilaus maksettu (True / False) |
+| Seller_id | N (FK) | Myyjän id |
+
 
 ### TG_TicketEvent
 TG_TicketEvent yhdistää liput ja tapahtumat välitauluksi. TG_TicketEventilla on ManyToOne-viittaukset TG_Ticket- ja TG_Event-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| TicketEvent_id | AN (PK) | Ticket/Event id |
+| Ticket_id | N (FK) | Lipun id |
+| Event_id | N (FK) | Tapahtuman id |
+
 
 ### TG_UserRole
 TG_UserRole sisältää käyttäjien roolit. TG_UserRolella on OneToMany-viittaus TG_User-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| UserRole_id | AN (PK) | Käyttäjäroolin id |
+| Name | C/100 | Nimi |
+| Description | C/500 | Kuvaus |
+
 
 ### TG_User
 TG_User sisältää käyttäjät. TG_Userilla on OneToMany-viittaukset TG_Order- ja TG_Payment-tauluihin sekä ManyToOne-viittaukset TG_UserRole- ja TG_PostalCode-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| User_id | AN (PK) | Käyttäjän id |
+| FirstName | C/100 | Etunimi |
+| LastName | C/100 | Sukunimi |
+| Phone | C/20 | Puhelinnumero |
+| Email | C/50 | Sähköpostiosoite |
+| Address | C/100 | Osoite |
+| PostalCode | C/5 | Postinumero |
+| UserRole_id | N (FK) | Käyttäjäroolin id |
+| ActiveUser | Boolean | Onko käyttäjä aktiivinen (True / False) |
+
 
 ### TG_PostalCode
 TG_PostalCode sisältää postinumerot. TG_PostalCodella on OneToMany-viittaukset TG_User- ja TG_Venue-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| PostalCode | C/5 | Postinumero |
+| City | C/100 | Kaupunki |
+| Country | C/100 | Maa |
+
 
 ### TG_EventOrganiser
 TG_EventOrganiser yhdistää tapahtumat ja järjestäjät. TG_EventOrganiserilla on ManyToOne-viittaukset TG_Organiser- ja TG_Event-tauluihin.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| EventOrganiser_id | AN (PK) | Event/Organiser id |
+| Organiser_id | N (FK) | Järjestäjän id |
+| Event_id | N (FK) | Tapahtuman id |
+
 
 ### TG_EventStatus
 TG_EventStatus sisältää tapahtumien statuksen. TG_EventStatusilla on OneToOne-viittaus TG_Event-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| EventStatus_id | AN (PK) | Statuksen id |
+| Status | C/100 | Status |
+
 
 ### TG_EventCategory
 TG_EventCategory sisältää tapahtumakategoriat. TG_EventCategorylla on OneToOne-viittaus TG_Event-tauluun.
-**tähän atribuutit taulukkona**
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+| EventCategory_id | AN (PK) | Kategorian id |
+| Name | C/100 | Nimi |
+| Description | C/500 | Kuvaus |
+
 
 
 ## Tekninen kuvaus
