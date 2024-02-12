@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,8 +32,11 @@ public class Venue {
     @Column(name = "Capacity")
     private int capacity;
 
-    @Column(name = "PostalCode")
-    private String postalCode;
+    @ManyToOne
+    @JoinColumn(name = "PostalCode")
+    private PostalCode postalCode;
+
+    // Constructors, getters, setters and toString()
 
     public Long getId() {
         return id;
@@ -81,15 +86,16 @@ public class Venue {
         this.capacity = capacity;
     }
 
-    public String getPostalCode() {
+    public PostalCode getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(PostalCode postalCode) {
         this.postalCode = postalCode;
     }
 
-    public Venue(Long id, String name, String address, String phone, String email, int capacity, String postalCode) {
+    public Venue(Long id, String name, String address, String phone, String email, int capacity,
+            PostalCode postalCode) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -104,5 +110,6 @@ public class Venue {
         return "Venue [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", email=" + email
                 + ", capacity=" + capacity + ", postalCode=" + postalCode + "]";
     }
+
     
 }
