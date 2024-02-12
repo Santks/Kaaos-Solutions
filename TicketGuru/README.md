@@ -1,5 +1,5 @@
-# TicketGuru – Kaaos Solutions
-Tiimi: Ilja Haapanen, Leonid Petrov, Sampsa Loukkola, Santeri Kuronen
+# TicketGuru by Kaaos Solutions
+Tiimi: Ilja Haapanen, Leonid Petrov, Sampsa Loukkola, Santeri Kuronen.
 
 
 ## Johdanto
@@ -17,8 +17,8 @@ Lipunmyyntijärjestelmä on määritelty alla erikseen käyttäjäryhminä, käy
 
 
 ### Käyttäjäryhmät
-**Tilaaja / Tuoteomistaja**
-- Lipputoimisto, joka on tilannut lipumyyntijärjestelmän
+**Tilaaja**
+- Lipputoimisto, joka on tilannut lipunmyyntijärjestelmän
 
 **Pääkäyttäjä**
 - Pääkäyttäjä voi lisätä, muokata sekä poistaa käyttäjäoikeuksia
@@ -29,6 +29,9 @@ Lipunmyyntijärjestelmä on määritelty alla erikseen käyttäjäryhminä, käy
 **Myyjä**
 - Myyjä lisää järjestelmään tilauksia ja tarkastaa lippuja
 
+**Lipuntarkastaja**
+- Lipuntarkastaja tarkastaa tapahtuman ovella asiakkaiden lippuja.
+
 **Asiakas**
 - Asiakas ostaa lipun tiettyyn tapahtumaan
 
@@ -38,28 +41,91 @@ Käyttäjätarinat löytyvät projektin SCRUM-taulun vasemmasta laidasta. [Linkk
 
 
 ### Käyttötapauskaavio
-- Kuva tulee tähän
+![Käyttötapauskaavio](kayttotapauskaavio.png)
 
 
 ## Käyttöliittymä
-Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona.
+Alustava tekstimuotoinen mallikuvaus käyttöliittymästä rautalankamallin perusteella.
 
-Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
+| Näkymä | Kuvaus |
+|--------|--------|
+| Lipunmyynti | Listaus tapahtumista, joihin lippuja myydään. Tapahtumista tiedot (nimi, päivämäärä, kellonaika). Valitusta tapahtumasta tulee näkyville myös lippujen kategoriat ja hinnat. Ostettavien lippujen määrää voi vaihtaa. Lippujen kokonaissumma näytetään myyntitapahtumaan johtavan painikkeen läheisyydessä. |
+| Myyntitapahtuma | Ostetuista lipuista näytetään yhteenveto, josta tulee ilmi myyntitapahtuman yksilöivä tunnus, maksupäivämäärä ja kellonaika, sekä maksettu summa. Lisäksi taulukko ostetuista tuotteista kategorisoituna (tapahtuma, lipputyyppi, hinta, yksilöivä tunnus). Näkymässä on myös painike lippujen tulostusta varten. |
+| Tapahtumien hallinta (listaus) | Ylläpidon näkymä listauksena tapahtumista ja niiden tiedoista. Jokaisen tapahtuman yhteydessä painikkeet, joista siirtymä eri näkymiin: (muokkaus, lipputyypit, myyntiraportti). Näkymässä on myös painike uuden tapahtuman luontia varten. |
+| Tapahtumien hallinta (muokkaus) | Näkymä, jossa kaikkia tapahtuman tietoja voi muokata poislukien lipputyypit. Näkymässä myös tallennus-painike. |
+| Tapahtumien hallinta (uusi) | Näkymä yhtenäinen "Tapahtumien hallinta (muokkaus)" kanssa. |
+| Tapahtumien hallinta (lipputyypit) | Yhden tapahtuman lipputyypit ja niiden tiedot listaava näkymä. Jokaisen listatun lipputyypin yhteydessä painike tietojen muokkausta varten. Uuden lipputyypin lisäystä varten lomake-tyyppinen ratkaisu. |
+| Myyntiraportti | Yhden tapahtuman yhteenveto, josta selviää tapahtumaan myytyjen lippujen tyypit ja kappalemäärät. Painike, josta siirtymä näkymään "Tapahtuma (myyntitapahtumat)". |
+| Tapahtuma (myyntitapahtumat) | Näkymä, jossa listaus kaikista yhden tapahtuman myyntitapahtumista. Kategorisoitu (aika, yksilöivä tunnus, kokonaissumma, toiminnot). Toiminnot-sarakkeessa painike näkymään, jossa tarkemmat tiedot yhdestä myyntitapahtumasta. |
+
+### Käyttöliittymäkaavio
+Kirjautumisen yhdeydessä tarkistetaan käyttäjän oikeudet ja sen mukaan määräytyy, mitä etusivulla näytetään. Esimerkiksi vain pääkäyttäjä pääsee muokkaamaan käyttäjiä ja käyttäjäoikeuksia, kun taas myyjällä on oikeudet vain lippujen myymiseen ja lipuntarkastajalla on vain mahdollisuus tarkastaa lipun voimassaolo.
+
+![Käyttöliittymäkaavio](kayttoliittymakaavio.png)
+
 
 ## Tietokanta
-Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet kuvataan käsitekaaviolla. Käsitemalliin sisältyy myös taulujen välisten viiteyhteyksien ja avainten määritykset. Tietokanta kuvataan käyttäen jotain kuvausmenetelmää, joko ER-kaaviota ja UML-luokkakaaviota.
+Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet on kuvattu alla UML-kaaviona sekä tietohakemistona.
 
-Lisäksi kukin järjestelmän tietoelementti ja sen attribuutit kuvataan tietohakemistossa. Tietohakemisto tarkoittaa yksinkertaisesti vain jokaisen elementin (taulun) ja niiden attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän tyyliin:
+### UML-kaavio
+![UML-kaavio](tietokantakaavio.png)
 
-### Tilit
-Tilit-taulu sisältää käyttäjätilit. Käyttäjällä voi olla monta tiliä. Tili kuuluu aina vain yhdelle käyttäjälle.
+### TG_Venue
+TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event-tauluun.
+**tähän atribuutit taulukkona**
 
-| Kenttä      | Tyyppi          | Kuvaus                           |
-|-------------|-----------------|----------------------------------|
-| id          | int PK          | Tilin id                         |
-| nimimerkki  | varchar(30)     | Tilin nimimerkki                 |
-| avatar      | int FK          | Tilin avatar, viittaus avatar-tauluun |
-| kayttaja    | int FK          | Viittaus käyttäjään käyttäjä-taulussa |
+### TG_Event
+TG_Event sisältää tapahtumat. TG_Eventista on ManyToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä OneToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_Organiser
+TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on ManyToMany-viittaus TG_EventOrganiser-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_Payment
+TG_Payment sisältää maksutiedot. TG_Paymentilla on ManyToOne-viittaus TG_User-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_Ticket
+TG_Ticket sisältää myytävät liput. TG_Ticketilla on ManyToMany-viittaus TG_TicketEvent-tauluun sekä ManyToOne-viittaukset TG_TicketType- ja TG_Order-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_TicketType
+TG_TicketType sisältää eri lipputyypit. TG_TicketTypella on OneToMany-viittaus TG_Ticket-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_Order
+TG_Order sisältää tilaukset. TG_Orderilla on OneToMany-viittaus TG_Ticket-tauluun ja ManyToOne-viittaukset TG_User- ja TG_Payment-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_TicketEvent
+TG_TicketEvent yhdistää liput ja tapahtumat välitauluksi. TG_TicketEventilla on ManyToOne-viittaukset TG_Ticket- ja TG_Event-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_UserRole
+TG_UserRole sisältää käyttäjien roolit. TG_UserRolella on OneToMany-viittaus TG_User-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_User
+TG_User sisältää käyttäjät. TG_Userilla on OneToMany-viittaukset TG_Order- ja TG_Payment-tauluihin sekä ManyToOne-viittaukset TG_UserRole- ja TG_PostalCode-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_PostalCode
+TG_PostalCode sisältää postinumerot. TG_PostalCodella on OneToMany-viittaukset TG_User- ja TG_Venue-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_EventOrganiser
+TG_EventOrganiser yhdistää tapahtumat ja järjestäjät. TG_EventOrganiserilla on ManyToOne-viittaukset TG_Organiser- ja TG_Event-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_EventStatus
+TG_EventStatus sisältää tapahtumien statuksen. TG_EventStatusilla on OneToOne-viittaus TG_Event-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_EventCategory
+TG_EventCategory sisältää tapahtumakategoriat. TG_EventCategorylla on OneToOne-viittaus TG_Event-tauluun.
+**tähän atribuutit taulukkona**
+
 
 ## Tekninen kuvaus
 Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim.
