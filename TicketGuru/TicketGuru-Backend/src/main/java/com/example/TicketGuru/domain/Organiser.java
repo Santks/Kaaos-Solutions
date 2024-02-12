@@ -1,11 +1,10 @@
 package com.example.TicketGuru.domain;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,9 +20,6 @@ public class Organiser {
 	private String email;
 	@Column(name = "Phone")
 	private String phone;
-	
-
-//	@ManyToMany eventorganiser
 	
 	public Long getId() {
 		return id;
@@ -49,5 +45,6 @@ public class Organiser {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
 	
 }
