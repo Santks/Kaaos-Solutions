@@ -36,9 +36,9 @@ public class User {
 	@Column
 	private boolean activeUser;
 	
-//	@OneToMany
-//	@JoinColumn(name="PostalCode")
-//	private PostalCode postalCode;
+	@OneToMany
+	@JoinColumn(name="PostalCode")
+	private PostalCode postalCode;
 	
 	@ManyToOne
 	@JoinColumn(name="userRoleId")
@@ -100,13 +100,13 @@ public class User {
 		this.activeUser = activeUser;
 	}
 
-//	public PostalCode getPostalCode() {
-//		return postalCode;
-//	}
-//
-//	public void setPostalCode(PostalCode postalCode) {
-//		this.postalCode = postalCode;
-//	}
+	public PostalCode getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(PostalCode postalCode) {
+		this.postalCode = postalCode;
+	}
 
 	public UserRole getUserRole() {
 		return userRole;
