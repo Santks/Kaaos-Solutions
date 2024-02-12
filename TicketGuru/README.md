@@ -72,7 +72,9 @@ Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väl
 
 ### TG_Venue
 TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event-tauluun.
-**tähän atribuutit taulukkona**
+| Kenttä | Tyyppi | Kuvaus |
+| Venue_id | AN | Tapahtumapaikan id |
+| Name | C | Tapahtumapaikan nimi |
 
 ### TG_Event
 TG_Event sisältää tapahtumat. TG_Eventista on ManyToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä OneToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
