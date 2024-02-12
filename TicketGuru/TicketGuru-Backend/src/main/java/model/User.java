@@ -30,9 +30,9 @@ public class User {
 	@Column
 	private boolean activeUser;
 	
-	@OneToMany
-	@JoinColumn(name="PostalCode")
-	private PostalCode postalCode;
+//	@OneToMany
+//	@JoinColumn(name="PostalCode")
+//	private PostalCode postalCode;
 
 	public Long getUserId() {
 		return userId;
