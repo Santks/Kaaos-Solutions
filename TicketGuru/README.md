@@ -68,7 +68,7 @@ Kirjautumisen yhdeydessä tarkistetaan käyttäjän oikeudet ja sen mukaan mää
 Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väliset suhteet on kuvattu alla UML-kaaviona sekä tietohakemistona.
 
 ### UML-kaavio
-** Kuva tähän **
+![UML-kaavio](tietokantakaavio.png)
 
 ### TG_1
 1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
