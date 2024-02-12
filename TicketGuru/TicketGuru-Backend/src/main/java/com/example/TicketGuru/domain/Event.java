@@ -44,6 +44,9 @@ public class Event {
     @OneToMany(mappedBy = "event")
     Set<EventOrganiser> eventorganisers;
     
+    @OneToMany(mappedBy = "ticevent")
+    Set<TicketEvent> ticketevents;
+    
        
     @Column(name = "StartDate")
     private String startDate;
