@@ -5,34 +5,44 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="TG_User")
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // generaatio tapa?
 	@Column(name ="User_id", nullable=false)
 	private Long userId;
+	
 	@Column(name="FirstName", nullable=false)
 	private String firstName;
+	
 	@Column(name="LastName", nullable=false)
 	private String lastName;
+	
 	@Column(name="Phone")
+	
 	private String phone;
 	@Column(name="Email", nullable=false)
 	private String email;
+	
 	@Column(name="Address")
 	private String address;
-	@Column
-	private char userRole;
+
 	@Column
 	private boolean activeUser;
 	
 //	@OneToMany
 //	@JoinColumn(name="PostalCode")
 //	private PostalCode postalCode;
+	
+	@ManyToOne
+	@JoinColumn(name="userRoleId")
+	private UserRole userRole;
 
 	public Long getUserId() {
 		return userId;
@@ -82,14 +92,6 @@ public class User {
 		this.address = address;
 	}
 
-	public char getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(char userRole) {
-		this.userRole = userRole;
-	}
-
 	public boolean isActiveUser() {
 		return activeUser;
 	}
@@ -106,8 +108,16 @@ public class User {
 //		this.postalCode = postalCode;
 //	}
 
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+
 	public User(Long userId, String firstName, String lastName, String phone, String email, String address,
-			char userRole, boolean activeUser) {
+			UserRole userRole, boolean activeUser) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;

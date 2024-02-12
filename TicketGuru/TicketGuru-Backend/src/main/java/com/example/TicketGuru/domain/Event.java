@@ -1,5 +1,10 @@
 package com.example.TicketGuru.domain;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,13 +33,18 @@ public class Event {
     @Column(name = "Description")
     private String description;
 
-     @ManyToOne @JoinColumn(name = "EventStatus_id",
-     referencedColumnName = "EventStatus_id") private EventStatus eventStatus;
+     @ManyToOne 
+     @JoinColumn(name = "EventStatus_id",referencedColumnName = "EventStatus_id") 
+     private EventStatus eventStatus;
 
      @ManyToOne
      @JoinColumn(name = "EventCategory_id",referencedColumnName = "EventCategory_id") 
      private EventCategory eventCategory;
-
+     
+    @OneToMany(mappedBy = "event")
+    Set<EventOrganiser> eventorganisers;
+    
+       
     @Column(name = "StartDate")
     private String startDate;
 
@@ -90,7 +101,23 @@ public class Event {
         this.endDate = endDate;
     }
 
-    public Event(Long id, Venue venue, String name, String description, String startDate, String endDate) {
+    public EventStatus getEventStatus() {
+		return eventStatus;
+	}
+
+	public void setEventStatus(EventStatus eventStatus) {
+		this.eventStatus = eventStatus;
+	}
+
+	public EventCategory getEventCategory() {
+		return eventCategory;
+	}
+
+	public void setEventCategory(EventCategory eventCategory) {
+		this.eventCategory = eventCategory;
+	}
+
+	public Event(Long id, Venue venue, String name, String description, String startDate, String endDate) {
         this.id = id;
         this.venue = venue;
         this.name = name;
