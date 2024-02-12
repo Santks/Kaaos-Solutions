@@ -1,5 +1,7 @@
 package com.example.TicketGuru.domain;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -39,7 +41,10 @@ public class Event {
      @JoinColumn(name = "EventCategory_id",referencedColumnName = "EventCategory_id") 
      private EventCategory eventCategory;
      
-
+    @OneToMany(mappedBy = "event")
+    Set<EventOrganiser> eventorganisers;
+    
+       
     @Column(name = "StartDate")
     private String startDate;
 
