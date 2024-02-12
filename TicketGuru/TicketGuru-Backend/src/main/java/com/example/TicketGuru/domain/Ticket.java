@@ -3,6 +3,7 @@ package com.example.TicketGuru.domain;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name= "TG_Ticket")
@@ -31,8 +32,8 @@ public class Ticket {
 	@Column(name= "TicketUsed")
 	private Boolean ticketUsed;
 	
-	@ManyToMany(mappedBy = "tickets")
-	private List<TicketEvent> ticketEvents;
+	@OneToMany(mappedBy = "ticket")
+	Set<TicketEvent> ticketevents;
 
 	public Long getTicketId() {
 		return ticketId;
