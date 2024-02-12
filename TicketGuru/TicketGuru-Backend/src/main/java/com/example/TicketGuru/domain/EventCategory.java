@@ -26,9 +26,9 @@ public class EventCategory {
 	@Column(name="Description")
 	private String description;
 	
-//	@JsonIgnore
-//	@OneToOne(cascade= CascadeType.ALL, mappedBy="Event_id")
-//	private Event event;
+	@JsonIgnore
+	@OneToOne(cascade= CascadeType.ALL, mappedBy="eventCategory")
+	private Event event;
 
 	public Long getEventCatId() {
 		return EventCatId;
@@ -52,6 +52,14 @@ public class EventCategory {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	@Override

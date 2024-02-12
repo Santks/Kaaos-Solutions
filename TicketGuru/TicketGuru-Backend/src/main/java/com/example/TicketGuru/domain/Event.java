@@ -27,12 +27,12 @@ public class Event {
     @Column(name = "Description")
     private String description;
 
-    // @ManyToOne @JoinColumn(name = "EventStatus_id",
-    // referencedColumnName = "EventStatus_id") private EventStatus eventStatus;
+     @ManyToOne @JoinColumn(name = "EventStatus_id",
+     referencedColumnName = "EventStatus_id") private EventStatus eventStatus;
 
-    // @ManyToOne @JoinColumn(name = "EventCategory_id"),
-    // referencedColumnName = "EventCategory_id") private EventCategory
-    // eventCategory;
+     @ManyToOne
+     @JoinColumn(name = "EventCategory_id",referencedColumnName = "EventCategory_id") 
+     private EventCategory eventCategory;
 
     @Column(name = "StartDate")
     private String startDate;

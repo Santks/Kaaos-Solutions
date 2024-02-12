@@ -23,9 +23,9 @@ public class EventStatus {
 	@Column(name= "status")
 	private String status;
 	
-	//@JsonIgnore
-	//@OneToOne(cascade = CascadeType.ALL, mappedBy="Event_id")
-	//private Event event;
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="eventStatus")
+	private Event event;
 
 	public Long getStatusId() {
 		return statusId;
@@ -43,13 +43,13 @@ public class EventStatus {
 		this.status = status;
 	}
 
-//	public Event getEvent() {
-//		return event;
-//	}
+	public Event getEvent() {
+		return event;
+	}
 
-//	public void setEvent(Event event) {
-//		this.event = event;
-//	}
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 	
 	public EventStatus(Long statusId, String status) {
 		this.statusId = statusId;
