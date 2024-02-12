@@ -1,4 +1,4 @@
-package model;
+package com.example.TicketGuru.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

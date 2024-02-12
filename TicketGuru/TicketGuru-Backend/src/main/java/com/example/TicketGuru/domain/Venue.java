@@ -1,4 +1,4 @@
-package model;
+package com.example.TicketGuru.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
