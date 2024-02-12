@@ -26,6 +26,8 @@ public class EventStatus {
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy="eventStatus")
 	private Event event;
+	
+	//getters and setters
 
 	public Long getStatusId() {
 		return statusId;

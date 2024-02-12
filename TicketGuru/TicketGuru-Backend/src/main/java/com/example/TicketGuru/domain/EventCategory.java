@@ -30,6 +30,8 @@ public class EventCategory {
 	@OneToOne(cascade= CascadeType.ALL, mappedBy="eventCategory")
 	private Event event;
 
+	//getters and setters
+	
 	public Long getEventCatId() {
 		return EventCatId;
 	}
