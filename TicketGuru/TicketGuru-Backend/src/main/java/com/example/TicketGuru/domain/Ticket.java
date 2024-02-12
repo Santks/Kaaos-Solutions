@@ -33,7 +33,7 @@ public class Ticket {
 	private Boolean ticketUsed;
 	
 	@OneToMany(mappedBy = "ticket")
-	Set<TicketEvent> ticketevents;
+	Set<TicketEvent> ticketEvents;
 
 	public Long getTicketId() {
 		return ticketId;
@@ -83,11 +83,11 @@ public class Ticket {
 		this.ticketUsed = ticketUsed;
 	}
 
-	public List<TicketEvent> getTicketEvents() {
+	public Set<TicketEvent> getTicketEvents() {
 		return ticketEvents;
 	}
 
-	public void setTicketEvents(List<TicketEvent> ticketEvents) {
+	public void setTicketEvents(Set<TicketEvent> ticketEvents) {
 		this.ticketEvents = ticketEvents;
 	}
 
