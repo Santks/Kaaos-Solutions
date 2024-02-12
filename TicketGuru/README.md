@@ -70,24 +70,60 @@ Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väl
 ### UML-kaavio
 ![UML-kaavio](tietokantakaavio.png)
 
-### TG_1
-1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+### TG_Venue
+TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event-tauluun.
 **tähän atribuutit taulukkona**
 
-### TG_2
-1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+### TG_Event
+TG_Event sisältää tapahtumat. TG_Eventista on OneToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä ManyToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
 **tähän atribuutit taulukkona**
 
-### TG_3
-1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+### TG_Organiser
+TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on OneToMany-viittaus TG_EventOrganiser-tauluun.
 **tähän atribuutit taulukkona**
 
-### TG_4
-1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+### TG_Payment
+TG_Payment sisältää maksutiedot. TG_Paymentilla on ManyToOne-viittaus TG_User-tauluun.
 **tähän atribuutit taulukkona**
 
-### TG_5
-1 -taulu sisältää tapahtumapaikkojen tiedot lorem ipsum testing ipsum lorem.
+### TG_Ticket
+TG_Ticket sisältää myytävät liput. TG_Ticketilla on OneToMany-viittaus TG_TicketEvent-tauluun sekä ManyToOne-viittaukset TG_TicketType- ja TG_Order-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_TicketType
+TG_TicketType sisältää eri lipputyypit. TG_TicketTypella on OneToMany-viittaus TG_Ticket-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_Order
+TG_Order sisältää tilaukset. TG_Orderilla on OneToMany-viittaus TG_Ticket-tauluun ja ManyToOne-viittaukset TG_User- ja TG_Payment-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_TicketEvent
+TG_TicketEvent yhdistää liput ja tapahtumat välitauluksi. TG_TicketEventilla on ManyToOne-viittaukset TG_Ticket- ja TG_Event-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_UserRole
+TG_UserRole sisältää käyttäjien roolit. TG_UserRolella on OneToMany-viittaus TG_User-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_User
+TG_User sisältää käyttäjät. TG_Userilla on OneToMany-viittaukset TG_Order- ja TG_Payment-tauluihin sekä ManyToOne-viittaukset TG_UserRole- ja TG_PostalCode-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_PostalCode
+TG_PostalCode sisältää postinumerot. TG_PostalCodella on OneToMany-viittaukset TG_User- ja TG_Venue-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_EventOrganiser
+TG_EventOrganiser yhdistää tapahtumat ja järjestäjät. TG_EventOrganiserilla on ManyToOne-viittaukset TG_Organiser- ja TG_Event-tauluihin.
+**tähän atribuutit taulukkona**
+
+### TG_EventStatus
+TG_EventStatus sisältää tapahtumien statuksen. TG_EventStatusilla on OneToMany-viittaus TG_Event-tauluun.
+**tähän atribuutit taulukkona**
+
+### TG_EventCategory
+TG_EventCategory sisältää tapahtumakategoriat. TG_EventCategorylla on OneToMany-viittaus TG_Event-tauluun.
 **tähän atribuutit taulukkona**
 
 
