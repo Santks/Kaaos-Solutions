@@ -111,5 +111,4 @@ public class Venue {
                 + ", capacity=" + capacity + ", postalCode=" + postalCode + "]";
     }
 
-    
 }
