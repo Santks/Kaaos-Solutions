@@ -1,4 +1,5 @@
 package com.example.TicketGuru.domain;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,42 +7,41 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TG_User")
+@Table(name = "TG_User")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // generaatio tapa?
-	@Column(name ="User_id", nullable=false)
+	@Column(name = "User_id", nullable = false)
 	private Long userId;
-	
-	@Column(name="FirstName", nullable=false)
+
+	@Column(name = "FirstName", nullable = false)
 	private String firstName;
-	
-	@Column(name="LastName", nullable=false)
+
+	@Column(name = "LastName", nullable = false)
 	private String lastName;
-	
-	@Column(name="Phone")
-	
+
+	@Column(name = "Phone")
+
 	private String phone;
-	@Column(name="Email", nullable=false)
+	@Column(name = "Email", nullable = false)
 	private String email;
-	
-	@Column(name="Address")
+
+	@Column(name = "Address")
 	private String address;
 
 	@Column
 	private boolean activeUser;
-	
+
 	@ManyToOne
-	@JoinColumn(name="PostalCode")
+	@JoinColumn(name = "PostalCode")
 	private PostalCode postalCode;
-	
+
 	@ManyToOne
-	@JoinColumn(name="userRoleId")
+	@JoinColumn(name = "userRoleId")
 	private UserRole userRole;
 
 	public Long getUserId() {

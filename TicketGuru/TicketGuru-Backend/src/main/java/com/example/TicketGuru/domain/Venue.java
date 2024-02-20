@@ -38,6 +38,10 @@ public class Venue {
 
     // Constructors, getters, setters and toString()
 
+    public Venue() {
+        super();
+    }
+
     public Long getId() {
         return id;
     }
@@ -97,6 +101,16 @@ public class Venue {
     public Venue(Long id, String name, String address, String phone, String email, int capacity,
             PostalCode postalCode) {
         this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.capacity = capacity;
+        this.postalCode = postalCode;
+    }
+
+    public Venue(String name, String address, String phone, String email, int capacity,
+            PostalCode postalCode) {
         this.name = name;
         this.address = address;
         this.phone = phone;

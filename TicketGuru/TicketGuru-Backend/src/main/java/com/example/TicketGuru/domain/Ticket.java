@@ -1,38 +1,35 @@
 package com.example.TicketGuru.domain;
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name= "TG_Ticket")
+@Table(name = "TG_Ticket")
 public class Ticket {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name= "Ticket_id")
+	@Column(name = "Ticket_id")
 	private Long ticketId;
-	
+
 	@ManyToOne
-	@JoinColumn(name="Event_id")
+	@JoinColumn(name = "Event_id")
 	private Event event;
-	
+
 	@ManyToOne
-	@JoinColumn(name="TicketType_id")
+	@JoinColumn(name = "TicketType_id")
 	private TicketType ticketType;
-	
+
 	@ManyToOne
-	@JoinColumn(name="Order_id")
+	@JoinColumn(name = "Order_id")
 	private Order order;
-	
-	@Column(name= "Price")
+
+	@Column(name = "Price")
 	private Double price;
-	
-	@Column(name= "TicketUsed")
+
+	@Column(name = "TicketUsed")
 	private Boolean ticketUsed;
-	
-	//GET SET
+
+	// GET SET
 
 	public Long getTicketId() {
 		return ticketId;
@@ -81,7 +78,6 @@ public class Ticket {
 	public void setTicketUsed(Boolean ticketUsed) {
 		this.ticketUsed = ticketUsed;
 	}
-
 
 	@Override
 	public String toString() {

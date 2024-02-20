@@ -1,25 +1,24 @@
 package com.example.TicketGuru.domain;
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 @Entity
-@Table(name= "TG_TicketType")
+@Table(name = "TG_TicketType")
 public class TicketType {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name= "TicketType_id")
+	@Column(name = "TicketType_id")
 	private Long ticketTypeId;
-	
-	@Column(name= "Name")
+
+	@Column(name = "Name")
 	private String name;
-	
-	@Column(name= "Description")
+
+	@Column(name = "Description")
 	private String description;
-	
-	@OneToMany(mappedBy="ticketType")
+
+	@OneToMany(mappedBy = "ticketType")
 	private List<Ticket> tickets;
 
 	public Long getTicketTypeId() {

@@ -25,7 +25,11 @@ public class PostalCode {
     private String country;
 
     // Constructors, getters, setters and toString()
-    
+
+    public PostalCode() {
+        super();
+    }
+
     public Long getId() {
         return Id;
     }
@@ -60,6 +64,12 @@ public class PostalCode {
 
     public PostalCode(Long id, String postalCode, String city, String country) {
         Id = id;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+    }
+
+    public PostalCode(String postalCode, String city, String country) {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
