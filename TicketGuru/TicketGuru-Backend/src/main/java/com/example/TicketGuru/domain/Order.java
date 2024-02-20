@@ -31,9 +31,6 @@ public class Order {
     @Column(name = "OrderPaid")
     private boolean orderPaid;
 
-    @Column(name = "Seller_id")
-    private Long sellerId;
-
     @ManyToOne
     @JoinColumn(name = "Seller_id", referencedColumnName = "User_id")
     private User seller;
@@ -80,14 +77,6 @@ public class Order {
         this.orderPaid = orderPaid;
     }
 
-    public Long getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
-    }
-
     public User getSeller() {
         return seller;
     }
@@ -96,20 +85,19 @@ public class Order {
         this.seller = seller;
     }
 
-    public Order(Long orderId, User customer, Date date, double totalPrice, boolean orderPaid, Long sellerId,
+    public Order(Long orderId, User customer, Date date, double totalPrice, boolean orderPaid,
             User seller) {
         this.orderId = orderId;
         this.customer = customer;
         this.date = date;
         this.totalPrice = totalPrice;
         this.orderPaid = orderPaid;
-        this.sellerId = sellerId;
         this.seller = seller;
     }
 
     @Override
     public String toString() {
         return "Order [orderId=" + orderId + ", customer=" + customer + ", date=" + date + ", totalPrice=" + totalPrice
-                + ", orderPaid=" + orderPaid + ", sellerId=" + sellerId + ", seller=" + seller + "]";
+                + ", orderPaid=" + orderPaid + ", seller=" + seller + "]";
     }
 }

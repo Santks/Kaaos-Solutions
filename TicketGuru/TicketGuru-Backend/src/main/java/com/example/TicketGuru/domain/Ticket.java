@@ -32,8 +32,7 @@ public class Ticket {
 	@Column(name= "TicketUsed")
 	private Boolean ticketUsed;
 	
-	@OneToMany(mappedBy = "ticket")
-	Set<TicketEvent> ticketEvents;
+	//GET SET
 
 	public Long getTicketId() {
 		return ticketId;
@@ -83,13 +82,6 @@ public class Ticket {
 		this.ticketUsed = ticketUsed;
 	}
 
-	public Set<TicketEvent> getTicketEvents() {
-		return ticketEvents;
-	}
-
-	public void setTicketEvents(Set<TicketEvent> ticketEvents) {
-		this.ticketEvents = ticketEvents;
-	}
 
 	@Override
 	public String toString() {

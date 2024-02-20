@@ -36,7 +36,7 @@ public class User {
 	@Column
 	private boolean activeUser;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="PostalCode")
 	private PostalCode postalCode;
 	

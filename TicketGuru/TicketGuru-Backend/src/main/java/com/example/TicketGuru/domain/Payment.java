@@ -20,7 +20,7 @@ public class Payment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "User_id")
+    @JoinColumn(name = "Customer_id")
     private User user;
 
     @OneToOne

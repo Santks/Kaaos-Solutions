@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "TG_Event")
 public class Event {
@@ -33,105 +34,104 @@ public class Event {
     @Column(name = "Description")
     private String description;
 
-     @ManyToOne 
-     @JoinColumn(name = "EventStatus_id",referencedColumnName = "EventStatus_id") 
-     private EventStatus eventStatus;
-
-     @ManyToOne
-     @JoinColumn(name = "EventCategory_id",referencedColumnName = "EventCategory_id") 
-     private EventCategory eventCategory;
-     
-    @OneToMany(mappedBy = "event")
-    Set<EventOrganiser> eventorganisers;
-    
-    @OneToMany(mappedBy = "ticevent")
-    Set<TicketEvent> ticketevents;
-    
+    @JoinColumn(name = "EventCategory") 
+    private String eventCategory;
        
     @Column(name = "StartDate")
     private String startDate;
 
     @Column(name = "EndDate")
     private String endDate;
+    
+    @Column(name = "eventStatus")
+    private char eventSatus;
+    
+    @Column(name = "OrganiserName")
+    private String organiserName;
+    
+    @Column(name = "maxTickets")
+    private Long maxTickets;
 
-    // Constructors, getters, setters and toString()
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Venue getVenue() {
-        return venue;
-    }
-
-    public void setVenue(Venue venue) {
-        this.venue = venue;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public EventStatus getEventStatus() {
-		return eventStatus;
+	public Long getId() {
+		return id;
 	}
 
-	public void setEventStatus(EventStatus eventStatus) {
-		this.eventStatus = eventStatus;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public EventCategory getEventCategory() {
+	public Venue getVenue() {
+		return venue;
+	}
+
+	public void setVenue(Venue venue) {
+		this.venue = venue;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getEventCategory() {
 		return eventCategory;
 	}
 
-	public void setEventCategory(EventCategory eventCategory) {
+	public void setEventCategory(String eventCategory) {
 		this.eventCategory = eventCategory;
 	}
 
-	public Event(Long id, Venue venue, String name, String description, String startDate, String endDate) {
-        this.id = id;
-        this.venue = venue;
-        this.name = name;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+	public String getStartDate() {
+		return startDate;
+	}
 
-    @Override
-    public String toString() {
-        return "Event [id=" + id + ", venue=" + venue + ", name=" + name + ", description=" + description
-                + ", startDate=" + startDate + ", endDate=" + endDate + "]";
-    }
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public char getEventSatus() {
+		return eventSatus;
+	}
+
+	public void setEventSatus(char eventSatus) {
+		this.eventSatus = eventSatus;
+	}
+
+	public String getOrganiserName() {
+		return organiserName;
+	}
+
+	public void setOrganiserName(String organiserName) {
+		this.organiserName = organiserName;
+	}
+
+	public Long getMaxTickets() {
+		return maxTickets;
+	}
+
+	public void setMaxTickets(Long maxTickets) {
+		this.maxTickets = maxTickets;
+	}
+
+	
+
 }
