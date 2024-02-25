@@ -3,6 +3,7 @@ package com.example.TicketGuru.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,4 +35,9 @@ public class RestEventController {
 	}
 	
 	//DELETE
+	@DeleteMapping("/events/{id}")
+	void deleteEvent(@PathVariable Long id) {
+		log.info("Delete event by id");
+		eventRepo.deleteById(id);
+	}
 }
