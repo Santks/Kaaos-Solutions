@@ -26,6 +26,7 @@ Tapahtuman järjestäjä voi päivittää tapahtuman tietoja
     "organiserName": "[1-100 merkkiä]",
     "maxTickets": "Luku muodossa 'long' "
 }
+```
 
 ### Vastaus
 
@@ -47,6 +48,7 @@ Tapahtuman järjestäjä voi päivittää tapahtuman tietoja
     "organiserName": "Cool events corp.",
     "maxTickets": 35500
 }
+```
 
 **Paluukoodi:** 200 OK
 
@@ -81,6 +83,7 @@ Tapahtuman järjestäjä voi päivittää tapahtuman tietoja
     "organiserName": "Cool events corp.",
     "maxTickets": 35500
 }
+```
 
 #### Epäonnistunut pyyntö
 
