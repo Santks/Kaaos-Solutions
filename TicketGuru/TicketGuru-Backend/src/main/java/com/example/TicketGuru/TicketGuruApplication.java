@@ -1,5 +1,7 @@
 package com.example.TicketGuru;
 
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -46,12 +48,18 @@ public class TicketGuruApplication {
 			vrepository.save(venue3);
 
 			// U=upcoming
-			Event coolEvent = new Event(venue1, "Cool event", "Cool event example", "Cool event", "22.2.2024",
-					"24.2.2024", 'U', "Cool events org.", 36000L);
-			Event fakeEvent = new Event(venue2, "Cool event", "Fake event example", "Fake event", "25.2.2024",
-					"26.2.2024", 'U', "Cool events org.", 16600L);
-			Event demoEvent = new Event(venue3, "Cool event", "Example of an event", "Demo event", "28.2.2024",
-					"29.2.2024", 'U', "Demo events co.", 8800L);
+			Event coolEvent = new Event(venue1, "Cool event", "Cool event example", "Cool event", 
+				    LocalDate.parse("2024-02-22"), LocalDate.parse("2024-02-24"), 
+				    'U', "Cool events org.", 36000L);
+
+			Event fakeEvent = new Event(venue2, "Cool event", "Fake event example", "Fake event", 
+				    LocalDate.parse("2024-02-25"), LocalDate.parse("2024-02-26"), 
+				    'U', "Cool events org.", 16600L);
+
+			Event demoEvent = new Event(venue3, "Cool event", "Example of an event", "Demo event", 
+				    LocalDate.parse("2024-02-28"), LocalDate.parse("2024-02-29"), 
+				    'U', "Demo events co.", 8800L);
+
 			erepository.save(coolEvent);
 			erepository.save(fakeEvent);
 			erepository.save(demoEvent);

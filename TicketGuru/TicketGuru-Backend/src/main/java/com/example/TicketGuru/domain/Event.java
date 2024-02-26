@@ -1,5 +1,6 @@
 package com.example.TicketGuru.domain;
 
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +32,10 @@ public class Event {
     private String eventCategory;
 
     @Column(name = "StartDate")
-    private String startDate;
+    private LocalDate startDate;
 
     @Column(name = "EndDate")
-    private String endDate;
+    private LocalDate endDate;
 
     @Column(name = "eventStatus")
     private char eventSatus;
@@ -49,14 +50,14 @@ public class Event {
         super();
     }
 
-    public Event(Venue venue, String name, String description, String eventCategory, String startDate, String endDate,
+    public Event(Venue venue, String name, String description, String eventCategory, LocalDate string, LocalDate string2,
             char eventSatus, String organiserName, long maxTickets) {
         this.venue = venue;
         this.name = name;
         this.description = description;
         this.eventCategory = eventCategory;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = string;
+        this.endDate = string2;
         this.eventSatus = eventSatus;
         this.organiserName = organiserName;
         this.maxTickets = maxTickets;
@@ -102,19 +103,19 @@ public class Event {
         this.eventCategory = eventCategory;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
