@@ -14,12 +14,6 @@ Tapahtuman järjestäjä voi poistaa yksittäisen tapahtuman
 |---|---|---|
 |{id}|String|Poistettavan tapahtuman id.|
 
-**Autentikointi vaaditaan**: 
-
-**Tarvittavat oikeudet**: 
-
-**Data-rajoitukset**:
-
 **Responses**
 
 >**Onnistunut poisto**
