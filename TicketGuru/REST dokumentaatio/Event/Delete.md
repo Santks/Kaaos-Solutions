@@ -1,20 +1,35 @@
-## Päivitä tapahtuma
+## Poista tapahtuma
 
 Tapahtuman järjestäjä voi poistaa yksittäisen tapahtuman
 
-**URL**: `/api/events/{id}`
+
+**Base-URL**: `localhost:8080`
+
+**Endpoint**: `/api/events/{id}`
 
 **Metodi**:`DELETE`
+
+**Path-parametrit**: 
+|Parametri|Type|Kuvaus|
+|---|---|---|
+|{id}|String|Poistettavan tapahtuman id.|
 
 **Autentikointi vaaditaan**: 
 
 **Tarvittavat oikeudet**: 
 
-**Data-rajoitukset**
+**Data-rajoitukset**:
 
-**Response**
-Code:`200 OK`
-Tapahtuma poistettu onnistuneesti.
+**Responses**
 
-Code:`404 Not Found`
-Tapahtumaa ei löydetty.
+>**Onnistunut poisto**
+>
+>Code:`200 OK`
+>
+>Body: `Tapahtuma poistettu onnistuneesti.`
+
+>**Virhe**
+>
+>Code:`404 Not Found`
+>
+>Body: `Tapahtumaa ei löydetty.`
