@@ -50,14 +50,14 @@ public class Event {
         super();
     }
 
-    public Event(Venue venue, String name, String description, String eventCategory, LocalDate string, LocalDate string2,
+    public Event(Venue venue, String name, String description, String eventCategory, LocalDate startDate, LocalDate endDate,
             char eventSatus, String organiserName, long maxTickets) {
         this.venue = venue;
         this.name = name;
         this.description = description;
         this.eventCategory = eventCategory;
-        this.startDate = string;
-        this.endDate = string2;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.eventSatus = eventSatus;
         this.organiserName = organiserName;
         this.maxTickets = maxTickets;
