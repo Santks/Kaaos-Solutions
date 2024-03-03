@@ -18,7 +18,7 @@ public class TicketType {
 	@Column(name = "Description")
 	private String description;
 
-	@OneToMany(mappedBy = "ticketType")
+	@OneToMany(mappedBy = "ticketType", cascade=CascadeType.PERSIST)
 	private List<Ticket> tickets;
 
 	public Long getTicketTypeId() {
@@ -56,6 +56,25 @@ public class TicketType {
 	@Override
 	public String toString() {
 		return "TicketType [ticketTypeId=" + ticketTypeId + ", name=" + name + ", description=" + description + "]";
+	}
+
+	public TicketType() {
+		super();
+	}
+	
+	public TicketType(Long ticketTypeId, String name, String description, List<Ticket> tickets) {
+		super();
+		this.ticketTypeId = ticketTypeId;
+		this.name = name;
+		this.description = description;
+		this.tickets = tickets;
+	}
+
+	public TicketType(String name, String description, List<Ticket> tickets) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.tickets = tickets;
 	}
 
 }

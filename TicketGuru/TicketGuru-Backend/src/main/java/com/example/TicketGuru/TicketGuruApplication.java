@@ -1,6 +1,8 @@
 package com.example.TicketGuru;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +13,14 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.EventRepository;
+import com.example.TicketGuru.domain.Order;
+import com.example.TicketGuru.domain.OrderRepository;
 import com.example.TicketGuru.domain.PostalCode;
 import com.example.TicketGuru.domain.PostalCodeRepository;
+import com.example.TicketGuru.domain.Ticket;
+import com.example.TicketGuru.domain.TicketRepository;
+import com.example.TicketGuru.domain.TicketType;
+import com.example.TicketGuru.domain.TicketTypeRepository;
 import com.example.TicketGuru.domain.Venue;
 import com.example.TicketGuru.domain.VenueRepository;
 
@@ -26,7 +34,7 @@ public class TicketGuruApplication {
 
 	@Bean
 	public CommandLineRunner eventDemo(EventRepository erepository, VenueRepository vrepository,
-			PostalCodeRepository pcrepository) {
+			PostalCodeRepository pcrepository, TicketRepository tkrepository, TicketTypeRepository tktrepository, OrderRepository orepository) {
 		return (args) -> {
 			log.info("Save some events");
 
@@ -46,6 +54,8 @@ public class TicketGuruApplication {
 			vrepository.save(venue1);
 			vrepository.save(venue2);
 			vrepository.save(venue3);
+			
+			
 
 			// U=upcoming
 			Event coolEvent = new Event(venue1, "Cool event", "Cool event example", "Cool event", 
@@ -63,11 +73,35 @@ public class TicketGuruApplication {
 			erepository.save(coolEvent);
 			erepository.save(fakeEvent);
 			erepository.save(demoEvent);
-
+			
+			//
+			List<Ticket> listtickets = new ArrayList<Ticket>();
+			TicketType tickettype1 = new TicketType("Aikuiset", "Yli 18-vuotta täyttäneiden lippu", listtickets);
+			TicketType tickettype2 = new TicketType("Lapset", "Alle 18-vuotiaiden liput", listtickets);
+			tktrepository.save(tickettype1);
+			tktrepository.save(tickettype2);
+			
+			Ticket ticket1 = new Ticket(demoEvent, tickettype1, null, null, null);
+			Ticket ticket2 = new Ticket(fakeEvent, tickettype2, null, null, null);
+			Ticket ticket3 = new Ticket(coolEvent, tickettype2, null, null, null);
+			Ticket ticket4 = new Ticket(demoEvent, tickettype1, null, null, null);
+			tkrepository.save(ticket1);
+			tkrepository.save(ticket2);
+			tkrepository.save(ticket3);
+			tkrepository.save(ticket4);
+			
 			log.info("fetch all events");
 			for (Event event : erepository.findAll()) {
 				log.info(event.toString());
+			};	
+			
+			log.info(ticket1.toString());
+			log.info(ticket2.toString());
+			
+			for (TicketType tickettype : tktrepository.findAll()) {
+				log.info(tickettype.toString());
 			}
+
 		};
 
 	}

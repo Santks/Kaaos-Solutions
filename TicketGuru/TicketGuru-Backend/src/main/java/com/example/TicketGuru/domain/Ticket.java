@@ -85,4 +85,22 @@ public class Ticket {
 				+ ", ticketUsed=" + ticketUsed + "]";
 	}
 
+	public Ticket(Long ticketId, Event event, TicketType ticketType, Order order, Double price, Boolean ticketUsed) {
+		super();
+		this.ticketId = ticketId;
+		this.event = event;
+		this.ticketType = ticketType;
+		this.order = order;
+		this.price = price;
+		this.ticketUsed = ticketUsed;
+	}
+	
+	public Ticket(Event event, TicketType ticketType, Order order, Double price, Boolean ticketUsed) {
+		super();
+		this.event = event;
+		this.ticketType = ticketType;
+		this.order = order;
+		this.price = price;
+		this.ticketUsed = ticketUsed;
+	}
 }
