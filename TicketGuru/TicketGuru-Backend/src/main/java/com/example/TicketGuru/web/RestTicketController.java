@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.TicketGuru.domain.Event;
@@ -32,16 +33,24 @@ public class RestTicketController {
         return ticketRepo.findAllByEventId(eventid);
     }
     
-    // GET ticket associated with a specific order
-//    @GetMapping("/tickets/order/{id}")
-//    Optional<Ticket> getEventById(@PathVariable Long id) {
-//        log.info("Get event by id");
-//        return ticketRepo.findById(id);
-//    }
-	// POST
-	//@PostMapping
-	// PUT
-	//@PutMapping
+	// GET ticket by it's own id
+	@GetMapping("tickets/{ticketid}")
+	Optional<Ticket> getTicketByTicketId(@PathVariable Long ticketid) {
+		return ticketRepo.findById(ticketid);
+	}
+	// POST create a new ticket
+	@PostMapping(value = "/tickets", consumes = {"application/json"})
+	Ticket createTicket(@RequestBody Ticket newTicket) {
+		return ticketRepo.save(newTicket);
+	};
+	
+	// PUT edit pre-existing ticket
+	@PutMapping("/tickets/{ticketid}")
+	Ticket editTicket(@RequestBody Ticket editedTicket, @PathVariable Long ticketid) {
+		editedTicket.setTicketId(ticketid);
+		return ticketRepo.save(editedTicket);
+	}
+	
 	// DELETE
 	@DeleteMapping("/tickets/{ticketid}")
 	ResponseEntity<String> deleteTicket(@PathVariable Long ticketid) {

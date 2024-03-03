@@ -91,7 +91,7 @@ public class Ticket {
 	}
 
 	public Ticket() {
-		
+		super();
 	}
 	
 	public Ticket(Long ticketId, Event event, TicketType ticketType, Order order, Double price, Boolean ticketUsed) {
