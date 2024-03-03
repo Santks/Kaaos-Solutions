@@ -11,8 +11,14 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.EventRepository;
+import com.example.TicketGuru.domain.Order;
+import com.example.TicketGuru.domain.OrderRepository;
 import com.example.TicketGuru.domain.PostalCode;
 import com.example.TicketGuru.domain.PostalCodeRepository;
+import com.example.TicketGuru.domain.User;
+import com.example.TicketGuru.domain.UserRepository;
+import com.example.TicketGuru.domain.UserRole;
+import com.example.TicketGuru.domain.UserRoleRepository;
 import com.example.TicketGuru.domain.Venue;
 import com.example.TicketGuru.domain.VenueRepository;
 
@@ -26,7 +32,7 @@ public class TicketGuruApplication {
 
 	@Bean
 	public CommandLineRunner eventDemo(EventRepository erepository, VenueRepository vrepository,
-			PostalCodeRepository pcrepository) {
+			PostalCodeRepository pcrepository, OrderRepository orderRepo, UserRoleRepository urRepository, UserRepository userRepo) {
 		return (args) -> {
 			log.info("Save some events");
 
@@ -63,6 +69,7 @@ public class TicketGuruApplication {
 			erepository.save(coolEvent);
 			erepository.save(fakeEvent);
 			erepository.save(demoEvent);
+			
 
 			log.info("fetch all events");
 			for (Event event : erepository.findAll()) {
