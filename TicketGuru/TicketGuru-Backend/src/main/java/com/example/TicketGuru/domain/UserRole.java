@@ -59,6 +59,12 @@ public class UserRole {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public UserRole(Long userRoleId, String userRoleName) {
+		super();
+		this.userRoleId = userRoleId;
+		this.userRoleName = userRoleName;
+	}
 
 	@Override
 	public String toString() {

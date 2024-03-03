@@ -17,10 +17,17 @@ import com.example.TicketGuru.domain.Order;
 import com.example.TicketGuru.domain.OrderRepository;
 import com.example.TicketGuru.domain.PostalCode;
 import com.example.TicketGuru.domain.PostalCodeRepository;
+
 import com.example.TicketGuru.domain.Ticket;
 import com.example.TicketGuru.domain.TicketRepository;
 import com.example.TicketGuru.domain.TicketType;
 import com.example.TicketGuru.domain.TicketTypeRepository;
+
+import com.example.TicketGuru.domain.User;
+import com.example.TicketGuru.domain.UserRepository;
+import com.example.TicketGuru.domain.UserRole;
+import com.example.TicketGuru.domain.UserRoleRepository;
+
 import com.example.TicketGuru.domain.Venue;
 import com.example.TicketGuru.domain.VenueRepository;
 
@@ -33,8 +40,8 @@ public class TicketGuruApplication {
 	}
 
 	@Bean
-	public CommandLineRunner eventDemo(EventRepository erepository, VenueRepository vrepository,
-			PostalCodeRepository pcrepository, TicketRepository tkrepository, TicketTypeRepository tktrepository, OrderRepository orepository) {
+	public CommandLineRunner eventDemo(EventRepository erepository, VenueRepository vrepository,PostalCodeRepository pcrepository, TicketRepository tkrepository,TicketTypeRepository tktrepository,OrderRepository orderRepo,UserRoleRepository urRepository, UserRepository userRepo) {
+			
 		return (args) -> {
 			log.info("Save some events");
 
@@ -74,6 +81,7 @@ public class TicketGuruApplication {
 			erepository.save(fakeEvent);
 			erepository.save(demoEvent);
 			
+
 			//
 			List<Ticket> listtickets = new ArrayList<Ticket>();
 			TicketType tickettype1 = new TicketType("Aikuiset", "Yli 18-vuotta täyttäneiden lippu", listtickets);
@@ -89,7 +97,7 @@ public class TicketGuruApplication {
 			tkrepository.save(ticket2);
 			tkrepository.save(ticket3);
 			tkrepository.save(ticket4);
-			
+
 			log.info("fetch all events");
 			for (Event event : erepository.findAll()) {
 				log.info(event.toString());

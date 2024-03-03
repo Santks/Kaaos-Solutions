@@ -129,5 +129,18 @@ public class User {
 		this.activeUser = activeUser;
 
 	}
+	
+	public User(Long userId, UserRole userRole) {
+		this.userId = userId;
+		this.userRole = userRole;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
+				+ ", email=" + email + ", address=" + address + ", activeUser=" + activeUser + ", postalCode="
+				+ postalCode + ", userRole=" + userRole + "]";
+	}
+	
 
 }
