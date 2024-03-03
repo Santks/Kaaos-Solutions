@@ -1,5 +1,7 @@
 package com.example.TicketGuru.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,14 +15,17 @@ public class Ticket {
 
 	@ManyToOne
 	@JoinColumn(name = "Event_id")
+	@JsonBackReference
 	private Event event;
 
 	@ManyToOne
 	@JoinColumn(name = "TicketType_id")
+	@JsonBackReference
 	private TicketType ticketType;
 
 	@ManyToOne
 	@JoinColumn(name = "Order_id")
+	@JsonBackReference
 	private Order order;
 
 	@Column(name = "Price")
@@ -85,6 +90,10 @@ public class Ticket {
 				+ ", ticketUsed=" + ticketUsed + "]";
 	}
 
+	public Ticket() {
+		
+	}
+	
 	public Ticket(Long ticketId, Event event, TicketType ticketType, Order order, Double price, Boolean ticketUsed) {
 		super();
 		this.ticketId = ticketId;

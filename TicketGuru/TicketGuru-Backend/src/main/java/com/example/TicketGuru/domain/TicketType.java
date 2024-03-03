@@ -3,6 +3,8 @@ package com.example.TicketGuru.domain;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "TG_TicketType")
 public class TicketType {
@@ -19,6 +21,7 @@ public class TicketType {
 	private String description;
 
 	@OneToMany(mappedBy = "ticketType", cascade=CascadeType.PERSIST)
+	@JsonManagedReference
 	private List<Ticket> tickets;
 
 	public Long getTicketTypeId() {
