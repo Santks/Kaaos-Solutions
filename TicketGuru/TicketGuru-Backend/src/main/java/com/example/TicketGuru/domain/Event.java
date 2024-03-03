@@ -1,6 +1,9 @@
 package com.example.TicketGuru.domain;
 
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,7 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "Venue_id", referencedColumnName = "Venue_id")
+    @JsonBackReference
     private Venue venue;
 
     @Column(name = "Name")

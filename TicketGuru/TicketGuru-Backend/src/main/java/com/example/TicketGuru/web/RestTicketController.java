@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,15 @@ public class RestTicketController {
 	// PUT
 	//@PutMapping
 	// DELETE
-	//@DeleteMapping()
+	@DeleteMapping("/tickets/{ticketid}")
+	ResponseEntity<String> deleteTicket(@PathVariable Long ticketid) {
+		if (ticketRepo.findById(ticketid).isEmpty()) {
+			log.info("no such ticket");
+			return ResponseEntity.notFound().build();
+		}
+		log.info("deleting ticket by id");
+		ticketRepo.deleteById(ticketid);
+		return ResponseEntity.ok("deleted ticket");
+	}
 	//
 }
