@@ -21,7 +21,7 @@ public class TicketType {
 	private String description;
 
 	@OneToMany(mappedBy = "ticketType", cascade=CascadeType.PERSIST)
-	@JsonManagedReference
+	@JsonManagedReference(value="ticket-tickettype")
 	private List<Ticket> tickets;
 
 	public Long getTicketTypeId() {

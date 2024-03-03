@@ -20,12 +20,12 @@ public class Ticket {
 
 	@ManyToOne
 	@JoinColumn(name = "TicketType_id")
-	@JsonBackReference
+	@JsonBackReference(value="ticket-tickettype")
 	private TicketType ticketType;
 
 	@ManyToOne
 	@JoinColumn(name = "Order_id")
-	@JsonBackReference
+	@JsonBackReference(value="ticket-ordertype")
 	private Order order;
 
 	@Column(name = "Price")
@@ -109,6 +109,11 @@ public class Ticket {
 		this.event = event;
 		this.ticketType = ticketType;
 		this.order = order;
+		this.price = price;
+		this.ticketUsed = ticketUsed;
+	}
+	public Ticket(Double price, Boolean ticketUsed) {
+		super();
 		this.price = price;
 		this.ticketUsed = ticketUsed;
 	}

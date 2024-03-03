@@ -39,7 +39,7 @@ public class RestTicketController {
 		return ticketRepo.findById(ticketid);
 	}
 	// POST create a new ticket
-	@PostMapping(value = "/tickets", consumes = {"application/json"})
+	@PostMapping("/tickets")
 	Ticket createTicket(@RequestBody Ticket newTicket) {
 		return ticketRepo.save(newTicket);
 	};
