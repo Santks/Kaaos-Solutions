@@ -1,4 +1,4 @@
-## Poista tapahtuma
+## Poista lippu
 
 Tapahtuman järjestäjä voi poistaa yksittäisen tapahtuman
 
