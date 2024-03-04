@@ -84,6 +84,10 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
+    public Payment() {
+        
+    }
+
     public Payment(Long id, User user, Order order, Double amount, Date paymentDate, String paymentMethod) {
         this.id = id;
         this.user = user;
