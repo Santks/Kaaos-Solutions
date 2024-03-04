@@ -60,12 +60,15 @@ public class UserRole {
 		this.user = user;
 	}
 	
-	public UserRole(Long userRoleId, String userRoleName) {
+	public UserRole() {
 		super();
-		this.userRoleId = userRoleId;
+	}
+	
+	public UserRole(String userRoleName) {
+		super();
 		this.userRoleName = userRoleName;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "UserRole [userRoleId=" + userRoleId + ", userRoleName=" + userRoleName + ", roleDesc=" + roleDesc

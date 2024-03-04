@@ -25,8 +25,8 @@ public class User {
 	private String lastName;
 
 	@Column(name = "Phone")
-
 	private String phone;
+	
 	@Column(name = "Email", nullable = false)
 	private String email;
 
@@ -115,6 +115,10 @@ public class User {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+	
+	public User() {
+		super();
+	}
 
 	public User(Long userId, String firstName, String lastName, String phone, String email, String address,
 			UserRole userRole, boolean activeUser) {
@@ -130,8 +134,11 @@ public class User {
 
 	}
 	
-	public User(Long userId, UserRole userRole) {
-		this.userId = userId;
+	public User(String firstName, String lastName, String email, UserRole userRole) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 		this.userRole = userRole;
 	}
 

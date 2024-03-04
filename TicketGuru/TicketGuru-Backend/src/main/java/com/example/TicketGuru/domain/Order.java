@@ -1,6 +1,6 @@
 package com.example.TicketGuru.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Order {
     private User customer;
 
     @Column(name = "Date")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "TotalPrice")
     private double totalPrice;
@@ -53,11 +53,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -84,10 +84,14 @@ public class Order {
     public void setSeller(User seller) {
         this.seller = seller;
     }
+    
+    public Order() {
+    	super();
+    }
 
-    public Order(Long orderId, User customer, Date date, double totalPrice, boolean orderPaid,
+    public Order(User customer, LocalDate date, double totalPrice, boolean orderPaid,
             User seller) {
-        this.orderId = orderId;
+    	super();
         this.customer = customer;
         this.date = date;
         this.totalPrice = totalPrice;

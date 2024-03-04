@@ -40,8 +40,11 @@ public class TicketGuruApplication {
 	}
 
 	@Bean
-	public CommandLineRunner eventDemo(EventRepository erepository, VenueRepository vrepository,PostalCodeRepository pcrepository, TicketRepository tkrepository,TicketTypeRepository tktrepository,OrderRepository orderRepo,UserRoleRepository urRepository, UserRepository userRepo) {
-			
+	public CommandLineRunner eventDemo(EventRepository erepository, VenueRepository vrepository,
+			PostalCodeRepository pcrepository, TicketRepository tkrepository,
+			TicketTypeRepository tktrepository, OrderRepository orderRepo,
+			UserRoleRepository urRepository, UserRepository userRepo) {
+
 		return (args) -> {
 			log.info("Save some events");
 
@@ -61,26 +64,45 @@ public class TicketGuruApplication {
 			vrepository.save(venue1);
 			vrepository.save(venue2);
 			vrepository.save(venue3);
-			
-			
 
 			// U=upcoming
-			Event coolEvent = new Event(venue1, "Cool event", "Cool event example", "Cool event", 
-				    LocalDate.parse("2024-02-22"), LocalDate.parse("2024-02-24"), 
-				    'U', "Cool events org.", 36000L);
+			Event coolEvent = new Event(venue1, "Cool event", "Cool event example", "Cool event",
+					LocalDate.parse("2024-02-22"), LocalDate.parse("2024-02-24"),
+					'U', "Cool events org.", 36000L);
 
-			Event fakeEvent = new Event(venue2, "Cool event", "Fake event example", "Fake event", 
-				    LocalDate.parse("2024-02-25"), LocalDate.parse("2024-02-26"), 
-				    'U', "Cool events org.", 16600L);
+			Event fakeEvent = new Event(venue2, "Cool event", "Fake event example", "Fake event",
+					LocalDate.parse("2024-02-25"), LocalDate.parse("2024-02-26"),
+					'U', "Cool events org.", 16600L);
 
-			Event demoEvent = new Event(venue3, "Cool event", "Example of an event", "Demo event", 
-				    LocalDate.parse("2024-02-28"), LocalDate.parse("2024-02-29"), 
-				    'U', "Demo events co.", 8800L);
+			Event demoEvent = new Event(venue3, "Cool event", "Example of an event", "Demo event",
+					LocalDate.parse("2024-02-28"), LocalDate.parse("2024-02-29"),
+					'U', "Demo events co.", 8800L);
 
 			erepository.save(coolEvent);
 			erepository.save(fakeEvent);
 			erepository.save(demoEvent);
-			
+
+			UserRole customer = new UserRole("customer");
+			UserRole worker = new UserRole("Salesman");
+
+			urRepository.save(customer);
+			urRepository.save(worker);
+
+			User demo = new User("John", "Doe", "john@doe.com", customer);
+			User demo2 = new User("Jane", "Doe", "jane@doe.com", customer);
+			User seller = new User("Mike", "Man", "mikeman@ticketGuru.com", worker);
+			User seller2 = new User("Daisy", "Duck", "daisyduck@ticketGuru.com", worker);
+
+			userRepo.save(demo);
+			userRepo.save(demo2);
+			userRepo.save(seller);
+			userRepo.save(seller2);
+
+			Order order1 = new Order(demo, LocalDate.parse("2024-03-01"), 31.99, true, seller);
+			Order order2 = new Order(demo2, LocalDate.parse("2024-03-01"), 23.45, false, seller2);
+
+			orderRepo.save(order1);
+			orderRepo.save(order2);
 
 			//
 			List<Ticket> listtickets = new ArrayList<Ticket>();
@@ -88,11 +110,11 @@ public class TicketGuruApplication {
 			TicketType tickettype2 = new TicketType("Lapset", "Alle 18-vuotiaiden liput", listtickets);
 			tktrepository.save(tickettype1);
 			tktrepository.save(tickettype2);
-			
-			Ticket ticket1 = new Ticket(demoEvent, tickettype1, null, null, null);
-			Ticket ticket2 = new Ticket(fakeEvent, tickettype2, null, null, null);
-			Ticket ticket3 = new Ticket(coolEvent, tickettype2, null, null, null);
-			Ticket ticket4 = new Ticket(demoEvent, tickettype1, null, null, null);
+
+			Ticket ticket1 = new Ticket(demoEvent, tickettype1, order1, 31.99, false);
+			Ticket ticket2 = new Ticket(fakeEvent, tickettype2, order2, 23.45, false);
+			Ticket ticket3 = new Ticket(coolEvent, tickettype2, order2, 23.45, false);
+			Ticket ticket4 = new Ticket(demoEvent, tickettype1, order1, 31.99, true);
 			tkrepository.save(ticket1);
 			tkrepository.save(ticket2);
 			tkrepository.save(ticket3);
@@ -101,11 +123,15 @@ public class TicketGuruApplication {
 			log.info("fetch all events");
 			for (Event event : erepository.findAll()) {
 				log.info(event.toString());
-			};	
-			
+			}
+			;
+
 			log.info(ticket1.toString());
 			log.info(ticket2.toString());
-			
+
+			log.info(order1.toString());
+			log.info(order2.toString());
+
 			for (TicketType tickettype : tktrepository.findAll()) {
 				log.info(tickettype.toString());
 			}
