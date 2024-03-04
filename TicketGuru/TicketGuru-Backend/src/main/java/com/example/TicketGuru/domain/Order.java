@@ -1,6 +1,11 @@
 package com.example.TicketGuru.domain;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,10 +40,22 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "Seller_id", referencedColumnName = "User_id")
     private User seller;
-
+    
+    @OneToMany(mappedBy = "order", cascade=CascadeType.ALL)
+	@JsonManagedReference(value="ticket-order")
+    private List<Ticket> tickets;
+    
     // Constructors, getters, setters and toString()
 
-    public Long getOrderId() {
+    public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	public Long getOrderId() {
         return orderId;
     }
 
@@ -99,6 +117,16 @@ public class Order {
         this.seller = seller;
     }
 
+    public Order(User customer, LocalDate date, double totalPrice, boolean orderPaid,
+            User seller, List<Ticket> tickets) {
+    	super();
+        this.customer = customer;
+        this.date = date;
+        this.totalPrice = totalPrice;
+        this.orderPaid = orderPaid;
+        this.seller = seller;
+        this.tickets = tickets;
+    }
     @Override
     public String toString() {
         return "Order [orderId=" + orderId + ", customer=" + customer + ", date=" + date + ", totalPrice=" + totalPrice

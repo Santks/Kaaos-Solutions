@@ -25,7 +25,7 @@ public class Ticket {
 
 	@ManyToOne
 	@JoinColumn(name = "Order_id")
-	@JsonBackReference(value="ticket-ordertype")
+	@JsonBackReference(value="ticket-order")
 	private Order order;
 
 	@Column(name = "Price")
