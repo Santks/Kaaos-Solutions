@@ -1,5 +1,6 @@
 package com.example.TicketGuru.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -29,18 +30,28 @@ public class RestPaymentController {
     // GET
     @GetMapping("/payments/{paymentId}")
     Optional<Payment> getPaymentByPaymentId(@PathVariable Long paymentId) {
+        log.info("Get payment by ID");
         return paymentRepo.findById(paymentId);
+    }
+
+    // GET ALL
+    @GetMapping("/payments")
+    List<Payment> getAllPayments() {
+        log.info("Get all payments");
+        return (List<Payment>) paymentRepo.findAll();
     }
 
     // POST
     @PostMapping("/payments")
     Payment createPayment(@RequestBody Payment newPayment) {
+        log.info("Create new payment");
         return paymentRepo.save(newPayment);
     }
 
     // PUT
     @PutMapping("/payments/{paymentId}")
     Payment editPayment(@RequestBody Payment editedPayment, @PathVariable Long paymentId) {
+        log.info("Edit payment by ID");
         return paymentRepo.save(editedPayment);
     }
 
