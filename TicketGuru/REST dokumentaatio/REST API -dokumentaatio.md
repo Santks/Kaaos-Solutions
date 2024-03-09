@@ -70,7 +70,7 @@ Lisää tilaus
 Tilauksen päivittäminen
 
 **DELETE orders/{orderId}**
-Tapahtuman poisto
+Tilauksen poisto
 
 #### Toimivuus
 
