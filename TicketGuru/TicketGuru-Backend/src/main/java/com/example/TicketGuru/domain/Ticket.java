@@ -3,6 +3,7 @@ package com.example.TicketGuru.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Ticket")
@@ -11,30 +12,34 @@ public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Ticket_id")
+	@NotNull
 	private Long ticketId;
 
 	@ManyToOne
 	@JoinColumn(name = "Event_id")
 	@JsonBackReference
+	@NotNull
 	private Event event;
 
 	@ManyToOne
 	@JoinColumn(name = "TicketType_id")
 	@JsonBackReference(value="ticket-tickettype")
+	@NotNull
 	private TicketType ticketType;
 
 	@ManyToOne
 	@JoinColumn(name = "Order_id")
 	@JsonBackReference(value="ticket-order")
+	@NotNull
 	private Order order;
 
 	@Column(name = "Price")
+	@NotNull
 	private Double price;
 
 	@Column(name = "TicketUsed")
+	@NotNull
 	private Boolean ticketUsed;
-
-	// GET SET
 
 	public Long getTicketId() {
 		return ticketId;

@@ -1,21 +1,25 @@
 package com.example.TicketGuru.web;
 
 import java.util.List;
-import java.util.Optional;
 import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.EventRepository;
+
 
 @RestController
 public class RestEventController {
@@ -35,9 +39,9 @@ public class RestEventController {
     
     // GET (id)
     @GetMapping("/events/{id}")
-    Optional<Event> getEventById(@PathVariable Long id) {
+    Event getEventById(@PathVariable Long id) {
         log.info("Get event by id");
-        return eventRepo.findById(id);
+        return eventRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tapahtumaa ei löytynyt."));
     }
     
     // GET (date)
@@ -51,14 +55,15 @@ public class RestEventController {
 	
 	//POST
 	@PostMapping("/events")
-	Event createEvent(@RequestBody Event newEvent) {
+	@ResponseStatus(HttpStatus.CREATED)
+	Event createEvent(@Validated @RequestBody Event newEvent) {
 		log.info("Create new event");
 		return eventRepo.save(newEvent);
 	}
 	
 	//PUT
 	@PutMapping("/events/{id}")
-	Event editEventRest(@RequestBody Event editedEvent, @PathVariable Long id) {
+	Event editEventRest(@Validated @RequestBody Event editedEvent, @PathVariable Long id) {
 		log.info("Edit event by id");
 		editedEvent.setId(id);
 		return eventRepo.save(editedEvent);

@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Venue")
@@ -15,28 +18,31 @@ public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Venue_id")
+    @NotNull
     private Long id;
 
     @Column(name = "Name")
+    @NotBlank
     private String name;
 
     @Column(name = "Address")
+    @NotBlank
     private String address;
 
     @Column(name = "Phone")
     private String phone;
 
     @Column(name = "Email")
+    @Email
     private String email;
 
     @Column(name = "Capacity")
+    @NotNull
     private int capacity;
 
     @ManyToOne
     @JoinColumn(name = "PostalCode")
     private PostalCode postalCode;
-
-    // Constructors, getters, setters and toString()
 
     public Venue() {
         super();

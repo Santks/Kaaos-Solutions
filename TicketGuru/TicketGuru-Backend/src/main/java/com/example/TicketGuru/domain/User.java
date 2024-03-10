@@ -8,26 +8,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_User")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // generaatio tapa?
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "User_id", nullable = false)
+	@NotNull
 	private Long userId;
 
 	@Column(name = "FirstName", nullable = false)
+	@NotBlank
 	private String firstName;
 
 	@Column(name = "LastName", nullable = false)
+	@NotBlank
 	private String lastName;
 
 	@Column(name = "Phone")
 	private String phone;
 	
 	@Column(name = "Email", nullable = false)
+	@Email
 	private String email;
 
 	@Column(name = "Address")
@@ -42,6 +49,7 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name = "userRoleId")
+	@NotNull
 	private UserRole userRole;
 
 	public Long getUserId() {

@@ -1,6 +1,9 @@
 package com.example.TicketGuru.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -12,9 +15,11 @@ public class TicketType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TicketType_id")
+	@NotNull
 	private Long ticketTypeId;
 
 	@Column(name = "Name")
+	@NotBlank
 	private String name;
 
 	@Column(name = "Description")

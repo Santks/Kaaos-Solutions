@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Order")
@@ -22,16 +23,20 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Order_id")
+    @NotNull
     private Long orderId;
 
     @ManyToOne
     @JoinColumn(name = "Customer_id")
+    @NotNull
     private User customer;
 
     @Column(name = "Date")
+    @NotNull
     private LocalDate date;
 
     @Column(name = "TotalPrice")
+    @NotNull
     private double totalPrice;
 
     @Column(name = "OrderPaid")
@@ -39,14 +44,13 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "Seller_id", referencedColumnName = "User_id")
+    @NotNull
     private User seller;
     
     @OneToMany(mappedBy = "order", cascade=CascadeType.ALL)
 	@JsonManagedReference(value="ticket-order")
     private List<Ticket> tickets;
     
-    // Constructors, getters, setters and toString()
-
     public List<Ticket> getTickets() {
 		return tickets;
 	}

@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Event")
@@ -19,14 +21,17 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Event_id")
+    @NotNull
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "Venue_id", referencedColumnName = "Venue_id")
     @JsonBackReference
+    @NotNull
     private Venue venue;
 
     @Column(name = "Name")
+    @NotBlank
     private String name;
 
     @Column(name = "Description")
@@ -36,9 +41,11 @@ public class Event {
     private String eventCategory;
 
     @Column(name = "StartDate")
+    @NotNull
     private LocalDate startDate;
 
     @Column(name = "EndDate")
+    @NotNull
     private LocalDate endDate;
 
     @Column(name = "eventStatus")
@@ -48,6 +55,7 @@ public class Event {
     private String organiserName;
 
     @Column(name = "maxTickets")
+    @NotNull
     private long maxTickets;
 
     public Event() {

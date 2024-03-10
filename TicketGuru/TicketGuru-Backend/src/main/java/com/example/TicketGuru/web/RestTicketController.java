@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,39 +29,50 @@ public class RestTicketController {
 	
 	// GET all tickets associated with an event
 	@GetMapping("/tickets/event/{eventid}")
-    Iterable<Ticket> getAllTicketsByEventId(@PathVariable Long eventid) {
+    public ResponseEntity<Iterable<Ticket>> getAllTicketsByEventId(@PathVariable Long eventid) {
         log.info("Get all events");
-        return ticketRepo.findAllByEventId(eventid);
+        return new ResponseEntity<>(ticketRepo.findAllByEventId(eventid), HttpStatus.OK);
     }
     
 	// GET ticket by it's own id
 	@GetMapping("tickets/{ticketid}")
-	Optional<Ticket> getTicketByTicketId(@PathVariable Long ticketid) {
-		return ticketRepo.findById(ticketid);
+	public ResponseEntity<Ticket> getTicketByTicketId(@PathVariable Long ticketid) {
+		Optional<Ticket> ticket = ticketRepo.findById(ticketid);
+		if (ticket.isPresent()) {
+			return new ResponseEntity<>(ticket.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
+	
 	// POST create a new ticket
 	@PostMapping("/tickets")
-	Ticket createTicket(@RequestBody Ticket newTicket) {
-		return ticketRepo.save(newTicket);
-	};
+	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket newTicket) {
+		if (newTicket.getPrice() == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(ticketRepo.save(newTicket), HttpStatus.CREATED);
+	}
 	
 	// PUT edit pre-existing ticket
 	@PutMapping("/tickets/{ticketid}")
-	Ticket editTicket(@RequestBody Ticket editedTicket, @PathVariable Long ticketid) {
+	public ResponseEntity<Ticket> editTicket(@RequestBody Ticket editedTicket, @PathVariable Long ticketid) {
+		if (editedTicket.getPrice() == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		editedTicket.setTicketId(ticketid);
-		return ticketRepo.save(editedTicket);
+		return new ResponseEntity<>(ticketRepo.save(editedTicket), HttpStatus.OK);
 	}
 	
 	// DELETE
 	@DeleteMapping("/tickets/{ticketid}")
-	ResponseEntity<String> deleteTicket(@PathVariable Long ticketid) {
+	public ResponseEntity<String> deleteTicket(@PathVariable Long ticketid) {
+		log.info("Deleting ticket by id");
 		if (ticketRepo.findById(ticketid).isEmpty()) {
-			log.info("no such ticket");
-			return ResponseEntity.notFound().build();
+			log.info("No such ticket");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		log.info("deleting ticket by id");
 		ticketRepo.deleteById(ticketid);
-		return ResponseEntity.ok("deleted ticket");
+		return new ResponseEntity<>("Deleted ticket", HttpStatus.OK);
 	}
-	//
 }
