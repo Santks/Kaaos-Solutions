@@ -23,7 +23,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Order_id")
-    @NotNull
+    // @NotNull
     private Long orderId;
 
     @ManyToOne

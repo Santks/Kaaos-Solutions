@@ -18,7 +18,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Payment_id")
-    @NotNull
+    // @NotNull
     private Long id;
 
     @ManyToOne

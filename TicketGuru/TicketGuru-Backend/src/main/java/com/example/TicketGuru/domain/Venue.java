@@ -18,7 +18,7 @@ public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Venue_id")
-    @NotNull
+    // @NotNull
     private Long id;
 
     @Column(name = "Name")

@@ -12,7 +12,7 @@ public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Ticket_id")
-	@NotNull
+	// @NotNull
 	private Long ticketId;
 
 	@ManyToOne

@@ -15,7 +15,7 @@ public class PostalCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PostalCode_id")
-    @NotNull
+    // @NotNull
     private Long Id;
 
     @Column(name = "PostalCode")

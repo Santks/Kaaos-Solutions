@@ -21,7 +21,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Event_id")
-    @NotNull
+    // @NotNull
     private Long id;
 
     @ManyToOne

@@ -82,21 +82,4 @@ public class RestEventController {
 		eventRepo.deleteById(id);
 		return ResponseEntity.ok("Poistettu");
 	}
-	
-    // 400 Bad Request
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST) // 400: Bad Request!
-    public String handleValidationExceptions(
-      MethodArgumentNotValidException ex) {
-        return "400: Bad Request!";
-    }
-    
-    // 500 - Internal Server Error
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500: Internal Server error!
-    public String handleAllUncaughtException(
-            Exception exception, 
-            WebRequest request) {
-        return "500: Internal Server Error!";
-    }
 }
