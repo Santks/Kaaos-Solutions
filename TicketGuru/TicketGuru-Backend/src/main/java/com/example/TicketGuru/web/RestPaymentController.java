@@ -34,9 +34,9 @@ public class RestPaymentController {
         log.info("Get payment by ID");
         Optional<Payment> payment = paymentRepo.findById(paymentId);
         if (payment.isPresent()) {
-            return new ResponseEntity<>(payment.get(), HttpStatus.OK);
+            return new ResponseEntity<>(payment.get(), HttpStatus.OK); // 200: OK!
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
         }
     }
 
@@ -44,7 +44,7 @@ public class RestPaymentController {
     @GetMapping("/payments")
     public ResponseEntity<List<Payment>> getAllPayments() {
         log.info("Get all payments");
-        return new ResponseEntity<>((List<Payment>) paymentRepo.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>((List<Payment>) paymentRepo.findAll(), HttpStatus.OK); // 200: OK!
     }
 
     // POST
@@ -52,9 +52,14 @@ public class RestPaymentController {
     public ResponseEntity<Payment> createPayment(@RequestBody Payment newPayment) {
         log.info("Create new payment");
         if (newPayment.getAmount() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
         }
-        return new ResponseEntity<>(paymentRepo.save(newPayment), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(paymentRepo.save(newPayment), HttpStatus.CREATED); // 201: Created!
+        } catch (Exception e) {
+            log.error("Error creating payment", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal Server Error!
+        }
     }
 
     // PUT
@@ -62,10 +67,10 @@ public class RestPaymentController {
     public ResponseEntity<Payment> editPayment(@RequestBody Payment editedPayment, @PathVariable Long paymentId) {
         log.info("Edit payment by ID");
         if (editedPayment.getAmount() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
         }
         editedPayment.setId(paymentId);
-        return new ResponseEntity<>(paymentRepo.save(editedPayment), HttpStatus.OK);
+        return new ResponseEntity<>(paymentRepo.save(editedPayment), HttpStatus.OK); // 200: OK!
     }
 
     // DELETE
@@ -74,10 +79,10 @@ public class RestPaymentController {
         log.info("Deleting payment by id");
         if (paymentRepo.findById(paymentId).isEmpty()) {
             log.info("No such payment");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
         }
         paymentRepo.deleteById(paymentId);
-        return new ResponseEntity<>("Deleted payment", HttpStatus.OK);
+        return new ResponseEntity<>("Deleted payment", HttpStatus.OK); // 200: OK!
     }
 }
 

@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.context.request.WebRequest;
 import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.EventRepository;
 
@@ -41,7 +44,7 @@ public class RestEventController {
     @GetMapping("/events/{id}")
     Event getEventById(@PathVariable Long id) {
         log.info("Get event by id");
-        return eventRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tapahtumaa ei löytynyt."));
+        return eventRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
     }
     
     // GET (date)
@@ -55,7 +58,7 @@ public class RestEventController {
 	
 	//POST
 	@PostMapping("/events")
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED) // 201: Created!
 	Event createEvent(@Validated @RequestBody Event newEvent) {
 		log.info("Create new event");
 		return eventRepo.save(newEvent);
@@ -79,4 +82,21 @@ public class RestEventController {
 		eventRepo.deleteById(id);
 		return ResponseEntity.ok("Poistettu");
 	}
+	
+    // 400 Bad Request
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST) // 400: Bad Request!
+    public String handleValidationExceptions(
+      MethodArgumentNotValidException ex) {
+        return "400: Bad Request!";
+    }
+    
+    // 500 - Internal Server Error
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500: Internal Server error!
+    public String handleAllUncaughtException(
+            Exception exception, 
+            WebRequest request) {
+        return "500: Internal Server Error!";
+    }
 }

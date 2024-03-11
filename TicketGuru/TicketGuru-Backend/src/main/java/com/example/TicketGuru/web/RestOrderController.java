@@ -30,7 +30,7 @@ public class RestOrderController {
     @GetMapping("/orders")
     public ResponseEntity<Iterable<Order>> getAllOrders() {
         log.info("get all orders");
-        return new ResponseEntity<>(orderRepo.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(orderRepo.findAll(), HttpStatus.OK); // 200: OK!
     }
 
     // GET (by orderId)
@@ -39,9 +39,9 @@ public class RestOrderController {
         log.info("find order by id");
         Optional<Order> order = orderRepo.findById(orderId);
         if (order.isPresent()) {
-            return new ResponseEntity<>(order.get(), HttpStatus.OK);
+            return new ResponseEntity<>(order.get(), HttpStatus.OK); // 200: OK!
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
         }
     }
 
@@ -50,9 +50,14 @@ public class RestOrderController {
     public ResponseEntity<Order> createOrder(@RequestBody Order newOrder) {
         log.info("create new order");
         if (newOrder.getCustomer() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
         }
-        return new ResponseEntity<>(orderRepo.save(newOrder), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(orderRepo.save(newOrder), HttpStatus.CREATED); // 201: Created!
+        } catch (Exception e) {
+            log.error("Error creating order", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal Server Error!
+        }
     }
 
     // DELETE (by orderId)
@@ -60,10 +65,10 @@ public class RestOrderController {
     public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
         log.info("Delete order by id");
         if (orderRepo.findById(orderId).isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
         }
         orderRepo.deleteById(orderId);
-        return new ResponseEntity<>("Tilaus poistettu", HttpStatus.OK);
+        return new ResponseEntity<>("Tilaus poistettu", HttpStatus.OK); // 200: OK!
     }
 
     // PUT (edit order by orderId)
@@ -71,10 +76,10 @@ public class RestOrderController {
     public ResponseEntity<Order> editOrderById(@RequestBody Order editedOrder, @PathVariable Long orderId) {
         log.info("edit order by order id");
         if (editedOrder.getCustomer() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
         }
         editedOrder.setOrderId(orderId);
-        return new ResponseEntity<>(orderRepo.save(editedOrder), HttpStatus.OK);
+        return new ResponseEntity<>(orderRepo.save(editedOrder), HttpStatus.OK); // 200: OK!
     }
 
 }
