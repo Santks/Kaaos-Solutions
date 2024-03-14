@@ -22,9 +22,9 @@ public class WebSecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
         .inMemoryAuthentication()
-        .withUser("user")
-        .password(passwordEncoder.encode("user"))
-        .authorities("ROLE_USER");
+        .withUser("admin")
+        .password(passwordEncoder.encode("admin"))
+        .authorities("ROLE_ADMIN");
     }
 
     @SuppressWarnings("deprecation")
