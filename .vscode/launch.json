@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TicketGuruApplication<TicketGuru>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.TicketGuru.TicketGuruApplication",
+            "projectName": "TicketGuru",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
