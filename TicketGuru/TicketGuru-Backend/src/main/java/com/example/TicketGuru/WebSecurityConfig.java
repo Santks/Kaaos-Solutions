@@ -31,7 +31,10 @@ public class WebSecurityConfig {
     @SuppressWarnings("deprecation")
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorize -> authorize
+        http
+        .csrf()
+        .disable()
+        .authorizeHttpRequests(authorize -> authorize
                 .anyRequest().authenticated())
                 .httpBasic(HttpSecurityHttpBasicConfigurer -> HttpSecurityHttpBasicConfigurer
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
