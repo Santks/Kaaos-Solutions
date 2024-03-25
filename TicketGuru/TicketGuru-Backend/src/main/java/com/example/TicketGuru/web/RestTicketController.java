@@ -15,25 +15,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.Ticket;
 import com.example.TicketGuru.domain.TicketRepository;
 
 @RestController
 public class RestTicketController {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(RestEventController.class);
-	
+
 	@Autowired
 	private TicketRepository ticketRepo;
-	
+
 	// GET all tickets associated with an event
 	@GetMapping("/tickets/event/{eventid}")
-    public ResponseEntity<Iterable<Ticket>> getAllTicketsByEventId(@PathVariable Long eventid) {
-        log.info("Get all events");
-        return new ResponseEntity<>(ticketRepo.findAllByEventId(eventid), HttpStatus.OK); // 200: OK!
-    }
-    
+	public ResponseEntity<Iterable<Ticket>> getAllTicketsByEventId(@PathVariable Long eventid) {
+		log.info("Get all events");
+		return new ResponseEntity<>(ticketRepo.findAllByEventId(eventid), HttpStatus.OK); // 200: OK!
+	}
+
 	// GET ticket by it's own id
 	@GetMapping("tickets/{ticketid}")
 	public ResponseEntity<Ticket> getTicketByTicketId(@PathVariable Long ticketid) {
@@ -44,21 +43,21 @@ public class RestTicketController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 		}
 	}
-	
+
 	// POST create a new ticket
 	@PostMapping("/tickets")
 	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket newTicket) {
-	    if (newTicket.getPrice() == null) {
-	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
-	    }
-	    try {
-	        return new ResponseEntity<>(ticketRepo.save(newTicket), HttpStatus.CREATED); // 201: Created!
-	    } catch (Exception e) {
-	        log.error("Error creating ticket", e);
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal Server Error!
-	    }
+		if (newTicket.getPrice() == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
+		}
+		try {
+			return new ResponseEntity<>(ticketRepo.save(newTicket), HttpStatus.CREATED); // 201: Created!
+		} catch (Exception e) {
+			log.error("Error creating ticket", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal Server Error!
+		}
 	}
-	
+
 	// PUT edit pre-existing ticket
 	@PutMapping("/tickets/{ticketid}")
 	public ResponseEntity<Ticket> editTicket(@RequestBody Ticket editedTicket, @PathVariable Long ticketid) {
@@ -68,7 +67,7 @@ public class RestTicketController {
 		editedTicket.setTicketId(ticketid);
 		return new ResponseEntity<>(ticketRepo.save(editedTicket), HttpStatus.OK); // 200: OK!
 	}
-	
+
 	// DELETE
 	@DeleteMapping("/tickets/{ticketid}")
 	public ResponseEntity<String> deleteTicket(@PathVariable Long ticketid) {
