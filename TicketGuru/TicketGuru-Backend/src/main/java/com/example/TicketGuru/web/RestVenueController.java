@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +42,19 @@ public class RestVenueController {
 
     // PUT
 
-    // DELETE
-
+    // DELETE // ONLY WORKS FOR VENUES WITH NO ASSOCIATED EVENTS DUE TO FOREIGN KEY RESTRAINTS
+    @DeleteMapping("/venues/{venueId}")
+    public ResponseEntity<String> deleteVenue(@PathVariable Long venueId) {
+    log.info("Deleting venue by id");
+    if (venueRepo.findById(venueId).isEmpty()) {
+        log.info("No such venue");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
+    }
+    try {venueRepo.deleteById(venueId);
+    return new ResponseEntity<>("Deleted venue", HttpStatus.OK); // 200: OK!
+    } catch (Exception e) {
+    	log.info("Error deleting venue", e);
+    	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal server error!
+    }
+}
 }
