@@ -61,9 +61,12 @@ public class TicketGuruApplication {
 					16800, pcode2);
 			Venue venue3 = new Venue("Veritas stadiom", "Hippoksentie 6", "04000099887", "bababooey@fafafooey.com",
 					9000, pcode3);
+			Venue venue4 = new Venue("No events for this venue", "Hippoksentie 6", "04000099887", "bababooey@fafafooey.com",
+					9000, pcode3);
 			vrepository.save(venue1);
 			vrepository.save(venue2);
 			vrepository.save(venue3);
+			vrepository.save(venue4);
 
 			// U=upcoming
 			Event coolEvent = new Event(venue1, "Cool event", "Cool event example", "Cool event",
