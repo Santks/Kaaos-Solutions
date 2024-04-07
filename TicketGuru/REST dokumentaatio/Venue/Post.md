@@ -16,7 +16,7 @@ Luodaan uusi tapahtumapaikka (Venue)
     "address": "test",
     "phone": "test",
     "email": "test@test.com",
-    "capacity": 55555
+    "capacity": 555
 }
 ```
 
@@ -24,12 +24,12 @@ Luodaan uusi tapahtumapaikka (Venue)
 
 ```json
 {
-    "id": 6,
+    "id": 5,
     "name": "test",
     "address": "test",
     "phone": "test",
     "email": "test@test.com",
-    "capacity": 55555,
+    "capacity": 555,
     "postalCode": null
 }
 ```

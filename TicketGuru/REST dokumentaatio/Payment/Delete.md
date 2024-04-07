@@ -1,13 +1,10 @@
-## Poista tapahtumapaikka
+## Poista maksu
 
-Poistetaan tapahtumapaikka (Venue)
-
-#### HTTP-Pyyntö
+Poistetaan maksu
 
 - **Metodi:** `DELETE`
 - **Base-URL:** `localhost:8080`
-- **Endpoint:** `/venues/{venueId}`
-
+- **Endpoint:** `/payments/{Paymentid}`
 
 **VASTAUS**
 
