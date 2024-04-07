@@ -1,6 +1,5 @@
 package com.example.TicketGuru;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,18 +36,19 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-//        .csrf()
-//        .disable()
-        .csrf((csrf) -> csrf
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
-        .authorizeHttpRequests(authorize -> authorize
-                .anyRequest().authenticated())
-        .httpBasic(Customizer.withDefaults())
-		.formLogin(Customizer.withDefaults());
-//                .httpBasic(HttpSecurityHttpBasicConfigurer -> HttpSecurityHttpBasicConfigurer
-//                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
-        
+                // .csrf()
+                // .disable()
+                .csrf((csrf) -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults());
+        // .httpBasic(HttpSecurityHttpBasicConfigurer -> HttpSecurityHttpBasicConfigurer
+        // .authenticationEntryPoint(new
+        // HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+
         return http.build();
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,21 +41,31 @@ public class RestVenueController {
         }
     }
 
-    // PUT
+    // PUT Edit venue by venue id
+    @PutMapping("/venues/{venueId}")
+    public ResponseEntity<Venue> editVenue(@RequestBody Venue editedVenue, @PathVariable Long venueId) {
+        if (editedVenue.getName() == null || editedVenue.getPostalCode() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
+        }
+        editedVenue.setId(venueId);
+        return new ResponseEntity<>(venueRepo.save(editedVenue), HttpStatus.OK); // 200: OK!
+    }
 
-    // DELETE // ONLY WORKS FOR VENUES WITH NO ASSOCIATED EVENTS DUE TO FOREIGN KEY RESTRAINTS
+    // DELETE // ONLY WORKS FOR VENUES WITH NO ASSOCIATED EVENTS DUE TO FOREIGN KEY
+    // RESTRAINTS
     @DeleteMapping("/venues/{venueId}")
     public ResponseEntity<String> deleteVenue(@PathVariable Long venueId) {
-    log.info("Deleting venue by id");
-    if (venueRepo.findById(venueId).isEmpty()) {
-        log.info("No such venue");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
+        log.info("Deleting venue by id");
+        if (venueRepo.findById(venueId).isEmpty()) {
+            log.info("No such venue");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
+        }
+        try {
+            venueRepo.deleteById(venueId);
+            return new ResponseEntity<>("Deleted venue", HttpStatus.OK); // 200: OK!
+        } catch (Exception e) {
+            log.info("Error deleting venue", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal server error!
+        }
     }
-    try {venueRepo.deleteById(venueId);
-    return new ResponseEntity<>("Deleted venue", HttpStatus.OK); // 200: OK!
-    } catch (Exception e) {
-    	log.info("Error deleting venue", e);
-    	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal server error!
-    }
-}
 }
