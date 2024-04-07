@@ -1,5 +1,6 @@
 FROM eclipse-temurin:17-jdk-focal as builder
 WORKDIR /opt/app
+ARG PROJECT_ROOT="./TicketGuru/TicketGuru-Backend"
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 RUN chmod +x ./mvnw
