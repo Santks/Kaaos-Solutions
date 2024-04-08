@@ -5,7 +5,7 @@ Haetaan tapahtumapaikkoja (Venue)
 - **Metodi:** `GET`
 - **Base-URL:** `localhost:8080`
 - **Endpointit:**
-`/venues/{venueId}` ja `/venues`
+`/venues/{venueId}` `/venues` `/venues/name/{venueName}`
 
 **Sisältö:** JSON-muotoinen
 
