@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
 import com.example.TicketGuru.domain.Venue;
 import com.example.TicketGuru.domain.VenueRepository;
 
@@ -24,8 +24,36 @@ public class RestVenueController {
     @Autowired
     private VenueRepository venueRepo;
 
-    // GET
+ // GET (all)
+    @GetMapping("/venues")
+    public ResponseEntity<Iterable<Venue>> getAllVenues() {
+        log.info("Hae kaikki tapahtumapaikat");
+        return new ResponseEntity<>(venueRepo.findAll(), HttpStatus.OK); // 200: OK!
+    }
 
+
+    // GET (id)
+    @GetMapping("/venues/{venueId}")
+    public ResponseEntity<Venue> getVenueById(@PathVariable Long venueId) {
+        log.info("Hae tapahtumapaikat ID:n perusteella");
+        Venue venue = venueRepo.findById(venueId).orElse(null);
+        if (venue == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
+        }
+        return new ResponseEntity<>(venue, HttpStatus.OK); // 200: OK!
+    }
+
+    // GET (name)
+    @GetMapping("/venues/name/{venueName}")
+    public ResponseEntity<List<Venue>> getVenueByName(@PathVariable String venueName) {
+        log.info("Hae tapahtumapaikat nimen perusteella");
+        List<Venue> venues = venueRepo.findByName(venueName);
+        if (venues.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204: No Content!
+        }
+        return new ResponseEntity<>(venues, HttpStatus.OK); // 200: OK!
+    }
+ 
     // POST
     @PostMapping("/venues")
     public ResponseEntity<Venue> createVenue(@RequestBody Venue newVenue) {
