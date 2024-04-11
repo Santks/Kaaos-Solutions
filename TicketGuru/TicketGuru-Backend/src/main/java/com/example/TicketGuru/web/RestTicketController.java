@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -79,5 +80,24 @@ public class RestTicketController {
 		}
 		ticketRepo.deleteById(ticketid);
 		return new ResponseEntity<>("Deleted ticket", HttpStatus.OK); // 200: OK!
+	}
+	
+	// PATCH (TicketUsed)
+	@PatchMapping("/tickets/{ticketid}")
+	public ResponseEntity<Ticket> TicketUsed(@RequestBody Ticket ticket, @PathVariable Long ticketid) {
+	    Optional<Ticket> existingTicket = ticketRepo.findById(ticketid);
+	    if (!existingTicket.isPresent()) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
+	    }
+	    Ticket currentTicket = existingTicket.get();
+	    if (ticket.getTicketUsed() != null) {
+	        currentTicket.setTicketUsed(ticket.getTicketUsed());
+	    }
+	    try {
+	        return new ResponseEntity<>(ticketRepo.save(currentTicket), HttpStatus.OK); // 200: OK!
+	    } catch (Exception e) {
+	        log.error("Error updating ticket", e);
+	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal Server Error!
+	    }
 	}
 }
