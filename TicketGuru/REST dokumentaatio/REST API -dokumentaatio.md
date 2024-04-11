@@ -124,3 +124,45 @@ Vastauskoodi: 200 OK.
 
 **DELETE /payments/{paymentId}**
 Vastauskoodi: 200 OK.
+
+## Venues
+
+#### Endpointit
+
+**GET /venues**
+Hae kaikki tapahtumapaikat
+
+**GET /venues/{venueId}**
+Hae tapahtumapaikka
+
+**GET /venues/name/{venueName}**
+Hae tapahtumapaikka nimen perusteella
+
+**POST /venues**
+Lisää tapahtumapaikka
+
+**PUT /venues/{venueId}**
+Tapahtumapaikan päivittäminen
+
+**DELETE /venues/{venueId}**
+Tapahtumapaikan poisto
+
+#### Toimivuus
+
+**GET /venues**
+Vastauskoodi: 200 OK.
+
+**GET /venues/{venueId}**
+Vastauskoodi: 200 OK.
+
+**GET /venues/name/{venueName}**
+Vastauskoodi: 200 OK.
+
+**POST /venues**
+Vastauskoodi: 200 OK.
+
+**PUT /venues/{venueId}**
+Vastauskoodi: 200 OK.
+
+**DELETE /venues/{venueId}**
+Vastauskoodi: 200 OK.
