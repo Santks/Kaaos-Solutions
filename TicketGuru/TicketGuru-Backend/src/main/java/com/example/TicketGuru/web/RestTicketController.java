@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -90,8 +91,11 @@ public class RestTicketController {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 	    }
 	    Ticket currentTicket = existingTicket.get();
-	    if (ticket.getTicketUsed() != null) {
+	    if (ticket.getTicketUsed() != null && ticket.getUsed() != null) {
 	        currentTicket.setTicketUsed(ticket.getTicketUsed());
+	        currentTicket.setUsed(ticket.getUsed());
+	    } else {
+	    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request
 	    }
 	    try {
 	        return new ResponseEntity<>(ticketRepo.save(currentTicket), HttpStatus.OK); // 200: OK!

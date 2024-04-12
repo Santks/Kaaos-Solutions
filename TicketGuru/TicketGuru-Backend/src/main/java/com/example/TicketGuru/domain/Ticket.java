@@ -1,5 +1,7 @@
 package com.example.TicketGuru.domain;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
@@ -40,6 +42,10 @@ public class Ticket {
 	@Column(name = "TicketUsed")
 	@NotNull
 	private Boolean ticketUsed;
+
+	@Column(name = "Used")
+	
+	private LocalDateTime used;
 
 	public Long getTicketId() {
 		return ticketId;
@@ -89,6 +95,13 @@ public class Ticket {
 		this.ticketUsed = ticketUsed;
 	}
 
+	public void setUsed(LocalDateTime used) {
+		this.used = used;
+	}
+	
+	public LocalDateTime getUsed() {
+		return used;
+	}
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", ticketType=" + ticketType + ", price=" + price
