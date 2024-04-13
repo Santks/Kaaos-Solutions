@@ -91,8 +91,9 @@ public class RestTicketController {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 	    }
 	    Ticket currentTicket = existingTicket.get();
-	    if (ticket.getTicketUsed() != null && ticket.getUsed() != null) {
-	        currentTicket.setTicketUsed(ticket.getTicketUsed());
+//	    if (ticket.getTicketUsed() != null && ticket.getUsed() != null) {
+	    if (ticket.getUsed() != null) {
+	        currentTicket.setTicketUsed(true);
 	        currentTicket.setUsed(ticket.getUsed());
 	    } else {
 	    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request

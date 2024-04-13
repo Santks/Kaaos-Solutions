@@ -33,7 +33,11 @@ public class WebSecurityConfig {
                                 .inMemoryAuthentication()
                                 .withUser("admin")
                                 .password(passwordEncoder.encode("admin"))
-                                .authorities("ROLE_ADMIN");
+                                .authorities("ROLE_ADMIN")
+                                .and()
+                				.withUser("inno")
+            					.password(passwordEncoder.encode("testbuild"))
+            					.authorities("ROLE_USER");
         }
 
         @SuppressWarnings("deprecation")
@@ -42,11 +46,11 @@ public class WebSecurityConfig {
                 http
                                 .cors((cors) -> cors
                                                 .configurationSource((corsConfigurationSource())))
-                                // .csrf()
-                                // .disable()
-                                .csrf((csrf) -> csrf
-                                                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                                                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
+                                 .csrf()
+                                 .disable()
+//                                .csrf((csrf) -> csrf
+//                                                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                                                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
                                 .authorizeHttpRequests(authorize -> authorize
                                                 .anyRequest().authenticated())
                                 .httpBasic(Customizer.withDefaults())
