@@ -66,11 +66,11 @@ public class WebSecurityConfig {
         CorsConfigurationSource corsConfigurationSource() {
                 CorsConfiguration configuration = new CorsConfiguration();
                 // Millaisista lähteistä PYYNTÖ sallitaan (1):
-                // (1) configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
+                configuration.setAllowedOrigins(Arrays.asList("*"));
                 // Sallii pyyntötyypit (2):
                 configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
                 // Sallii OTSIKOT (3):
-                // (3) configuration.setAllowedHeaders(Arrays.asList("*"));
+                configuration.setAllowedHeaders(Arrays.asList("*"));
                 UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                 source.registerCorsConfiguration("/**", configuration);
                 return source;

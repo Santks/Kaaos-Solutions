@@ -1,6 +1,7 @@
 package com.example.TicketGuru;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,10 +115,10 @@ public class TicketGuruApplication {
 			tktrepository.save(tickettype1);
 			tktrepository.save(tickettype2);
 
-			Ticket ticket1 = new Ticket(demoEvent, tickettype1, order1, 31.99, false);
-			Ticket ticket2 = new Ticket(fakeEvent, tickettype2, order2, 23.45, false);
-			Ticket ticket3 = new Ticket(coolEvent, tickettype2, order2, 23.45, false);
-			Ticket ticket4 = new Ticket(demoEvent, tickettype1, order1, 31.99, true);
+			Ticket ticket1 = new Ticket(demoEvent, tickettype1, order1, 31.99, null);
+			Ticket ticket2 = new Ticket(fakeEvent, tickettype2, order2, 23.45, LocalDateTime.now());
+			Ticket ticket3 = new Ticket(coolEvent, tickettype2, order2, 23.45, null);
+			Ticket ticket4 = new Ticket(demoEvent, tickettype1, order1, 31.99, null);
 			tkrepository.save(ticket1);
 			tkrepository.save(ticket2);
 			tkrepository.save(ticket3);
