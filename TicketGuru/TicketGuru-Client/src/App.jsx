@@ -85,7 +85,7 @@ const App = () => {
               Tapahtuma: {ticketInfo.tapahtuma.kuvaus}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Tapahtuma: {ticketInfo.tapahtuma.sijainti}
+              Sijainti: {ticketInfo.tapahtuma.sijainti}
             </Typography>
           </CardContent>
         </Card>
