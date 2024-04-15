@@ -11,20 +11,43 @@ const App = () => {
   const [ticketInfo, setTicketInfo] = useState(null);
   const [error, setError] = useState(null);
 
-  const username = 'admin';
+  const username = 'Admin';
   const password = 'admin';
   const headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
 
   const fetchTicketInfo = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/${ticketId}`, { headers });
+      const response = await fetch(`http://innovaatioimpussi-innovaatioimpulssi.rahtiapp.fi/api/liput/${ticketId}`, { headers });
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error: ${response.status}`);
       }
       const data = await response.json();
       setTicketInfo(data);
       setError(null);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const patchTicketInfo = async () => {
+    try {
+      const response = await fetch(`http://innovaatioimpussi-innovaatioimpulssi.rahtiapp.fi/api/liput/${ticketId}`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({
+          kaytettyLippu: true,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.success) {
+        alert('Lippua muokattu onnistuneesti');
+      } else {
+        alert('Lipun muokkaus epäonnistui!');
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -39,23 +62,12 @@ const App = () => {
         placeholder="Syötä lipun ID:"
       />
       <Button variant="contained" onClick={fetchTicketInfo}>Hae lippu</Button>
+      <Button variant="contained" onClick={patchTicketInfo}>Merkitse myydyksi</Button>
       {error && <Typography variant="h6" color="error">Virhe: {error}</Typography>}
       {ticketInfo &&
         <Card>
           <CardContent>
-            <Typography variant="h5" component="div">Lipun tiedot</Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lipun ID: {ticketInfo.ticketId}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Hinta: {ticketInfo.price} euroa
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Käytetty?: {ticketInfo.ticketUsed ? 'Kyllä' : 'Ei'}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Käytetty (pvm): {ticketInfo.used}
-            </Typography>
+          
           </CardContent>
         </Card>
       }

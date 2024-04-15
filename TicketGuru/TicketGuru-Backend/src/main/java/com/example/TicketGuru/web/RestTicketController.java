@@ -1,5 +1,6 @@
 package com.example.TicketGuru.web;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -85,19 +86,13 @@ public class RestTicketController {
 	
 	// PATCH (TicketUsed)
 	@PatchMapping("/tickets/{ticketid}")
-	public ResponseEntity<Ticket> TicketUsed(@RequestBody Ticket ticket, @PathVariable Long ticketid) {
+	public ResponseEntity<Ticket> TicketUsed(@PathVariable Long ticketid) {
 	    Optional<Ticket> existingTicket = ticketRepo.findById(ticketid);
 	    if (!existingTicket.isPresent()) {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 	    }
 	    Ticket currentTicket = existingTicket.get();
-//	    if (ticket.getTicketUsed() != null && ticket.getUsed() != null) {
-	    if (ticket.getUsed() != null) {
-	        currentTicket.setTicketUsed(true);
-	        currentTicket.setUsed(ticket.getUsed());
-	    } else {
-	    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request
-	    }
+	    currentTicket.setTicketUsed(LocalDateTime.now());
 	    try {
 	        return new ResponseEntity<>(ticketRepo.save(currentTicket), HttpStatus.OK); // 200: OK!
 	    } catch (Exception e) {
@@ -105,4 +100,5 @@ public class RestTicketController {
 	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Internal Server Error!
 	    }
 	}
+
 }
