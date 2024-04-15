@@ -55,6 +55,7 @@ const App = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
+      <h1>Ticketguru lipuntarkastus</h1>
       <TextField
         type="text"
         value={ticketId}
@@ -67,7 +68,22 @@ const App = () => {
       {ticketInfo &&
         <Card>
           <CardContent>
-          
+            <Typography variant="h5" component="div">Lipun tiedot</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lipun ID: {ticketInfo.lippuId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Hinta: {ticketInfo.lipputyyppi.hinta} euroa
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Käytetty?: {ticketInfo.kaytettyLippu ? 'Kyllä' : 'Ei'}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lipputyyppi: {ticketInfo.lipputyyppi.kuvaus}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Tapahtuma: {ticketInfo.tapahtuma.kuvaus}
+            </Typography>
           </CardContent>
         </Card>
       }
