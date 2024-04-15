@@ -40,8 +40,9 @@ public class Ticket {
 	@NotNull
 	private Double price;
 
-	@Column(name = "ticketUsed")
+	@Column(name = "ticketUsed", columnDefinition="DATETIME")
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime ticketUsed;
 
 	public Long getTicketId() {
