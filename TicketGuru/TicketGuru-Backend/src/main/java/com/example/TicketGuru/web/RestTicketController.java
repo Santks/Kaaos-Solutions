@@ -2,6 +2,7 @@ package com.example.TicketGuru.web;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,17 @@ public class RestTicketController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 		}
+	}
+	
+	// GET ticket by UUID
+	@GetMapping("/tickets/uuid/{uuid}")
+	public ResponseEntity<Ticket> getTicketByUuid(@PathVariable UUID uuid) {
+	    Optional<Ticket> ticket = ticketRepo.findByUuid(uuid);
+	    if (ticket.isPresent()) {
+	        return new ResponseEntity<>(ticket.get(), HttpStatus.OK); // 200: OK!
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
+	    }
 	}
 	
 	// POST create a new ticket
