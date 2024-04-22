@@ -1,4 +1,4 @@
-EXPLAIN CREATE TABLE IF NOT EXISTS TG_User (
+CREATE TABLE IF NOT EXISTS TG_User (
 	User_id INT AUTO_INCREMENT PRIMARY KEY,
 	FirstName VARCHAR(100) NOT NULL,
 	LastName VARCHAR(100) NOT NULL,
@@ -7,5 +7,87 @@ EXPLAIN CREATE TABLE IF NOT EXISTS TG_User (
 	Address VARCHAR(100),
 	activeUser BOOLEAN,
 	PostalCode INT,
-	userRoleId INT
+	userRoleId INT,
+	FOREIGN KEY (PostalCode) REFERENCES TG_PostalCode(PostalCode_id),
+	FOREIGN KEY (userRoleId) REFERENCES TG_UserRole(UserRole_id)
+);
+
+CREATE TABLE IF NOT EXISTS TG_UserRole (
+	UserRole_id INT AUTO_INCREMENT PRIMARY KEY,
+	Name VARCHAR(100) NOT NULL,
+	Description VARCHAR(1000),
+	User_id INT,
+	FOREIGN KEY (User_id) REFERENCES TG_User(User_id)
+);
+
+CREATE TABLE IF NOT EXISTS TG_PostalCode (
+	PostalCode_id INT AUTO_INCREMENT PRIMARY KEY,
+	PostalCode VARCHAR(5),
+	City VARCHAR(50) NOT NULL,
+	Country VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS TG_Venue (
+	Venue_id INT AUTO_INCREMENT PRIMARY KEY,
+	Name VARCHAR(100) NOT NULL,
+	Address VARCHAR(100) NOT NULL,
+	Phone VARCHAR(20),
+	Email VARCHAR(50),
+	Capacity INT NOT NULL,
+	PostalCode INT,
+	FOREIGN KEY (PostalCode) REFERENCES TG_PostalCode(PostalCode_id)
+);
+
+CREATE TABLE IF NOT EXISTS TG_Event (
+	Event_id INT AUTO_INCREMENT PRIMARY KEY,
+	Venue_id INT NOT NULL,
+	Name VARCHAR(100) NOT NULL,
+	Description VARCHAR(1000),
+	EventCategory VARCHAR(50),
+	StartDate DATE NOT NULL,
+	EndDate DATE NOT NULL,
+	EventStatus CHAR,
+	OrganiserName VARCHAR(100),
+	MaxTickets INT NOT NULL,
+	FOREIGN KEY (Venue_id) REFERENCES TG_Venue(Venue_id)
+);
+
+CREATE TABLE IF NOT EXISTS TG_Order (
+	Order_id INT AUTO_INCREMENT PRIMARY KEY,
+	Customer_id INT NOT NULL,
+	Date DATE NOT NULL,
+	TotalPrice DOUBLE NOT NULL,
+	OrderPaid BOOLEAN,
+	Seller_id INT NOT NULL,
+	FOREIGN KEY (Customer_id) REFERENCES TG_User(User_id),
+	FOREIGN KEY (Seller_id) REFERENCES TG_User(User_id)
+);
+
+CREATE TABLE IF NOT EXISTS TG_Payment (
+	Payment_id INT AUTO_INCREMENT PRIMARY KEY,
+	Customer_id INT NOT NULL,
+	Order_id INT NOT NULL,
+	Amount DOUBLE NOT NULL,
+	PaymentDate DATE NOT NULL,
+	PaymentMethod VARCHAR(50),
+	FOREIGN KEY (Customer_id) REFERENCES TG_User(User_id),
+	FOREIGN KEY (Order_id) REFERENCES TG_Order(Order_id)
+);
+
+CREATE TABLE IF NOT EXISTS TG_TicketType (
+	TicketType_id INT AUTO_INCREMENT PRIMARY KEY,
+	Name VARCHAR(100) NOT NULL,
+	Description VARCHAR(1000)
+);
+
+CREATE TABLE IF NOT EXISTS TG_Ticket (
+	Ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+	Event_id INT NOT NULL,
+	TicketType_id INT NOT NULL,
+	Order_id INT NOT NULL,
+	Price DOUBLE NOT NULL,
+	TicketUsed DATETIME NOT NULL,
+	FOREIGN KEY (Event_id) REFERENCES TG_Event(Event_id),
+	FOREIGN KEY (TicketType_id) REFERENCES TG_TicketType(TicketType_id),
+	FOREIGN KEY (Order_id) REFERENCES TG_Order(Order_id)
 );

@@ -124,7 +124,7 @@ TG_Ticket sisältää liput. TG_Ticket on yhteydessä Event, TicketType ja Order
 |TicketType_id|N (FK)|Lipputyypin id|
 |Order_id|N (FK)|Tilauksen id|
 |Price|Double|Lipun hinta|
-|TicketUsed|Boolean|Onko lippu käytetty? (True/False)|
+|TicketUsed|LocalDateTime|Aikaleima lipulle (jos käytetty)|
 
 
 ### TG_User
