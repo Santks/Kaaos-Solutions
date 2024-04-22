@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import dayjs from 'dayjs'
 
 const Ticketcheck = () => {
   const [ticketId, setTicketId] = useState('');
@@ -18,7 +19,7 @@ const Ticketcheck = () => {
 
   const fetchTicketInfo = async () => {
     try {
-      const response = await fetch(`http://innovaatioimpussi-innovaatioimpulssi.rahtiapp.fi/api/liput/${ticketId}`, { headers });
+      const response = await fetch(`http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, { headers });
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
@@ -32,18 +33,19 @@ const Ticketcheck = () => {
 
   const patchTicketInfo = async () => {
     try {
-      const response = await fetch(`http://innovaatioimpussi-innovaatioimpulssi.rahtiapp.fi/api/liput/${ticketId}`, {
+      const dateNow = new Date().toISOString();
+      const response = await fetch(`http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, {
         method: 'PATCH',
         headers,
         body: JSON.stringify({
-          kaytettyLippu: true,
+          kaytettyLippu: dateNow.substring(0, 19)
         }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
       const data = await response.json();
-      if (data.success) {
+      if (data.ticketUsed != "1970-01-01T00:00:00") {
         alert('Lippua muokattu onnistuneesti');
       } else {
         alert('Lipun muokkaus epäonnistui!');
@@ -52,6 +54,11 @@ const Ticketcheck = () => {
       setError(error.message);
     }
   };
+
+  const formattedDate = () => {
+    const date = dayjs(ticketInfo.ticketUsed).format("DD.MM.YYYY - HH:mm");
+    return date
+  }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
@@ -63,29 +70,23 @@ const Ticketcheck = () => {
         placeholder="Syötä lipun ID:"
       />
       <Button variant="contained" onClick={fetchTicketInfo}>Hae lippu</Button>
-      <Button variant="contained" onClick={patchTicketInfo}>Merkitse myydyksi</Button>
+      <Button variant="contained" onClick={patchTicketInfo}>Merkitse käytetyksi</Button>
       {error && <Typography variant="h6" color="error">Virhe: {error}</Typography>}
       {ticketInfo &&
         <Card>
           <CardContent>
             <Typography variant="h5" component="div">Lipun tiedot</Typography>
             <Typography variant="body2" color="text.secondary">
-              Lipun ID: {ticketInfo.lippuId}
+              Lipun ID: {ticketInfo.ticketId}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Hinta: {ticketInfo.lipputyyppi.hinta} euroa
+              Hinta: {ticketInfo.price} euroa
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Käytetty?: {ticketInfo.kaytettyLippu ? 'Kyllä' : 'Ei'}
+              Käytetty?: {ticketInfo.ticketUsed === "1970-01-01T00:00:00" ? 'Ei' : 'Kyllä'}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lipputyyppi: {ticketInfo.lipputyyppi.kuvaus}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Tapahtuma: {ticketInfo.tapahtuma.kuvaus}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Sijainti: {ticketInfo.tapahtuma.sijainti}
+              Käytetty (pvm): {ticketInfo.ticketUsed === "1970-01-01T00:00:00" ? "Lippua ei ole käytetty" : formattedDate()}
             </Typography>
           </CardContent>
         </Card>
