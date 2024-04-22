@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.1 on win32)" generated="2024-04-22T21:30:01.712374" rpa="false" schemaversion="5">
+<suite id="s1" name="ClientTest" source="C:\Users\kuron\KaaosSolutions\TicketGuru\TicketGuru-Client\test\ClientTest.robot">
+<test id="s1-t1" name="Open ticketcheck page" line="12">
+<kw name="Skip If Previous Fails Or Skips">
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'FAIL'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:01.902450" elapsed="0.000000"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'SKIP'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:01.902450" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:01.901493" elapsed="0.000957"/>
+</kw>
+<kw name="Open Ticketcheck">
+<try>
+<branch type="TRY">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:01.902450" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173/Ticketcheck'.</msg>
+<arg>${AltURL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-22T21:30:01.902450" elapsed="3.432344"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-04-22T21:30:10.335027" level="INFO">Slept 5 seconds.</msg>
+<arg>${Sleep}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-04-22T21:30:05.334794" elapsed="5.000233"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:01.902450" elapsed="8.432577"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Fatal Error" owner="BuiltIn">
+<arg>Unable to open ${URL}.</arg>
+<doc>Stops the whole test execution.</doc>
+<status status="NOT RUN" start="2024-04-22T21:30:10.335027" elapsed="0.001024"/>
+</kw>
+<status status="NOT RUN" start="2024-04-22T21:30:10.335027" elapsed="0.001024"/>
+</branch>
+<status status="PASS" start="2024-04-22T21:30:01.902450" elapsed="8.433601"/>
+</try>
+<status status="PASS" start="2024-04-22T21:30:01.902450" elapsed="8.433601"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:10.352412" level="INFO">Current page contains element 'id=header'.</msg>
+<arg>id=header</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.336051" elapsed="0.016361"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:10.362437" level="INFO">Current page contains element 'id=textinput'.</msg>
+<arg>id=textinput</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.352412" elapsed="0.016544"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:10.385291" level="INFO">Current page contains element 'id=search'.</msg>
+<arg>id=search</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.368956" elapsed="0.017405"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:10.407851" level="INFO">Current page contains element 'id=patch'.</msg>
+<arg>id=patch</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.386846" elapsed="0.021005"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:01.900664" elapsed="8.508253"/>
+</test>
+<test id="s1-t2" name="Open ticketguru page" line="20">
+<kw name="Skip If Previous Fails Or Skips">
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'FAIL'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="0.000000"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'SKIP'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="0.000000"/>
+</kw>
+<kw name="Open Ticketguru">
+<try>
+<branch type="TRY">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:10.417168" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="3.369251"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-04-22T21:30:18.781657" level="INFO">Slept 5 seconds.</msg>
+<arg>${Sleep}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-04-22T21:30:13.781287" elapsed="5.000370"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="8.370176"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Fatal Error" owner="BuiltIn">
+<arg>Unable to open ${URL}.</arg>
+<doc>Stops the whole test execution.</doc>
+<status status="NOT RUN" start="2024-04-22T21:30:18.782877" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-22T21:30:18.781657" elapsed="0.001220"/>
+</branch>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="8.371396"/>
+</try>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="8.371396"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.804054" level="INFO">Current page contains element 'id=eventCard'.</msg>
+<arg>id=eventCard</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.782877" elapsed="0.021177"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.822180" level="INFO">Current page contains element 'id=eventInput'.</msg>
+<arg>id=eventInput</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.804054" elapsed="0.018126"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.841485" level="INFO">Current page contains element 'id=ticketMenu'.</msg>
+<arg>id=ticketMenu</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.822180" elapsed="0.019305"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.860965" level="INFO">Current page contains element 'id=adultTicket'.</msg>
+<arg>id=adultTicket</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.841485" elapsed="0.020085"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.882840" level="INFO">Current page contains element 'id=childrenTicket'.</msg>
+<arg>id=childrenTicket</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.861570" elapsed="0.021270"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.907896" level="INFO">Current page contains element 'id=ticketList'.</msg>
+<arg>id=ticketList</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.882840" elapsed="0.025056"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.931598" level="INFO">Current page contains element 'id=addButton'.</msg>
+<arg>id=addButton</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.907896" elapsed="0.023702"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:18.955662" level="INFO">Current page contains element 'id=orderButton'.</msg>
+<arg>id=orderButton</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.931598" elapsed="0.024064"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:24.006834" level="INFO">Current page does not contain element 'id=orderCard'.</msg>
+<arg>id=orderCard</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:18.955662" elapsed="5.051172"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:10.411481" elapsed="13.595353"/>
+</test>
+<test id="s1-t3" name="Check ticket info" line="34">
+<kw name="Skip If Previous Fails Or Skips">
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'FAIL'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="0.000000"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'SKIP'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="0.000000"/>
+</kw>
+<kw name="Open Ticketcheck">
+<try>
+<branch type="TRY">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:24.012917" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173/Ticketcheck'.</msg>
+<arg>${AltURL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="3.778824"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-04-22T21:30:32.792609" level="INFO">Slept 5 seconds.</msg>
+<arg>${Sleep}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-04-22T21:30:27.791741" elapsed="5.000868"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="8.779692"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Fatal Error" owner="BuiltIn">
+<arg>Unable to open ${URL}.</arg>
+<doc>Stops the whole test execution.</doc>
+<status status="NOT RUN" start="2024-04-22T21:30:32.792609" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-22T21:30:32.792609" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="8.779692"/>
+</try>
+<status status="PASS" start="2024-04-22T21:30:24.012917" elapsed="8.779692"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=textinput</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:32.792609" elapsed="0.022594"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=search</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:32.815203" elapsed="0.013850"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:32.831695" level="INFO">Typing text '1' into text field 'id=textinput'.</msg>
+<arg>id=textinput</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:32.831077" elapsed="0.162466"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:32.993543" level="INFO">Clicking button 'id=search'.</msg>
+<arg>id=search</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:32.993543" elapsed="0.099213"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:38.143538" level="INFO">Current page does not contain element 'id=Error'.</msg>
+<arg>id=Error</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:33.092756" elapsed="5.050782"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=ticketInfo</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:38.143538" elapsed="0.022942"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:38.181558" level="INFO">Current page contains element 'id=ticketInfo'.</msg>
+<arg>id=ticketInfo</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:38.166480" elapsed="0.015078"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:24.011392" elapsed="14.171108"/>
+</test>
+<test id="s1-t4" name="Post new order" line="47">
+<kw name="Skip If Previous Fails Or Skips">
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'FAIL'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="0.000000"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'SKIP'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="0.000000"/>
+</kw>
+<kw name="Open Ticketguru">
+<try>
+<branch type="TRY">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:38.182500" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="3.520647"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-04-22T21:30:46.703347" level="INFO">Slept 5 seconds.</msg>
+<arg>${Sleep}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-04-22T21:30:41.703147" elapsed="5.000200"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="8.520847"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Fatal Error" owner="BuiltIn">
+<arg>Unable to open ${URL}.</arg>
+<doc>Stops the whole test execution.</doc>
+<status status="NOT RUN" start="2024-04-22T21:30:46.703347" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-22T21:30:46.703347" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="8.520847"/>
+</try>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="8.520847"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=eventCard</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:46.703347" elapsed="0.018018"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=eventInput</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:46.724665" elapsed="0.008047"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:51.741365" level="INFO">Current page does not contain element 'id=orderCard'.</msg>
+<arg>id=orderCard</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:46.736652" elapsed="5.004713"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:51.741365" level="INFO">Clicking element 'id=eventSelect'.</msg>
+<arg>id=eventSelect</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:51.741365" elapsed="0.500361"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:52.242882" level="INFO">Clicking element 'id=eventList'.</msg>
+<arg>id=eventList</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:52.242882" elapsed="0.474658"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:52.717540" level="INFO">Typing text '1' into text field 'id=adultTicket'.</msg>
+<arg>id=adultTicket</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:52.717540" elapsed="0.434914"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:53.152454" level="INFO">Typing text '1' into text field 'id=childrenTicket'.</msg>
+<arg>id=childrenTicket</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:53.152454" elapsed="0.198968"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:53.353021" level="INFO">Clicking button 'id=addButton'.</msg>
+<arg>id=addButton</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:53.353021" elapsed="0.188670"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:53.541691" level="INFO">Clicking button 'id=orderButton'.</msg>
+<arg>id=orderButton</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:30:53.541691" elapsed="0.150726"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:54.006830" level="INFO">Current page contains element 'id=orderCard'.</msg>
+<arg>id=orderCard</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:53.692417" elapsed="0.314413"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:54.033403" level="INFO">Current page contains element 'id=successMessage'.</msg>
+<arg>id=successMessage</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:30:54.006830" elapsed="0.026573"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:38.182500" elapsed="15.850903"/>
+</test>
+<test id="s1-t5" name="Mark ticket as used" line="66">
+<kw name="Skip If Previous Fails Or Skips">
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'FAIL'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:54.033403" elapsed="0.000000"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>'${PREV TEST STATUS}' == 'SKIP'</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2024-04-22T21:30:54.033403" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:54.033403" elapsed="0.000000"/>
+</kw>
+<kw name="Open Ticketcheck">
+<try>
+<branch type="TRY">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:30:54.042484" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173/Ticketcheck'.</msg>
+<arg>${AltURL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-22T21:30:54.042484" elapsed="2.850553"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-04-22T21:31:01.893587" level="INFO">Slept 5 seconds.</msg>
+<arg>${Sleep}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-04-22T21:30:56.893037" elapsed="5.000550"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:54.042484" elapsed="7.851103"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Fatal Error" owner="BuiltIn">
+<arg>Unable to open ${URL}.</arg>
+<doc>Stops the whole test execution.</doc>
+<status status="NOT RUN" start="2024-04-22T21:31:01.893587" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-22T21:31:01.893587" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-22T21:30:54.041433" elapsed="7.852154"/>
+</try>
+<status status="PASS" start="2024-04-22T21:30:54.041433" elapsed="7.852154"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=textinput</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:31:01.895556" elapsed="0.019624"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=search</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:31:01.920694" elapsed="0.013374"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:31:06.951655" level="INFO">Current page does not contain element 'id=ticketInfo'.</msg>
+<arg>id=ticketInfo</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:31:01.934068" elapsed="5.017587"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:31:06.951655" level="INFO">Typing text '14' into text field 'id=textinput'.</msg>
+<arg>id=textinput</arg>
+<arg>14</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:31:06.951655" elapsed="0.276376"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:31:07.230542" level="INFO">Clicking button 'id=search'.</msg>
+<arg>id=search</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:31:07.230542" elapsed="0.153849"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>id=ticketInfo</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:31:07.384391" elapsed="0.237373"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:31:12.663056" level="INFO">Current page does not contain element 'id=Error'.</msg>
+<arg>id=Error</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2024-04-22T21:31:07.621764" elapsed="5.041292"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:31:12.670314" level="INFO">Clicking button 'id=patch'.</msg>
+<arg>id=patch</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-22T21:31:12.669716" elapsed="0.173146"/>
+</kw>
+<kw name="Alert Should Be Present" owner="SeleniumLibrary">
+<msg time="2024-04-22T21:31:12.842862" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<arg>Lippua muokattu onnistuneesti</arg>
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<status status="PASS" start="2024-04-22T21:31:12.842862" elapsed="0.520048"/>
+</kw>
+<kw name="Alert Should Not Be Present" owner="SeleniumLibrary">
+<arg>Lipun muokkaus epäonnistui!</arg>
+<doc>Verifies that no alert is present.</doc>
+<status status="PASS" start="2024-04-22T21:31:13.364888" elapsed="15.145945"/>
+</kw>
+<status status="PASS" start="2024-04-22T21:30:54.033403" elapsed="34.477996"/>
+</test>
+<doc>Test cases for ticketguru-client</doc>
+<status status="PASS" start="2024-04-22T21:30:01.713499" elapsed="86.800144"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="5" fail="0" skip="0" id="s1" name="ClientTest">ClientTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

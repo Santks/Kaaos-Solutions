@@ -62,18 +62,19 @@ const Ticketcheck = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
-      <h1>Ticketguru lipuntarkastus</h1>
+      <h1 id='header'>Ticketguru lipuntarkastus</h1>
       <TextField
+        id='textinput'
         type="text"
         value={ticketId}
         onChange={(e) => setTicketId(e.target.value)}
         placeholder="Syötä lipun ID:"
       />
-      <Button variant="contained" onClick={fetchTicketInfo}>Hae lippu</Button>
-      <Button variant="contained" onClick={patchTicketInfo}>Merkitse käytetyksi</Button>
-      {error && <Typography variant="h6" color="error">Virhe: {error}</Typography>}
+      <Button id='search' variant="contained" onClick={fetchTicketInfo}>Hae lippu</Button>
+      <Button id='patch' variant="contained" onClick={patchTicketInfo}>Merkitse käytetyksi</Button>
+      {error && <Typography id='error' variant="h6" color="error">Virhe: {error}</Typography>}
       {ticketInfo &&
-        <Card>
+        <Card id='ticketInfo'>
           <CardContent>
             <Typography variant="h5" component="div">Lipun tiedot</Typography>
             <Typography variant="body2" color="text.secondary">

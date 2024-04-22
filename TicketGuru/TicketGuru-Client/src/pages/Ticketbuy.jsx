@@ -102,22 +102,23 @@ export default function Ticketbuy() {
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
             {isLoadingEvents ? <Card>getting data...</Card>
                 :
-                <Card>
+                <Card id='eventCard'>
                     <Typography variant="h6" sx={{ margin: 5 }}>Choose event</Typography>
                     <FormControl sx={{ minWidth: 200 }}>
 
 
-                        <InputLabel id="event">Event</InputLabel>
-                        <Select id="event" value={order.event.id} onChange={handleChangeEvent} label="event">
+                        <InputLabel id="eventInput">Event</InputLabel>
+                        <Select id="eventSelect" value={order.event.id} onChange={handleChangeEvent} label="event">
                             {events.map((item, index) => (
-                                <MenuItem key={index} value={item.id}>{item.name + " (eventid: " + item.id + ")"}</MenuItem>
+                                <MenuItem id='eventList' key={index} value={item.id}>{item.name + " (eventid: " + item.id + ")"}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
                 </Card>
             }
-            <Typography variant="h6">Tickets</Typography>
+            <Typography id='ticketMenu' variant="h6">Tickets</Typography>
             <TextField
+                id='adultTicket'
                 type="number"
                 name="adult"
                 label="Adults"
@@ -126,6 +127,7 @@ export default function Ticketbuy() {
                 placeholder="Ticket(s) adults"
             />
             <TextField
+                id='childrenTicket'
                 type="number"
                 name="child"
                 label="Children"
@@ -133,15 +135,15 @@ export default function Ticketbuy() {
                 onChange={handleChangeAge}
                 placeholder="Ticket(s) children"
             />
-            <Typography>Tickets to buy</Typography>
+            <Typography id='ticketList'>Tickets to buy</Typography>
             <Typography>{"Adults: " + tickets.adult}</Typography>
             <Typography>{"Children: " + tickets.child}</Typography>
-            <Button variant='contained' onClick={() => ticketsToArray(ticketAdult, ticketChild)}>Add tickets</Button>
-            <Button variant='contained' onClick={postOrder}>Post order</Button>
+            <Button id='addButton' variant='contained' onClick={() => ticketsToArray(ticketAdult, ticketChild)}>Add tickets</Button>
+            <Button id='orderButton' variant='contained' onClick={postOrder}>Post order</Button>
 
             {orderDone &&
-                <Card>
-                    <Typography>Order successful</Typography>
+                <Card id='orderCard' >
+                    <Typography id='successMessage'>Order successful</Typography>
                     <CardContent>
                         {Object.entries(completedOrder).map(([key, value]) => (
                             <Typography key={key}>{key + " " + value}</Typography>
