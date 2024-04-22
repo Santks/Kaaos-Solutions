@@ -38,7 +38,7 @@ Check ticket info
     Open Ticketcheck
     Wait Until Page Contains Element    id=textinput
     Wait Until Page Contains Element    id=search
-    Page Should Contain Element    id=ticketInfo
+    Page Should Not Contain Element    id=ticketInfo
     Input Text    id=textinput    1
     Click Button    id=search
 
