@@ -2,6 +2,7 @@ package com.example.TicketGuru.domain;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -17,6 +18,9 @@ public class Ticket {
 	@Column(name = "Ticket_id")
 	// @NotNull
 	private Long ticketId;
+	
+    @Column(name = "uuid", unique = true, nullable = false, updatable = false)
+    private UUID uuid = UUID.randomUUID();
 
 	@ManyToOne
 	@JoinColumn(name = "Event_id")
@@ -92,6 +96,10 @@ public class Ticket {
 	public void setTicketUsed(@NotNull LocalDateTime ticketUsed) {
 		this.ticketUsed = ticketUsed;
 	}
+	
+    public UUID getUuid() {
+        return uuid;
+    }
 	
 	@Override
 	public String toString() {
