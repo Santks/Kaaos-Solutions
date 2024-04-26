@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-material.css";
 
-function ListEvents() {
+const ListEvents = () => {
+    const [rowData, setRowData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events', {
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin:admin')
+            }
+        })
+            .then(response => response.json())
+            .then(data => setRowData(data));
+    }, []);
+
+    const columnDefs = [
+        { headerName: "ID", field: "id", sortable: true, filter: true },
+        { headerName: "Name", field: "name", sortable: true, filter: true },
+        { headerName: "Description", field: "description", sortable: true, filter: true },
+        { headerName: "Event Category", field: "eventCategory", sortable: true, filter: true },
+        { headerName: "Start Date", field: "startDate", sortable: true, filter: true },
+        { headerName: "End Date", field: "endDate", sortable: true, filter: true },
+        { headerName: "Event Status", field: "eventStatus", sortable: true, filter: true },
+        { headerName: "Organiser Name", field: "organiserName", sortable: true, filter: true },
+        { headerName: "Max Tickets", field: "maxTickets", sortable: true, filter: true }
+    ];
+
 
     return (
-        <div>
-            <h2>This is ListEvents.</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div className="ag-theme-material" style={{ height: "800px", width: "100%", margin: "auto" }}>
+            <AgGridReact
+                columnDefs={columnDefs}
+                rowData={rowData}
+            />
         </div>
     );
-}
+};
 
 export default ListEvents;
