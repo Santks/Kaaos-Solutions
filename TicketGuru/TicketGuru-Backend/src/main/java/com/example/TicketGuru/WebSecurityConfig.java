@@ -37,17 +37,27 @@ public class WebSecurityConfig {
                                 .and()
                                 .withUser("inno")
                                 .password(passwordEncoder.encode("testbuild"))
-                                .authorities("ROLE_USER");
+                                .authorities("ROLE_USER")
+                                .and()
+                                .withUser("manager")
+                                .password(passwordEncoder.encode("manager"))
+                                .authorities("ROLE_EVENT_MANAGER")
+                                .and()
+                                .withUser("seller")
+                                .password(passwordEncoder.encode("seller"))
+                                .authorities("ROLE_SELLER")
+                                .and()
+                                .withUser("inspector")
+                                .password(passwordEncoder.encode("inspector"))
+                                .authorities("ROLE_TICKET_INSPECTOR");
         }
 
-        @SuppressWarnings("deprecation")
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 http
                                 .cors((cors) -> cors
                                                 .configurationSource((corsConfigurationSource())))
-                                .csrf()
-                                .disable()
+                                .csrf(csrf -> csrf.disable())
                                 // .csrf((csrf) -> csrf
                                 // .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                                 // .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
