@@ -7,7 +7,7 @@ const ListEvents = () => {
     const [rowData, setRowData] = useState([]);
 
     useEffect(() => {
-        fetch('http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events', {
+        fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events', {
             headers: {
                 'Authorization': 'Basic ' + btoa('admin:admin')
             }

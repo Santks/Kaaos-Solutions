@@ -5,11 +5,14 @@ import HomeIcon from '@mui/icons-material/Home';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
 import HomePage from "./components/HomePage";
 import ListEvents from "./components/ListEvents";
 import TemplatePage from "./components/TemplatePage";
+import Ticketbuy from './pages/Ticketbuy';
+import Ticketcheck from './pages/Ticketcheck';
 
 
 function App() {
@@ -21,6 +24,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/events" element={<ListEvents />} />
           <Route path="/template" element={<TemplatePage />} />
+          <Route path="/ticketbuy" element={<Ticketbuy />} />
+          <Route path="/ticketcheck" element={<Ticketcheck />} />
         </Routes>
       </Box>
     </Router>
@@ -43,6 +48,12 @@ function Navigation() {
     case '/template':
       value = 2;
       break;
+    case '/ticketbuy':
+      value = 3;
+      break;
+    case '/ticketcheck':
+      value = 4;
+      break;
 
     default:
       value = false;
@@ -63,6 +74,8 @@ function Navigation() {
           <Tab color='secondary' label='Homepage' icon={<HomeIcon />} component={Link} to="/" />
           <Tab label='Events' icon={<TheaterComedyIcon />} component={Link} to="/events" />
           <Tab label='Template' icon={<SportsBarIcon />} component={Link} to="/template" />
+          <Tab label='Buy tickets' icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" />
+          <Tab label='Ticketcheck' icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" />
         </Tabs>
       </Box>
     </AppBar>
