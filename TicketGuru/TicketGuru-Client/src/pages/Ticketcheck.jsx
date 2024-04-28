@@ -19,7 +19,7 @@ const Ticketcheck = () => {
 
   const fetchTicketInfo = async () => {
     try {
-      const response = await fetch(`http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, { headers });
+      const response = await fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, { headers });
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
@@ -34,7 +34,7 @@ const Ticketcheck = () => {
   const patchTicketInfo = async () => {
     try {
       const dateNow = new Date().toISOString();
-      const response = await fetch(`http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, {
+      const response = await fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, {
         method: 'PATCH',
         headers,
         body: JSON.stringify({
