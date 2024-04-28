@@ -49,7 +49,7 @@ public class Event {
     private LocalDate endDate;
 
     @Column(name = "eventStatus")
-    private char eventSatus;
+    private char eventStatus;
 
     @Column(name = "OrganiserName")
     private String organiserName;
@@ -63,14 +63,14 @@ public class Event {
     }
 
     public Event(Venue venue, String name, String description, String eventCategory, LocalDate startDate, LocalDate endDate,
-            char eventSatus, String organiserName, long maxTickets) {
+            char eventStatus, String organiserName, long maxTickets) {
         this.venue = venue;
         this.name = name;
         this.description = description;
         this.eventCategory = eventCategory;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.eventSatus = eventSatus;
+        this.eventStatus = eventStatus;
         this.organiserName = organiserName;
         this.maxTickets = maxTickets;
     }
@@ -131,12 +131,12 @@ public class Event {
         this.endDate = endDate;
     }
 
-    public char getEventSatus() {
-        return eventSatus;
+    public char geteventStatus() {
+        return eventStatus;
     }
 
-    public void setEventSatus(char eventSatus) {
-        this.eventSatus = eventSatus;
+    public void seteventStatus(char eventStatus) {
+        this.eventStatus = eventStatus;
     }
 
     public String getOrganiserName() {
@@ -159,7 +159,7 @@ public class Event {
     public String toString() {
         return "Event [id=" + id + ", venue=" + venue + ", name=" + name + ", description=" + description
                 + ", eventCategory=" + eventCategory + ", startDate=" + startDate + ", endDate=" + endDate
-                + ", eventSatus=" + eventSatus + ", organiserName=" + organiserName + ", maxTickets=" + maxTickets
+                + ", eventStatus=" + eventStatus + ", organiserName=" + organiserName + ", maxTickets=" + maxTickets
                 + "]";
     }
 
