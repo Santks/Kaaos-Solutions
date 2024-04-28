@@ -28,9 +28,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
 
 @RestController
-public class UserEventController {
+public class RestUserController {
 	
-	private static final Logger log = LoggerFactory.getLogger(UserEventController.class);
+	private static final Logger log = LoggerFactory.getLogger(RestUserController.class);
 	
 	@Autowired
 	private UserRepository userRepo;
