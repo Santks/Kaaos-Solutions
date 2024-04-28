@@ -43,7 +43,7 @@ export default function Ticketbuy() {
     headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
     //
     const fetchEvents = async () => {
-        const eurl = "http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events"
+        const eurl = "https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events"
         try {
             const eventresp = await fetch(eurl, { headers })
             const data = await eventresp.json()
@@ -60,7 +60,7 @@ export default function Ticketbuy() {
             return alert("Select event")
 
         }
-        const url = "http://kaaos-solutions-kaaosticketguru.rahtiapp.fi/orders"
+        const url = "https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/orders"
         headers.set('Content-Type', 'application/json')
         try {
             console.log(order)
