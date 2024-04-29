@@ -97,9 +97,9 @@ public class RestTicketController {
 	}
 	
 	// PATCH (TicketUsed)
-	@PatchMapping("/tickets/{ticketid}")
-	public ResponseEntity<Ticket> TicketUsed(@PathVariable Long ticketid) {
-	    Optional<Ticket> existingTicket = ticketRepo.findById(ticketid);
+	@PatchMapping("/tickets/uuid/{uuid}")
+	public ResponseEntity<Ticket> TicketUsed(@PathVariable UUID uuid) {
+	    Optional<Ticket> existingTicket = ticketRepo.findByUuid(uuid);
 	    if (!existingTicket.isPresent()) {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 	    }
