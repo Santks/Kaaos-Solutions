@@ -34,7 +34,7 @@ const Ticketcheck = () => {
   const patchTicketInfo = async () => {
     try {
       const dateNow = new Date().toISOString();
-      const response = await fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, {
+      const response = await fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/uuid/${ticketInfo.uuid}`, {
         method: 'PATCH',
         headers,
         body: JSON.stringify({
@@ -47,6 +47,7 @@ const Ticketcheck = () => {
       const data = await response.json();
       if (data.ticketUsed != "1970-01-01T00:00:00") {
         alert('Lippua muokattu onnistuneesti');
+        setTicketInfo(data);
       } else {
         alert('Lipun muokkaus epäonnistui!');
       }
