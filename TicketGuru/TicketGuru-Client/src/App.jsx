@@ -60,7 +60,7 @@ function Navigation() {
   }
 
   return (
-    <AppBar position='static' sx={{ bgcolor: '#2196f3' }}>
+    <AppBar position='static' color='primary'>
       <Box display='flex' justifyContent='flex-start' alignItems='center'>
         <Typography variant='h6' color='inherit' style={{ marginLeft: '20px' }}>
           <Box display='flex' alignItems='center'>
