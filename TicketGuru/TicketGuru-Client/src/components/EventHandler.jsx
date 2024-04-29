@@ -18,10 +18,12 @@ export const fetchEvents = () => {
 };
 
 export const addEvent = (data) => {
-
     return fetch(ApiUrl, {
         method: 'POST',
-        headers,
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     }).then(response => {
         if (!response.ok) {
