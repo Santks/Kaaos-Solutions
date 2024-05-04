@@ -5,8 +5,6 @@ public class TicketTypeDTO {
     private String name;
     private String description;
 
-    // Constructors, getters, and setters
-    // Constructor from TicketType
     public TicketTypeDTO(TicketType ticketType) {
         this.ticketTypeId = ticketType.getTicketTypeId();
         this.name = ticketType.getName();
