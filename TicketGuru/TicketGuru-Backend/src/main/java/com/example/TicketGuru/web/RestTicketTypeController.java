@@ -1,13 +1,16 @@
 package com.example.TicketGuru.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +24,13 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.example.TicketGuru.domain.TicketType;
+import com.example.TicketGuru.domain.TicketTypeDTO;
 import com.example.TicketGuru.domain.TicketTypeRepository;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.beans.BeanUtils;
 
 @RestController
 public class RestTicketTypeController {
@@ -37,16 +42,30 @@ public class RestTicketTypeController {
 	
 	// GET (all)
     @GetMapping("/tickettype")
-    Iterable<TicketType> getAllTicketTypes() {
+    Iterable<TicketTypeDTO> getAllTicketTypes() {
         log.info("Get all events");
-        return ticketTypeRepo.findAll();
+        Iterable<TicketType> tickettypes = ticketTypeRepo.findAll();
+        List<TicketTypeDTO> tickettypesDTO = new ArrayList<>();
+        for (TicketType tickettype : tickettypes) {
+        	TicketTypeDTO tickettypeDTO = new TicketTypeDTO(tickettype);
+        	tickettypesDTO.add(tickettypeDTO);
+        }
+        return tickettypesDTO;
     }
+    
+    
     
     // GET (id)
     @GetMapping("/tickettype/id/{tickettypeid}")
-    TicketType getTicketTypeById(@PathVariable Long tickettypeid) {
-    	log.info("Get tickettype by id"); 	
-    	return ticketTypeRepo.findById(tickettypeid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
+    ResponseEntity<TicketTypeDTO> getTicketTypeById(@PathVariable Long tickettypeid) {
+    	log.info("Get tickettype by id");
+    	TicketType foundTicketType = ticketTypeRepo.findById(tickettypeid).orElse(null);
+    	if (foundTicketType == null) {
+    		return ResponseEntity.notFound().build();
+    	}
+    	TicketTypeDTO stripped = new TicketTypeDTO(foundTicketType);
+    	return ResponseEntity.ok(stripped);
+    	
     }
 
 	//POST
