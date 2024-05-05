@@ -17,6 +17,16 @@ export const fetchEvents = () => {
         });
 };
 
+export const fetchVenues = () => {
+    return fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/venues', { headers })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(errorMessage);
+            }
+            return response.json();
+        });
+};
+
 export const addEvent = (data) => {
     return fetch(ApiUrl, {
         method: 'POST',
@@ -59,10 +69,10 @@ export const deleteEvent = (id) => {
 
 export const fetchEventTickets = (eventid) => {
     return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/event/${eventid}`, { headers })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(errorMessage);
-        }
-        return response.json();
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(errorMessage);
+            }
+            return response.json();
+        });
 };
