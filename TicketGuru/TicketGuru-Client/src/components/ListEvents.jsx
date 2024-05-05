@@ -13,18 +13,28 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { addEvent, fetchEvents } from './EventHandler';
+import { addEvent, fetchEvents, fetchEventTickets } from './EventHandler';
 
 const ListEvents = () => {
     const [rowData, setRowData] = useState([]);
-
     const [open, setOpen] = useState(false);
-
+    const [ticketInfo, setTicketInfo] = useState(null);
+    const [ticketDialogOpen, setTicketDialogOpen] = useState(false);
+    
     const handleAdd = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleReport = (eventId) => {
+        fetchEventTickets(eventId)
+        .then(data => {
+            setTicketInfo(data);
+            setTicketDialogOpen(true);
+        })
+        .catch(error => console.error('Error:', error));
     };
 
 
@@ -74,7 +84,7 @@ const ListEvents = () => {
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ }) => <Button color={"secondary"}>Report<AssessmentIcon /></Button>
+            cellRenderer: ({data}) => <Button color={"secondary"} onClick={() => handleReport(data.id)}>Report<AssessmentIcon /></Button>
         },
     ];
 
@@ -131,6 +141,16 @@ const ListEvents = () => {
                         </DialogActions>
                     </form>
                 </DialogContent>
+            </Dialog>
+        
+            <Dialog open={ticketDialogOpen} onClose={() => setTicketDialogOpen(false)}>
+                <DialogTitle>Ticket Information</DialogTitle>
+                <DialogContent>
+                   <p>Total Tickets: {ticketInfo ? ticketInfo.length : 0}</p>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setTicketDialogOpen(false)} variant="contained" color="error">Close<CloseIcon /></Button>
+                </DialogActions>
             </Dialog>
         </>
     );
