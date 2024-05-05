@@ -124,7 +124,7 @@ TG_Ticket sisältää liput. TG_Ticket on yhteydessä Event, TicketType ja Order
 |TicketType_id|N (FK)|Lipputyypin id|
 |Order_id|N (FK)|Tilauksen id|
 |Price|Double|Lipun hinta|
-|TicketUsed|Boolean|Onko lippu käytetty? (True/False)|
+|TicketUsed|LocalDateTime|Aikaleima lipulle (jos käytetty)|
 
 
 ### TG_User
@@ -189,12 +189,13 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 
 
 ## Tekninen kuvaus
-Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim.
-
-- Missä mikäkin järjestelmän komponentti ajetaan (tietokone, palvelinohjelma) ja komponenttien väliset yhteydet ([esimerkki](https://security.ufl.edu/it-workers/risk-assessment/creating-an-information-systemdata-flow-diagram/))
-- Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
-- Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla.
-- Toteutuksen yleisiä ratkaisuja, esim. turvallisuus.
+- Järjestelmän backend sekä tietokanta toimivat CSC:n rahti palvelun avulla, joka pitää kyseiset osat käynnissä. Järjestelmän client on tällä hetkellä vain saatavilla paikallisesti ajettavana react sovelluksena. 
+- Palvelimena toimii edellisessä kohdassa mainittu rahti ympäristö. TicketGuru-järjestelmä on julkaistu sinne tämän Github-repositorion master haaran pohjalta ja järjestelmä päivittyy automaattisesti, kun master haaraan tulee muutoksia.
+- Järjestelmän backend on toteutettu Javalla, Spring Bootilla ja MySQL tietokannalla. Järjestelmän client on tehty Reactilla ja Vitellä.
+- Käytetyiden teknologioiden versiot: Java 17, React.js 18.2.0, Vite v5.2.8
+- REST-rajapinnan kuvaus löytyy järjestelmän [REST-dokumentaatiosta](../TicketGuru/REST%20dokumentaatio/)
+- Järjestelmän turvallisuus on toteutettu Spring Securityn Basic Authenticationin avulla. [(Dokumentaatio)](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)
+- Järjestelmään on myös toteutettu CORS-konfiguraatio, josta lisää tietoa [CORS-dokumentaatiossa](../TicketGuru/REST%20dokumentaatio/CORS.md)
 
 ### Tämän lisäksi
 - ohjelmakoodin tulee olla kommentoitua
