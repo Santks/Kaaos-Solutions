@@ -32,7 +32,7 @@ function App() {
           <Route path="/ticketcheck" element={<Ticketcheck />} />
           <Route path="/tickettypes" element={<ListTicketTypes />} />
           <Route path="/users" element={<ListUsers />} />
-          <Route path="/Kaaos-Solutions/eventreport/:eventId" element={<EventReport />} />
+          <Route path="/eventreport/:eventId" element={<EventReport />} />
         </Routes>
       </Box>
     </Router>

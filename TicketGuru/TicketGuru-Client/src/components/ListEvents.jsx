@@ -72,7 +72,7 @@ const ListEvents = () => {
     };
 
     const handleReport = (eventId) => {
-        window.open(`/Kaaos-Solutions/eventreport/${eventId}`, '_blank');
+        window.open(`/eventreport/${eventId}`, '_blank');
     };
     
     useEffect(() => {
