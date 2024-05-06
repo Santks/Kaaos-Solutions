@@ -5,12 +5,12 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 import { fetchEventTickets } from './EventHandler';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import { Button } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 const EventReport = () => {
 
     const [ticketInfo, setTicketInfo] = useState([]);
-    
-    const eventId = window.location.pathname.split('/').pop();
+    const { eventId } = useParams();
     
     useEffect(() => {
         fetchEventTickets(eventId)
