@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AgGridReact } from "ag-grid-react";
+import { Link } from 'react-router-dom';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 
@@ -127,7 +128,7 @@ const ListEvents = () => {
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"secondary"} onClick={() => handleReport(data.id)}>Report<AssessmentIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
         },
     ];
 
