@@ -69,9 +69,10 @@ const ListTicketTypes = () => {
             cellRenderer: ({ data }) => (
                 <>
                     <Button color="warning" onClick={() => handleEdit(data)}>Edit <EditIcon /></Button>
-                    <Button color="error" onClick={() => handleDelete(data)}>Delete <DeleteIcon /></Button>
+                    <Button color="error" onClick={() => handleDelete(data)} style={{ marginLeft: 10 }}>Delete <DeleteIcon /></Button>
                 </>
-            )
+            ),
+            width: 300
         }
     ];
 
@@ -108,9 +109,7 @@ const ListTicketTypes = () => {
                 <AgGridReact
                     columnDefs={columnDefs}
                     rowData={rowData}
-                    pagination={true}
                     sortable={true}
-                    paginationPageSize={10}
                     animateRows={true}
                 />
             </div>

@@ -34,7 +34,10 @@ export const addTicketType = (data) => {
 export const editTicketType = (id, data) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'PUT',
-        headers: headers,
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     })
         .then(response => {

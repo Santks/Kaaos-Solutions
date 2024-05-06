@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel, List, ListItem, ListItemText } from '@mui/material';
 
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EditIcon from '@mui/icons-material/Edit';
@@ -14,6 +14,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
+import { fetchTicketTypes } from './TicketTypeHandler';
 
 const ListEvents = () => {
     const [rowData, setRowData] = useState([]);
@@ -27,6 +28,8 @@ const ListEvents = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [ticketTypeDialog, setTicketTypeDialog] = useState(false);
+    const [ticketTypes, setTicketTypes] = useState([]);
 
     const handleOpen = () => {
         setOpen(true);
@@ -36,6 +39,7 @@ const ListEvents = () => {
         setOpen(false);
         setEditMode(false);
         setSelectedEvent(null);
+        setTicketTypeDialog(false)
     };
 
     const handleEdit = (event) => {
@@ -50,6 +54,10 @@ const ListEvents = () => {
     const handleDelete = (event) => {
         setSelectedEvent(event);
         setDeleteDialogOpen(true);
+    };
+
+    const handleTicketTypeDialog = () => {
+        setTicketTypeDialog(true);
     };
 
     const confirmDelete = () => {
@@ -80,6 +88,10 @@ const ListEvents = () => {
         fetchVenues()
             .then(data => setVenues(data))
             .catch(error => console.error('Error:', error));
+
+        fetchTicketTypes()
+            .then(data => setTicketTypes(data))
+            .catch(error => console.error('Error', error))
     }, []);
 
     const columnDefs = [
@@ -115,7 +127,7 @@ const ListEvents = () => {
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"info"}>Ticket types<ConfirmationNumberIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"info"} onClick={handleTicketTypeDialog}>Ticket types<ConfirmationNumberIcon /></Button>
         },
         {
             field: "",
@@ -222,6 +234,25 @@ const ListEvents = () => {
                 <DialogActions>
                     <Button onClick={() => setDeleteDialogOpen(false)} variant="contained" color="error">Cancel<CloseIcon /></Button>
                     <Button onClick={confirmDelete} variant="contained" color="success">Delete<DeleteIcon /></Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog open={ticketTypeDialog} onClose={handleClose}>
+                <DialogTitle>Available Ticket Types</DialogTitle>
+                <DialogContent>
+                    <List>
+                        {ticketTypes.map(ticketType => (
+                            <ListItem key={ticketType.ticketTypeId}>
+                                <ListItemText
+                                    primary={ticketType.name}
+                                    secondary={ticketType.description}
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setTicketTypeDialog(false)} variant="contained" color="error">Close<CloseIcon /></Button>
                 </DialogActions>
             </Dialog>
         </>
