@@ -15,7 +15,7 @@ import TemplatePage from "./components/TemplatePage";
 import Ticketbuy from './pages/Ticketbuy';
 import Ticketcheck from './pages/Ticketcheck';
 import ListTicketTypes from './pages/TicketTypes';
-
+import EventReport from './components/EventReport';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
           <Route path="/ticketbuy" element={<Ticketbuy />} />
           <Route path="/ticketcheck" element={<Ticketcheck />} />
           <Route path="/tickettypes" element={<ListTicketTypes />} />
+          <Route path="/Kaaos-Solutions/eventreport/:eventId" element={<EventReport />} />
         </Routes>
       </Box>
     </Router>

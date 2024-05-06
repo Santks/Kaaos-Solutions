@@ -72,14 +72,9 @@ const ListEvents = () => {
     };
 
     const handleReport = (eventId) => {
-        fetchEventTickets(eventId)
-            .then(data => {
-                setTicketInfo(data);
-                setTicketDialogOpen(true);
-            })
-            .catch(error => console.error('Error:', error));
+        window.open(`/Kaaos-Solutions/eventreport/${eventId}`, '_blank');
     };
-
+    
     useEffect(() => {
         fetchEvents()
             .then(data => setRowData(data))
