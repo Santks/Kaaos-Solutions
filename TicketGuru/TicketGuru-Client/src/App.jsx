@@ -7,12 +7,14 @@ import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 
 import HomePage from "./components/HomePage";
 import ListEvents from "./components/ListEvents";
 import TemplatePage from "./components/TemplatePage";
 import Ticketbuy from './pages/Ticketbuy';
 import Ticketcheck from './pages/Ticketcheck';
+import ListTicketTypes from './pages/TicketTypes';
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
           <Route path="/template" element={<TemplatePage />} />
           <Route path="/ticketbuy" element={<Ticketbuy />} />
           <Route path="/ticketcheck" element={<Ticketcheck />} />
+          <Route path="/tickettypes" element={<ListTicketTypes />} />
         </Routes>
       </Box>
     </Router>
@@ -54,6 +57,9 @@ function Navigation() {
     case '/ticketcheck':
       value = 4;
       break;
+    case '/tickettypes':
+      value = 5;
+      break;
 
     default:
       value = false;
@@ -76,6 +82,7 @@ function Navigation() {
           <Tab label='Template' icon={<SportsBarIcon />} component={Link} to="/template" />
           <Tab label='Buy tickets' icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" />
           <Tab label='Ticketcheck' icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" />
+          <Tab label='Ticket Types' icon={<ConfirmationNumberIcon />} component={Link} to="/tickettypes" />
         </Tabs>
       </Box>
     </AppBar>
