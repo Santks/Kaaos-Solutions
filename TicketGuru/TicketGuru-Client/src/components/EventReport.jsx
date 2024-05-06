@@ -17,7 +17,7 @@ const EventReport = ({ eventId }) => {
     }, [eventId]);
 
     const columnDefs = [
-        { headerName: 'Ticket ID', field: 'id'},
+        { headerName: 'Ticket ID', field: 'ticketId'},
         { headerName: 'Price', field: 'price'},
     ];
 
