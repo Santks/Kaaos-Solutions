@@ -197,7 +197,7 @@ const ListUsers = () => {
                         <TextField label="User Role ID" name="userRoleId" id="userRoleId" value={user.userRole.userRoleId} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Cancel<CloseIcon /></Button>
-                            <Button type="submit" variant="contained" color="success">{editMode ? "Save Changes" : "Add Ticket Type"}</Button>
+                            <Button type="submit" variant="contained" color="success">{editMode ? "Save Changes" : "Add User"}</Button>
                         </DialogActions>
                     </form>
                 </DialogContent>
