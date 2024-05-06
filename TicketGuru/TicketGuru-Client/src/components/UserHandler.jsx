@@ -35,7 +35,7 @@ export const editUser = (id, data) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'PUT',
         headers: {
-            headers,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)

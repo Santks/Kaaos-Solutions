@@ -39,17 +39,27 @@ const ListUsers = () => {
         "firstName": "",
         "lastName": "",
         "phone": null,
-        "email": "john@doe.com",
+        "email": "",
         "address": null,
         "activeUser": false,
         "postalCode": null,
         "userRole": {
             "userRoleId": 1,
-            "userRoleName": "customer",
-            "roleDesc": null,
-            "user": null
         }
     })
+    const defaultUser = {
+        "userId": null,
+        "firstName": "",
+        "lastName": "",
+        "phone": null,
+        "email": "",
+        "address": null,
+        "activeUser": false,
+        "postalCode": null,
+        "userRole": {
+            "userRoleId": 1,
+        }
+    }
 
     useEffect(() => {
         fetchUsers()
@@ -65,12 +75,14 @@ const ListUsers = () => {
         setOpen(false);
         setEditMode(false);
         setSelectedUser(null);
+        setUser(defaultUser)
         setUserName("");
         setDesc("");
     };
 
     const handleEdit = (user) => {
         setSelectedUser(user);
+        setUser(user)
         setDesc(user.email);
         setEditMode(true);
         setOpen(true);
@@ -82,7 +94,7 @@ const ListUsers = () => {
     };
 
     const confirmDelete = () => {
-        deleteTicketType(selectedUser.userId)
+        deleteUser(selectedUser.userId)
             .then(() => {
                 fetchUsers().then(data => setRowData(data));
             })
@@ -95,6 +107,10 @@ const ListUsers = () => {
     const columnDefs = [
         { field: "lastName", headerName: "Last Name", sortable: true, filter: true },
         { field: "firstName", headerName: "First Name", sortable: true, filter: true },
+        { field: "email", headerName: "email", sortable: true, filter: true },
+        { field: "phone", headerName: "phone", sortable: true, filter: true },
+        { field: "userRole.userRoleId", headerName: "User Role", sortable: true, filter: true },
+        { field: "address", headerName: "Address", sortable: true, filter: true },
         {
             field: "",
             headerName: "Actions",
@@ -109,9 +125,9 @@ const ListUsers = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         if (editMode) {
-            editUser(selectedUser.userId, user)
+            editUser(user.userId, user)
                 .then(() => {
                     fetchUsers().then(data => setRowData(data));
                 })
@@ -131,10 +147,27 @@ const ListUsers = () => {
     };
 
     const handleChangeUser = (e) => {
-        setUser(prevUser => ({
-            ...prevUser,
-            [e.target.name]: e.target.value
-        }));
+        console.log(e.target.name)
+        console.log(e.target.value)
+
+        if (e.target.name === 'postalCode') {
+            parseInt(e.target.value)
+        }
+        if (e.target.name === 'userRoleId') {
+            setUser(prevUser => ({
+                ...prevUser,
+                userRole: {
+                    ...prevUser.userRole,
+                    [e.target.name]: e.target.value
+                }
+            }));
+        } else {
+            setUser(prevUser => ({
+                ...prevUser,
+                [e.target.name]: e.target.value
+            }));
+        }
+        console.log(user)
     }
 
     return (
@@ -150,13 +183,18 @@ const ListUsers = () => {
                     animateRows={true}
                 />
             </div>
-        <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{editMode ? "Edit User" : "Add New User"}</DialogTitle>
                 <DialogContent>
                     <form onSubmit={handleSubmit}>
+                        <TextField disabled label="ID" name="userId" id="userId" value={user.userId} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <TextField label="First Name" name="firstName" id="firstName" value={user.firstName} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <TextField label="Last Name" name="lastName" id="lastName" value={user.lastName} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <TextField label="Email" name="email" id="email" value={user.email} onChange={(e) => handleChangeUser(e)} fullWidth required />
+                        <TextField label="Phone" name="phone" id="phone" value={user.phone} onChange={(e) => handleChangeUser(e)} fullWidth required />
+                        <TextField label="Address" name="address" id="address" value={user.address} onChange={(e) => handleChangeUser(e)} fullWidth required />
+                        {/* <TextField label="Postal Code" name="postalCode" id="postalCode" value={user.postalCode} onChange={(e) => handleChangeUser(e)} fullWidth required /> */}
+                        <TextField label="User Role ID" name="userRoleId" id="userRoleId" value={user.userRole.userRoleId} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Cancel<CloseIcon /></Button>
                             <Button type="submit" variant="contained" color="success">{editMode ? "Save Changes" : "Add Ticket Type"}</Button>
