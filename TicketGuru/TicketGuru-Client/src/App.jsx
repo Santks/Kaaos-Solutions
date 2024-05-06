@@ -15,6 +15,7 @@ import TemplatePage from "./components/TemplatePage";
 import Ticketbuy from './pages/Ticketbuy';
 import Ticketcheck from './pages/Ticketcheck';
 import ListTicketTypes from './pages/TicketTypes';
+import ListUsers from './pages/Users';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/ticketbuy" element={<Ticketbuy />} />
           <Route path="/ticketcheck" element={<Ticketcheck />} />
           <Route path="/tickettypes" element={<ListTicketTypes />} />
+          <Route path="/users" element={<ListUsers />} />
         </Routes>
       </Box>
     </Router>
@@ -60,6 +62,9 @@ function Navigation() {
     case '/tickettypes':
       value = 5;
       break;
+    case '/users':
+      value = 6;
+      break;
 
     default:
       value = false;
@@ -83,6 +88,7 @@ function Navigation() {
           <Tab label='Buy tickets' icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" />
           <Tab label='Ticketcheck' icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" />
           <Tab label='Ticket Types' icon={<ConfirmationNumberIcon />} component={Link} to="/tickettypes" />
+          <Tab label='Users' icon={<ConfirmationNumberIcon />} component={Link} to="/users" />
         </Tabs>
       </Box>
     </AppBar>
