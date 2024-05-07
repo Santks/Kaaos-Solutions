@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Payment")
@@ -17,20 +18,25 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Payment_id")
+    // @NotNull
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "Customer_id")
+    @NotNull
     private User user;
 
     @OneToOne
     @JoinColumn(name = "Order_id")
+    @NotNull
     private Order order;
 
     @Column(name = "Amount")
+    @NotNull
     private Double amount;
 
     @Column(name = "PaymentDate")
+    @NotNull
     private Date paymentDate;
 
     @Column(name = "PaymentMethod")
@@ -82,6 +88,10 @@ public class Payment {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public Payment() {
+        
     }
 
     public Payment(Long id, User user, Order order, Double amount, Date paymentDate, String paymentMethod) {

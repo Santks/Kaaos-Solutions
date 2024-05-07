@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_PostalCode")
@@ -13,18 +15,18 @@ public class PostalCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PostalCode_id")
+    // @NotNull
     private Long Id;
 
     @Column(name = "PostalCode")
     private String postalCode;
 
     @Column(name = "City")
+    @NotBlank
     private String city;
 
     @Column(name = "Country")
     private String country;
-
-    // Constructors, getters, setters and toString()
 
     public PostalCode() {
         super();

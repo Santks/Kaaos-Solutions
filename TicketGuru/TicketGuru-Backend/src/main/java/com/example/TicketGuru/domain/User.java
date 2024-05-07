@@ -8,26 +8,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_User")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // generaatio tapa?
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "User_id", nullable = false)
+	// @NotNull
 	private Long userId;
 
 	@Column(name = "FirstName", nullable = false)
+	@NotBlank
 	private String firstName;
 
 	@Column(name = "LastName", nullable = false)
+	@NotBlank
 	private String lastName;
 
 	@Column(name = "Phone")
-
 	private String phone;
+	
 	@Column(name = "Email", nullable = false)
+	@Email
 	private String email;
 
 	@Column(name = "Address")
@@ -42,6 +49,7 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name = "userRoleId")
+	@NotNull
 	private UserRole userRole;
 
 	public Long getUserId() {
@@ -115,6 +123,10 @@ public class User {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+	
+	public User() {
+		super();
+	}
 
 	public User(Long userId, String firstName, String lastName, String phone, String email, String address,
 			UserRole userRole, boolean activeUser) {
@@ -129,5 +141,21 @@ public class User {
 		this.activeUser = activeUser;
 
 	}
+	
+	public User(String firstName, String lastName, String email, UserRole userRole) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.userRole = userRole;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
+				+ ", email=" + email + ", address=" + address + ", activeUser=" + activeUser + ", postalCode="
+				+ postalCode + ", userRole=" + userRole + "]";
+	}
+	
 
 }

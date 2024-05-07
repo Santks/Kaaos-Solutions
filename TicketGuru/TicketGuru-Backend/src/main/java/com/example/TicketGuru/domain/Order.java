@@ -1,6 +1,11 @@
 package com.example.TicketGuru.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Order")
@@ -16,16 +23,20 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Order_id")
+    // @NotNull
     private Long orderId;
 
     @ManyToOne
     @JoinColumn(name = "Customer_id")
+    @NotNull
     private User customer;
 
     @Column(name = "Date")
-    private Date date;
+    @NotNull
+    private LocalDate date;
 
     @Column(name = "TotalPrice")
+    @NotNull
     private double totalPrice;
 
     @Column(name = "OrderPaid")
@@ -33,11 +44,22 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "Seller_id", referencedColumnName = "User_id")
+    @NotNull
     private User seller;
+    
+    @OneToMany(mappedBy = "order", cascade=CascadeType.ALL)
+	@JsonManagedReference(value="ticket-order")
+    private List<Ticket> tickets;
+    
+    public List<Ticket> getTickets() {
+		return tickets;
+	}
 
-    // Constructors, getters, setters and toString()
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 
-    public Long getOrderId() {
+	public Long getOrderId() {
         return orderId;
     }
 
@@ -53,11 +75,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -84,10 +106,14 @@ public class Order {
     public void setSeller(User seller) {
         this.seller = seller;
     }
+    
+    public Order() {
+    	super();
+    }
 
-    public Order(Long orderId, User customer, Date date, double totalPrice, boolean orderPaid,
+    public Order(User customer, LocalDate date, double totalPrice, boolean orderPaid,
             User seller) {
-        this.orderId = orderId;
+    	super();
         this.customer = customer;
         this.date = date;
         this.totalPrice = totalPrice;
@@ -95,6 +121,16 @@ public class Order {
         this.seller = seller;
     }
 
+    public Order(User customer, LocalDate date, double totalPrice, boolean orderPaid,
+            User seller, List<Ticket> tickets) {
+    	super();
+        this.customer = customer;
+        this.date = date;
+        this.totalPrice = totalPrice;
+        this.orderPaid = orderPaid;
+        this.seller = seller;
+        this.tickets = tickets;
+    }
     @Override
     public String toString() {
         return "Order [orderId=" + orderId + ", customer=" + customer + ", date=" + date + ", totalPrice=" + totalPrice

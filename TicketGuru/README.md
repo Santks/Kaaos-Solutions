@@ -70,178 +70,132 @@ Järjestelmään säilöttävät ja siinä käsiteltävät tiedot ja niiden väl
 ### UML-kaavio
 ![UML-kaavio](tietokantakaavio.png)
 
-### TG_Venue
-TG_Venue sisältää tapahtumapaikat. TG_Venuella on OneToMany-viittaus TG_Event-tauluun.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| Venue_id | AN (PK)| Paikan id |
-| Name | C/100 | Paikan nimi |
-| Address | C/100 | Osoite |
-| Phone | C/20 | Puhelinnumero |
-| Email | C/50 | Sähköpostiosoite |
-| Capasity | N | Paikan kapasiteetti |
-| PostalCode | C/5 | Postinumero |
-
 
 ### TG_Event
-TG_Event sisältää tapahtumat. TG_Eventista on ManyToMany-viittaus TG_TicketEvent- ja TG_EventOrganiser-tauluihin sekä OneToOne-viittaukset TG_EventStatus- ja TG_EventCategory-tauluihin.
+TG_Event sisältää tapahtumat. TG_Event on yhteydessä TG_Venue -luokkaan (ManyToOne) ja TG_Ticket -luokkaan (OneToMany).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| Event_id | AN (PK) | Tapahtuman id |
-| Venue_id | N (FK) | Paikan id |
-| Name | C/100 | Tapahtuman nimi |
-| Description | C/1000 | Kuvaus |
-| EventStatus_id | N (FK) | Statuksen id |
-| StartDate | D | Alkamispäivä |
-| EndDate | D | Päättymispäivä |
-| EventCategory_id | N (FK) | Kategorian id |
-
-
-### TG_Organiser
-TG_Organiser sisältää tapahtumien järjestäjät. TG_Organiserilla on ManyToMany-viittaus TG_EventOrganiser-tauluun.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| Organiser_id | AN (PK) | Järjestäjän id |
-| Name | C/100 | Järjestäjän nimi |
-| Email | C/50 | Sähköpostiosoite |
-| Phone | C/20 | Puhelinnumero |
-
-
-### TG_Payment
-TG_Payment sisältää maksutiedot. TG_Paymentilla on ManyToOne-viittaus TG_User-tauluun.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| Payment_id | AN (PK) | Maksun id |
-| User_id | N (FK) | Käyttäjän id |
-| Order_id | N (FK) | Tilauksen id |
-| Amount | Double | Summa |
-| PaymentDate | D | Maksupäivä |
-| PaymentMethod | C/20 | Maksutapa |
-
-
-### TG_Ticket
-TG_Ticket sisältää myytävät liput. TG_Ticketilla on ManyToMany-viittaus TG_TicketEvent-tauluun sekä ManyToOne-viittaukset TG_TicketType- ja TG_Order-tauluihin.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| Ticket_id | AN (PK) | Lipun id |
-| Event_id | N (FK) | Tapahtuman id |
-| TicketType_id | N (FK) | Lipputyypin id |
-| Order_id | N (FK) | Tilauksen id |
-| Price | Double | Hinta |
-| TicketUsed | Boolean | Onko lippu käytetty (True / False) |
-
-
-### TG_TicketType
-TG_TicketType sisältää eri lipputyypit. TG_TicketTypella on OneToMany-viittaus TG_Ticket-tauluun.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| TicketType_id | AN (PK) | Lipputyypin id |
-| Name | C/100 | Lipputyypin nimi |
-| Description | C/500 | Kuvaus |
+|Event_id|AN (PK)|Tapahtuman id|
+|Venue_id|N (FK) |Paikan id|
+|Name|C/100|Tapahtuman nimi|
+|Description|C/1000|Tapahtuman kuvaus|
+|EventCategory|C/50|Tapahtuman kategoria|
+|StartDate|LocalDate|Alkamispäivä|
+|EndDate|LocalDate|Päättymispäivä|
+|EventStatus|C/50|Tapahtuman status|
+|OrganiserName|C/100|Järjestäjän nimi|
+|MaxTickets|N|Lippujen maksimimäärä|
 
 
 ### TG_Order
-TG_Order sisältää tilaukset. TG_Orderilla on OneToMany-viittaus TG_Ticket-tauluun ja ManyToOne-viittaukset TG_User- ja TG_Payment-tauluihin.
+TG_Order sisältää tilaukset. TG_Order on yhteydessä TG_User -luokkaan (ManyToOne) sekä TG_Ticket ja TG_Payment -luokkiin (OneToMany).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| Order_id | AN (PK) | Tilauksen id |
-| User_id | N (FK) | Käyttäjän id |
-| Date | D | Päivämäärä |
-| TotalPrice | Double | Kokonaishinta |
-| OrderPaid | Boolean | Onko tilaus maksettu (True / False) |
-| Seller_id | N (FK) | Myyjän id |
+|Order_id|AN (PK)|Tilauksen id|
+|Customer_id|N (FK)|Asiakkaan id|
+|Date|LocalDate|Tilauspäivä|
+|TotalPrice|Double|Kokonaishinta|
+|OrderPaid|Boolean|Onko tilaus maksettu? (True/False)|
+|Seller_id| N (FK)|Myyjän id|
 
 
-### TG_TicketEvent
-TG_TicketEvent yhdistää liput ja tapahtumat välitauluksi. TG_TicketEventilla on ManyToOne-viittaukset TG_Ticket- ja TG_Event-tauluihin.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| TicketEvent_id | AN (PK) | Ticket/Event id |
-| Ticket_id | N (FK) | Lipun id |
-| Event_id | N (FK) | Tapahtuman id |
-
-
-### TG_UserRole
-TG_UserRole sisältää käyttäjien roolit. TG_UserRolella on OneToMany-viittaus TG_User-tauluun.
+### TG_Payment
+TG_Payment sisältää maksut. TG_Payment on yhteydessä TG_User ja TG_Order -luokkiin (ManyToOne).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| UserRole_id | AN (PK) | Käyttäjäroolin id |
-| Name | C/100 | Nimi |
-| Description | C/500 | Kuvaus |
+|Payment_id|AN (PK)|Maksun id|
+|Customer_id|N (FK)|Asiakkaan id|
+|Order_id|N (FK)|Tilauksen id|
+|Amount|Double|Summa|
+|PaymentDate|LocalDate|Maksupäivä|
+|PaymentMethod|C/50|Maksutapa|
+
+
+### TG_Ticket
+TG_Ticket sisältää liput. TG_Ticket on yhteydessä Event, TicketType ja Order -luokkiin (ManyToOne).
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+|Ticket_id|AN (PK)|Lipun id|
+|Event_id|N (FK)|Tapahtuman id|
+|TicketType_id|N (FK)|Lipputyypin id|
+|Order_id|N (FK)|Tilauksen id|
+|Price|Double|Lipun hinta|
+|TicketUsed|LocalDateTime|Aikaleima lipulle (jos käytetty)|
 
 
 ### TG_User
-TG_User sisältää käyttäjät. TG_Userilla on OneToMany-viittaukset TG_Order- ja TG_Payment-tauluihin sekä ManyToOne-viittaukset TG_UserRole- ja TG_PostalCode-tauluihin.
+TG_User sisältää käyttäjät. TG_User on yhteydessä PostalCode ja UserRole -luokkiin (ManyToOne) ja Order ja Payment -luokkiin (OneToMany).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| User_id | AN (PK) | Käyttäjän id |
-| FirstName | C/100 | Etunimi |
-| LastName | C/100 | Sukunimi |
-| Phone | C/20 | Puhelinnumero |
-| Email | C/50 | Sähköpostiosoite |
-| Address | C/100 | Osoite |
-| PostalCode | C/5 | Postinumero |
-| UserRole_id | N (FK) | Käyttäjäroolin id |
-| ActiveUser | Boolean | Onko käyttäjä aktiivinen (True / False) |
+|User_id|AN (PK)|Käyttäjän id|
+|FirstName|C/50|Etunimi|
+|LastName|C/50|Sukunimi|
+|Phone|C/20|Puhelinnumero|
+|Email|C/50|Sähköpostiosoite|
+|Address|C/100|Osoite|
+|PostalCode|N (FK)|Postinumeron id|
+|ActiveUser|Boolean|Onko käyttäjä aktiivinen? (True/False)|
+|UserRoleId|N (FK)|Käyttäjäroolin id|
+
+
+### TG_Venue
+TG_Venue sisältää tapahtumapaikat. TG_Venue on yhteydessä PostalCode -luokkaan (ManyToOne) ja Event -luokkaan (OneToMany).
+
+| Kenttä | Tyyppi | Kuvaus |
+|--------|--------|--------|
+|Venue_id|AN (PK)|Tapahtumapaikan id|
+|Name|C/100|Tapahtumapaikan nimi|
+|Address|C/100|Osoite|
+|Phone|C/20|Puhelinnumero|
+|Email|C/50|Sähköpostiosoite|
+|Capasity|N|Paikan kapasiteetti|
+|PostalCode|N (FK)|Postinumeron id|
 
 
 ### TG_PostalCode
-TG_PostalCode sisältää postinumerot. TG_PostalCodella on OneToMany-viittaukset TG_User- ja TG_Venue-tauluihin.
+TG_PostalCode sisältää postinumerot. TG_PostalCode on yhteydessä User ja Venue -luokkiin (ManyToOne).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| PostalCode | C/5 | Postinumero |
-| City | C/100 | Kaupunki |
-| Country | C/100 | Maa |
+|PostalCode_id|AN (PK)|Postinumeron id|
+|PostalCode|C/5|Postinumero|
+|City|C/50|Kaupunki|
+|Country|C/50|Maa|
 
 
-### TG_EventOrganiser
-TG_EventOrganiser yhdistää tapahtumat ja järjestäjät. TG_EventOrganiserilla on ManyToOne-viittaukset TG_Organiser- ja TG_Event-tauluihin.
-
-| Kenttä | Tyyppi | Kuvaus |
-|--------|--------|--------|
-| EventOrganiser_id | AN (PK) | Event/Organiser id |
-| Organiser_id | N (FK) | Järjestäjän id |
-| Event_id | N (FK) | Tapahtuman id |
-
-
-### TG_EventStatus
-TG_EventStatus sisältää tapahtumien statuksen. TG_EventStatusilla on OneToOne-viittaus TG_Event-tauluun.
+### TG_TicketType
+TG_TicketType sisältää lipputyypit. TG_TicketType on yhteydessä Ticket -luokkaan (OneToMany).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| EventStatus_id | AN (PK) | Statuksen id |
-| Status | C/100 | Status |
+|TicketType_id|AN (PK)|Lipputyypin id|
+|Name|C/100|Lipputyyppi|
+|Description|C/1000|Lipputyypin kuvaus|
 
 
-### TG_EventCategory
-TG_EventCategory sisältää tapahtumakategoriat. TG_EventCategorylla on OneToOne-viittaus TG_Event-tauluun.
+### TG_UserRole
+TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -luokkaan (ManyToOne).
 
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
-| EventCategory_id | AN (PK) | Kategorian id |
-| Name | C/100 | Nimi |
-| Description | C/500 | Kuvaus |
-
+|UserRole_id|AN (PK)|Käyttäjäroolin id|
+|Name|C/100|Käyttäjärooli|
+|Description|C/1000|Käyttäjäroolin kuvaus|
 
 
 ## Tekninen kuvaus
-Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim.
-
-- Missä mikäkin järjestelmän komponentti ajetaan (tietokone, palvelinohjelma) ja komponenttien väliset yhteydet ([esimerkki](https://security.ufl.edu/it-workers/risk-assessment/creating-an-information-systemdata-flow-diagram/))
-- Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
-- Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla.
-- Toteutuksen yleisiä ratkaisuja, esim. turvallisuus.
+- Järjestelmän backend sekä tietokanta toimivat CSC:n rahti palvelun avulla, joka pitää kyseiset osat käynnissä. Järjestelmän client on tällä hetkellä vain saatavilla paikallisesti ajettavana react sovelluksena. 
+- Palvelimena toimii edellisessä kohdassa mainittu rahti ympäristö. TicketGuru-järjestelmä on julkaistu sinne tämän Github-repositorion master haaran pohjalta ja järjestelmä päivittyy automaattisesti, kun master haaraan tulee muutoksia.
+- Järjestelmän backend on toteutettu Javalla, Spring Bootilla ja MySQL tietokannalla. Järjestelmän client on tehty Reactilla ja Vitellä.
+- Käytetyiden teknologioiden versiot: Java 17, React.js 18.2.0, Vite v5.2.8
+- REST-rajapinnan kuvaus löytyy järjestelmän [REST-dokumentaatiosta](../TicketGuru/REST%20dokumentaatio/)
+- Järjestelmän turvallisuus on toteutettu Spring Securityn Basic Authenticationin avulla. [(Dokumentaatio)](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)
+- Järjestelmään on myös toteutettu CORS-konfiguraatio, josta lisää tietoa [CORS-dokumentaatiossa](../TicketGuru/REST%20dokumentaatio/CORS.md)
 
 ### Tämän lisäksi
 - ohjelmakoodin tulee olla kommentoitua

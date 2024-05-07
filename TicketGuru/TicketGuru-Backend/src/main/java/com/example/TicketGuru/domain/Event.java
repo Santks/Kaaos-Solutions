@@ -1,5 +1,9 @@
 package com.example.TicketGuru.domain;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TG_Event")
@@ -19,9 +25,11 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "Venue_id", referencedColumnName = "Venue_id")
+    @NotNull
     private Venue venue;
 
     @Column(name = "Name")
+    @NotBlank
     private String name;
 
     @Column(name = "Description")
@@ -31,33 +39,36 @@ public class Event {
     private String eventCategory;
 
     @Column(name = "StartDate")
-    private String startDate;
+    @NotNull
+    private LocalDate startDate;
 
     @Column(name = "EndDate")
-    private String endDate;
+    @NotNull
+    private LocalDate endDate;
 
     @Column(name = "eventStatus")
-    private char eventSatus;
+    private char eventStatus;
 
     @Column(name = "OrganiserName")
     private String organiserName;
 
     @Column(name = "maxTickets")
+    @NotNull
     private long maxTickets;
 
     public Event() {
         super();
     }
 
-    public Event(Venue venue, String name, String description, String eventCategory, String startDate, String endDate,
-            char eventSatus, String organiserName, long maxTickets) {
+    public Event(Venue venue, String name, String description, String eventCategory, LocalDate startDate, LocalDate endDate,
+            char eventStatus, String organiserName, long maxTickets) {
         this.venue = venue;
         this.name = name;
         this.description = description;
         this.eventCategory = eventCategory;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.eventSatus = eventSatus;
+        this.eventStatus = eventStatus;
         this.organiserName = organiserName;
         this.maxTickets = maxTickets;
     }
@@ -102,28 +113,28 @@ public class Event {
         this.eventCategory = eventCategory;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public char getEventSatus() {
-        return eventSatus;
+    public char geteventStatus() {
+        return eventStatus;
     }
 
-    public void setEventSatus(char eventSatus) {
-        this.eventSatus = eventSatus;
+    public void seteventStatus(char eventStatus) {
+        this.eventStatus = eventStatus;
     }
 
     public String getOrganiserName() {
@@ -146,7 +157,7 @@ public class Event {
     public String toString() {
         return "Event [id=" + id + ", venue=" + venue + ", name=" + name + ", description=" + description
                 + ", eventCategory=" + eventCategory + ", startDate=" + startDate + ", endDate=" + endDate
-                + ", eventSatus=" + eventSatus + ", organiserName=" + organiserName + ", maxTickets=" + maxTickets
+                + ", eventStatus=" + eventStatus + ", organiserName=" + organiserName + ", maxTickets=" + maxTickets
                 + "]";
     }
 

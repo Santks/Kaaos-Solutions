@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TG_UserRole")
@@ -16,9 +18,11 @@ public class UserRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="UserRole_id")
+	// @NotNull
 	private Long userRoleId;
 	
 	@Column(name="Name")
+	@NotBlank
 	private String userRoleName;
 	
 	@Column(name="Description")
@@ -59,14 +63,19 @@ public class UserRole {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
+	public UserRole() {
+		super();
+	}
+	
+	public UserRole(String userRoleName) {
+		super();
+		this.userRoleName = userRoleName;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserRole [userRoleId=" + userRoleId + ", userRoleName=" + userRoleName + ", roleDesc=" + roleDesc
 				+ ", user=" + user + "]";
 	}
-	
-	
-	
-
 }

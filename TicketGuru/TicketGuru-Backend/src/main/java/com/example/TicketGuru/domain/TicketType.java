@@ -1,7 +1,13 @@
 package com.example.TicketGuru.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "TG_TicketType")
@@ -10,15 +16,18 @@ public class TicketType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TicketType_id")
+	// @NotNull
 	private Long ticketTypeId;
 
 	@Column(name = "Name")
+	@NotBlank
 	private String name;
 
 	@Column(name = "Description")
 	private String description;
 
-	@OneToMany(mappedBy = "ticketType")
+	@OneToMany(mappedBy = "ticketType", cascade=CascadeType.PERSIST)
+	@JsonManagedReference(value="ticket-tickettype")
 	private List<Ticket> tickets;
 
 	public Long getTicketTypeId() {
@@ -56,6 +65,25 @@ public class TicketType {
 	@Override
 	public String toString() {
 		return "TicketType [ticketTypeId=" + ticketTypeId + ", name=" + name + ", description=" + description + "]";
+	}
+
+	public TicketType() {
+		super();
+	}
+	
+	public TicketType(Long ticketTypeId, String name, String description, List<Ticket> tickets) {
+		super();
+		this.ticketTypeId = ticketTypeId;
+		this.name = name;
+		this.description = description;
+		this.tickets = tickets;
+	}
+
+	public TicketType(String name, String description, List<Ticket> tickets) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.tickets = tickets;
 	}
 
 }
