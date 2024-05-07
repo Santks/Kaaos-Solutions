@@ -6,7 +6,6 @@ const headers = {
 
 const errorMessage = "Homma meni ihan wilduks!";
 
-
 export const fetchEvents = () => {
     return fetch(ApiUrl, { headers })
         .then(response => {
@@ -27,7 +26,7 @@ export const fetchVenues = () => {
         });
 };
 
-export const addEvent = (data) => {
+export const addEvent = (data, callback) => {
     return fetch(ApiUrl, {
         method: 'POST',
         headers: {
@@ -40,21 +39,31 @@ export const addEvent = (data) => {
             throw new Error(errorMessage);
         }
         return response.json();
+    }).then(data => {
+        callback();
+        return data;
     });
 };
 
-export const editEvent = (id, data) => {
+export const editEvent = (id, data, callback) => {
     return fetch(`${ApiUrl}/${id}`, {
         method: 'PUT',
-        headers,
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     }).then(response => {
         if (!response.ok) {
             throw new Error(errorMessage);
         }
         return response.json();
+    }).then(data => {
+        callback();
+        return data;
     });
 };
+
 
 export const deleteEvent = (id) => {
     return fetch(`${ApiUrl}/${id}`, {
