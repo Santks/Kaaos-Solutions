@@ -46,12 +46,13 @@ public class RestEventController {
     // GET (id)
     @GetMapping("/events/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable Long id) {
-        log.info("Get event by id");
-        Event event = eventRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
-        Venue venue = venueRepo.findById(event.getVenue().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
-        event.setVenue(venue);
+        Event event = eventRepo.findEventWithVenue(id);
+        if (event == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND); // 404: Not Found!
+        }
         return new ResponseEntity<>(event, HttpStatus.OK); // 200: OK!
     }
+
 
     
     // GET (date)

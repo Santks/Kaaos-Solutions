@@ -10,8 +10,12 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends CrudRepository<Event, Long>{
-    
+
 	// Haetaan kaikki tapahtumat jotka ovat alkamassa tai menossa tiettynä päivänä (:date)
 	@Query("SELECT e FROM Event e WHERE e.startDate = :date OR e.endDate = :date")
-    List<Event> findEventsByDate(@Param("date") LocalDate date);
+	List<Event> findEventsByDate(@Param("date") LocalDate date);
+
+	@Query("SELECT e FROM Event e JOIN FETCH e.venue WHERE e.id = :id")
+	Event findEventWithVenue(@Param("id") Long id);
+
 }
