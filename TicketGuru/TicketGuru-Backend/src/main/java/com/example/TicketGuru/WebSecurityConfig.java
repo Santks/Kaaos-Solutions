@@ -24,65 +24,78 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-        @Autowired
-        private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-                auth
-                                .inMemoryAuthentication()
-                                .withUser("admin")
-                                .password(passwordEncoder.encode("admin"))
-                                .authorities("ROLE_ADMIN")
-                                .and()
-                                .withUser("inno")
-                                .password(passwordEncoder.encode("testbuild"))
-                                .authorities("ROLE_USER")
-                                .and()
-                                .withUser("manager")
-                                .password(passwordEncoder.encode("manager"))
-                                .authorities("ROLE_EVENT_MANAGER")
-                                .and()
-                                .withUser("seller")
-                                .password(passwordEncoder.encode("seller"))
-                                .authorities("ROLE_SELLER")
-                                .and()
-                                .withUser("inspector")
-                                .password(passwordEncoder.encode("inspector"))
-                                .authorities("ROLE_TICKET_INSPECTOR");
-        }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+		.inMemoryAuthentication()
+		.withUser("admin")
+		.password(passwordEncoder.encode("admin"))
+		.authorities("ROLE_ADMIN")
+		.and()
+		.withUser("inno")
+		.password(passwordEncoder.encode("testbuild"))
+		.authorities("ROLE_USER")
+		.and()
+		.withUser("manager")
+		.password(passwordEncoder.encode("manager"))
+		.authorities("ROLE_EVENT_MANAGER")
+		.and()
+		.withUser("seller")
+		.password(passwordEncoder.encode("seller"))
+		.authorities("ROLE_SELLER")
+		.and()
+		.withUser("inspector")
+		.password(passwordEncoder.encode("inspector"))
+		.authorities("ROLE_TICKET_INSPECTOR");
+	}
 
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-                http
-                                .cors((cors) -> cors
-                                                .configurationSource((corsConfigurationSource())))
-                                .csrf(csrf -> csrf.disable())
-                                // .csrf((csrf) -> csrf
-                                // .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                                // .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
-                                .authorizeHttpRequests(authorize -> authorize
-                                                .anyRequest().authenticated())
-                                .httpBasic(Customizer.withDefaults())
-                                .formLogin(Customizer.withDefaults());
-                // .httpBasic(HttpSecurityHttpBasicConfigurer -> HttpSecurityHttpBasicConfigurer
-                // .authenticationEntryPoint(new
-                // HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http
+		.cors((cors) -> cors
+				.configurationSource((corsConfigurationSource())))
+		.csrf(csrf -> csrf.disable())
+		.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/api/login").permitAll()
+				.anyRequest().authenticated())
+		.httpBasic(Customizer.withDefaults())
+		.formLogin(formLogin -> formLogin
+				.loginProcessingUrl("/api/login")
+				.successHandler((request, response, authentication) -> {
+					response.getWriter().append("{\"success\":true}");
+					response.setStatus(200);
+				})
+				.failureHandler((request, response, exception) -> {
+					response.getWriter().append("{\"success\":false}");
+					response.setStatus(401);
+				}))
+		.logout(logout -> logout
+				.logoutUrl("/api/logout")
+				.logoutSuccessHandler((request, response, authentication) -> {
+					response.getWriter().append("{\"success\":true}");
+					response.setStatus(200);
+				}));
 
-                return http.build();
-        }
+		return http.build();
+	}
 
-        @Bean
-        CorsConfigurationSource corsConfigurationSource() {
-                CorsConfiguration configuration = new CorsConfiguration();
-                // Millaisista lähteistä PYYNTÖ sallitaan (1):
-                configuration.setAllowedOrigins(Arrays.asList("*"));
-                // Sallii pyyntötyypit (2):
-                configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
-                // Sallii OTSIKOT (3):
-                configuration.setAllowedHeaders(Arrays.asList("*"));
-                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-                source.registerCorsConfiguration("/**", configuration);
-                return source;
-        }
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		// Millaisista lähteistä PYYNTÖ sallitaan (1):
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		// Sallii pyyntötyypit (2):
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
+		// Sallii OTSIKOT (3):
+		configuration.setAllowedHeaders(Arrays.asList("*"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+
+
+
 }
