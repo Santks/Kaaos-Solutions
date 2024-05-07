@@ -1,10 +1,10 @@
-const apiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype'
+const apiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/users'
 
 const headers = {
     'Authorization': 'Basic ' + btoa('admin:admin')
 };
 
-export const fetchTicketTypes = () => {
+export const fetchUsers = () => {
     return fetch(apiUrl, { headers })
         .then(response => {
             if (!response.ok) {
@@ -14,7 +14,7 @@ export const fetchTicketTypes = () => {
         });
 };
 
-export const addTicketType = (data) => {
+export const addUser = (data) => {
     return fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -31,7 +31,7 @@ export const addTicketType = (data) => {
         });
 };
 
-export const editTicketType = (id, data) => {
+export const editUser = (id, data) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'PUT',
         headers: {
@@ -48,7 +48,7 @@ export const editTicketType = (id, data) => {
         });
 };
 
-export const deleteTicketType = (id) => {
+export const deleteUser = (id) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'DELETE',
         headers: headers

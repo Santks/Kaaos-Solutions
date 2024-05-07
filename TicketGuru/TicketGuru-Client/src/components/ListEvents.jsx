@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AgGridReact } from "ag-grid-react";
+import { Link } from 'react-router-dom';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel, List, ListItem, ListItemText } from '@mui/material';
 
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,8 +13,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import CloseIcon from '@mui/icons-material/Close';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
+import { fetchTicketTypes } from './TicketTypeHandler';
 
 const ListEvents = () => {
     const [rowData, setRowData] = useState([]);
@@ -21,14 +24,19 @@ const ListEvents = () => {
     const [ticketInfo, setTicketInfo] = useState(null);
     const [ticketDialogOpen, setTicketDialogOpen] = useState(false);
     const [venues, setVenues] = useState([]);
-    const [venueId, setVenueId] = useState("");
+    const [venue, setVenue] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [ticketTypeDialog, setTicketTypeDialog] = useState(false);
+    const [ticketTypes, setTicketTypes] = useState([]);
 
     const handleOpen = () => {
+        if (!editMode) {
+            setVenue(null);
+        }
         setOpen(true);
     };
 
@@ -36,20 +44,32 @@ const ListEvents = () => {
         setOpen(false);
         setEditMode(false);
         setSelectedEvent(null);
+        setTicketTypeDialog(false)
     };
 
     const handleEdit = (event) => {
         setSelectedEvent(event);
-        setVenueId(event.venueId);
         setStartDate(new Date(event.startDate));
         setEndDate(new Date(event.endDate));
         setEditMode(true);
-        handleOpen();
+
+        fetchVenues()
+            .then(data => {
+                setVenues(data);
+                const venue = data.find(v => v.id === event.venueId);
+                setVenue(venue);
+                handleOpen();
+            })
+            .catch(error => console.error('Error:', error));
     };
 
     const handleDelete = (event) => {
         setSelectedEvent(event);
         setDeleteDialogOpen(true);
+    };
+
+    const handleTicketTypeDialog = () => {
+        setTicketTypeDialog(true);
     };
 
     const confirmDelete = () => {
@@ -64,12 +84,7 @@ const ListEvents = () => {
     };
 
     const handleReport = (eventId) => {
-        fetchEventTickets(eventId)
-            .then(data => {
-                setTicketInfo(data);
-                setTicketDialogOpen(true);
-            })
-            .catch(error => console.error('Error:', error));
+        window.open(`/eventreport/${eventId}`, '_blank');
     };
 
     useEffect(() => {
@@ -78,14 +93,24 @@ const ListEvents = () => {
             .catch(error => console.error('Error:', error));
 
         fetchVenues()
-            .then(data => setVenues(data))
+            .then(data => {
+                setVenues(data);
+                if (editMode && selectedEvent) {
+                    const venue = data.find(v => v.id === selectedEvent.venueId);
+                    setVenue(venue);
+                }
+            })
             .catch(error => console.error('Error:', error));
+
+        fetchTicketTypes()
+            .then(data => setTicketTypes(data))
+            .catch(error => console.error('Error', error))
     }, []);
 
     const columnDefs = [
         { headerName: "Name", field: "name", sortable: true, filter: true },
         { headerName: "Description", field: "description", sortable: true, filter: true },
-        { headerName: "Event Category", field: "eventCategory", sortable: true, filter: true },
+        { headerName: "Category", field: "eventCategory", sortable: true, filter: true },
         {
             headerName: "Date", sortable: true, filter: true,
             valueGetter: function (params) {
@@ -95,7 +120,7 @@ const ListEvents = () => {
                 return `${format(startDate)} - ${format(endDate)}`;
             }
         },
-        { headerName: "Organiser Name", field: "organiserName", sortable: true, filter: true },
+        { headerName: "Organiser", field: "organiserName", sortable: true, filter: true },
         { headerName: "Max Tickets", field: "maxTickets", sortable: true, filter: true },
         {
             field: "",
@@ -115,12 +140,12 @@ const ListEvents = () => {
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"info"}>Ticket types<ConfirmationNumberIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"info"} onClick={handleTicketTypeDialog}>Ticket types<ConfirmationNumberIcon /></Button>
         },
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"secondary"} onClick={() => handleReport(data.id)}>Report<AssessmentIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
         },
     ];
 
@@ -143,7 +168,6 @@ const ListEvents = () => {
                     <form onSubmit={(event) => {
                         event.preventDefault();
                         const newData = {
-                            venueId: venueId,
                             name: event.target.name.value,
                             description: event.target.description.value,
                             eventCategory: event.target.eventCategory.value,
@@ -152,33 +176,37 @@ const ListEvents = () => {
                             eventStatus: event.target.eventStatus.value,
                             organiserName: event.target.organiserName.value,
                             maxTickets: event.target.maxTickets.value,
+                            venue: venue,
                         };
                         if (editMode) {
-                            editEvent(selectedEvent.id, newData)
-                                .then(() => {
-                                    fetchEvents().then(data => setRowData(data));
-                                })
+                            editEvent(selectedEvent.id, newData, () => fetchEvents().then(data => setRowData(data)))
                                 .catch(error => {
                                     console.error('Error:', error);
                                 });
                         } else {
-                            addEvent(newData)
-                                .then(() => {
-                                    fetchEvents().then(data => setRowData(data));
-                                })
+                            addEvent(newData, () => fetchEvents().then(data => setRowData(data)))
                                 .catch(error => {
                                     console.error('Error:', error);
                                 });
                         }
                         handleClose();
                     }}>
-                        <Select label="Venue" id="venue" style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} value={venueId} onChange={(e) => setVenueId(e.target.value)}>
+                        <TextField
+                            id="venue"
+                            select
+                            label="Venue"
+                            required
+                            style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
+                            value={venue ? venue.id : ""}
+                            onChange={(e) => setVenue(venues.find(v => v.id === e.target.value))}
+                            helperText="Please select your venue">
                             {venues.map((venue) => (
                                 <MenuItem key={venue.id} value={venue.id}>
                                     {venue.name}
                                 </MenuItem>
                             ))}
-                        </Select>
+                        </TextField>
+
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Name" name="name" required defaultValue={editMode ? selectedEvent.name : ""} />
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Description" name="description" required defaultValue={editMode ? selectedEvent.description : ""} />
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Event Category" name="eventCategory" required defaultValue={editMode ? selectedEvent.eventCategory : ""} />
@@ -207,21 +235,35 @@ const ListEvents = () => {
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Max Tickets" name="maxTickets" required defaultValue={editMode ? selectedEvent.maxTickets : ""} />
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Close<CloseIcon /></Button>
-                            <Button type="submit" variant="contained" color="success">{editMode ? "Edit Event" : "Add Event"}</Button>
+                            <Button type="submit" variant="contained" color="success">{editMode ? "Edit Event" : "Add Event"}<CheckBoxIcon /></Button>
                         </DialogActions>
                     </form>
                 </DialogContent>
             </Dialog>
-
             <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
                 <DialogTitle>Delete Event</DialogTitle>
-                <DialogContent>
-                    Are you sure you want to delete event {selectedEvent ? selectedEvent.name : ""}?
-
-                </DialogContent>
+                <DialogContent>Are you sure you want to delete event {selectedEvent ? selectedEvent.name : ""}?</DialogContent>
                 <DialogActions>
                     <Button onClick={() => setDeleteDialogOpen(false)} variant="contained" color="error">Cancel<CloseIcon /></Button>
                     <Button onClick={confirmDelete} variant="contained" color="success">Delete<DeleteIcon /></Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={ticketTypeDialog} onClose={handleClose}>
+                <DialogTitle>Available Ticket Types</DialogTitle>
+                <DialogContent>
+                    <List>
+                        {ticketTypes.map(ticketType => (
+                            <ListItem key={ticketType.ticketTypeId}>
+                                <ListItemText
+                                    primary={ticketType.name}
+                                    secondary={ticketType.description}
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setTicketTypeDialog(false)} variant="contained" color="error">Close<CloseIcon /></Button>
                 </DialogActions>
             </Dialog>
         </>

@@ -10,15 +10,17 @@
 
 ```json
 {
-    "venueId": 123,
     "name": "Tapahtuman nimi",
     "description": "Tapahtuman kuvaus",
     "eventCategory": "Tapahtuman kategoria",
     "startDate": "2024-02-25",
     "endDate": "2024-02-26",
-    "eventStatus": "A",
+    "eventStatus": "U",
     "organiserName": "Tapahtuman järjestäjän nimi",
-    "maxTickets": 100
+    "maxTickets": 100,
+    "venue": {
+      "id": 1
+    }
   }
 ```
 
@@ -45,17 +47,19 @@
 #### Pyyntö:
 
 ```json
-{
-  "venueId": 123,
-  "name": "Tapahtuman nimi",
-  "description": "Tapahtuman kuvaus",
-  "eventCategory": "Tapahtuman kategoria",
-  "startDate": "2024-02-25",
-  "endDate": "2024-02-26",
-  "eventStatus": "A",
-  "organiserName": "Tapahtuman järjestäjän nimi",
-  "maxTickets": 100
-}
+ {
+    "name": "Tapahtuman nimi",
+    "description": "Tapahtuman kuvaus",
+    "eventCategory": "Tapahtuman kategoria",
+    "startDate": "2024-02-25",
+    "endDate": "2024-02-26",
+    "eventStatus": "A",
+    "organiserName": "Tapahtuman järjestäjän nimi",
+    "maxTickets": 100,
+    "venue": {
+      "id": 1
+    }
+  }
 ```
 
 **VASTAUS**

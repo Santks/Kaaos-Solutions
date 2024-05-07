@@ -1,4 +1,5 @@
 package com.example.TicketGuru.domain;
+
 public class TicketTypeDTO {
 
     private Long ticketTypeId;
@@ -35,4 +36,10 @@ public class TicketTypeDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "TicketTypeDTO [ticketTypeId=" + ticketTypeId + ", name=" + name + ", description=" + description + "]";
+    }
+
 }
