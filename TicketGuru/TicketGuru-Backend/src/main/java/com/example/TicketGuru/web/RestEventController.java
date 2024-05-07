@@ -66,12 +66,8 @@ public class RestEventController {
 	
 	//POST
 	@PostMapping("/events")
-<<<<<<< HEAD
-	Event createEvent(@RequestBody Event newEvent) {
-=======
 	@ResponseStatus(HttpStatus.CREATED) // 201: Created!
 	Event createEvent(@Validated @RequestBody Event newEvent) {
->>>>>>> develop
 		log.info("Create new event");
 		return eventRepo.save(newEvent);
 	}
