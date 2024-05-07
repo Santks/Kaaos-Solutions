@@ -111,7 +111,7 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
           </>
         ) : (
           <Button
-            color="info" variant="contained" style={{ marginLeft: "auto", marginRight: "20px" }}
+            color="primary" variant="contained" style={{ marginLeft: "auto", marginRight: "20px" }}
             onClick={() => setLoginOpen(true)}>Login <LoginIcon style={{ marginLeft: "2px" }} />
           </Button>)}
       </Box>

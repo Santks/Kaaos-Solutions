@@ -60,7 +60,7 @@ function HomePage() {
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={`src/assets/${Math.floor(Math.random() * 8) + 1}.jpg`}
+                                image={`${Math.floor(Math.random() * 8) + 1}.jpg`}
                                 alt={event.name}
                             />
                             <CardContent>

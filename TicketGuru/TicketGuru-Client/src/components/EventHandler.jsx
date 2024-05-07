@@ -13,8 +13,19 @@ export const fetchEvents = () => {
                 throw new Error(errorMessage);
             }
             return response.json();
+        })
+        .then(events => {
+            return Promise.all(events.map(event => 
+                fetchEventTickets(event.id)
+                    .then(tickets => ({ ...event, ticketsSold: tickets.length }))
+                    .catch(error => {
+                        console.error('Error fetching tickets for event:', event.id, error);
+                        return { ...event, ticketsSold: 0 };
+                    })
+            ));
         });
 };
+
 
 export const fetchVenues = () => {
     return fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/venues', { headers })

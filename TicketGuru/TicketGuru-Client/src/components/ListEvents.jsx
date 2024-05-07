@@ -32,6 +32,8 @@ const ListEvents = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [ticketTypeDialog, setTicketTypeDialog] = useState(false);
     const [ticketTypes, setTicketTypes] = useState([]);
+    const [ticketsSold, setTicketsSold] = useState([]);
+
 
     const handleOpen = () => {
         if (!editMode) {
@@ -110,6 +112,7 @@ const ListEvents = () => {
     const columnDefs = [
         { headerName: "Name", field: "name", sortable: true, filter: true },
         { headerName: "Description", field: "description", sortable: true, filter: true },
+        { headerName: "Venue", field: "venue.name", sortable: true, filter: true},
         { headerName: "Category", field: "eventCategory", sortable: true, filter: true },
         {
             headerName: "Date", sortable: true, filter: true,
@@ -123,6 +126,12 @@ const ListEvents = () => {
         { headerName: "Organiser", field: "organiserName", sortable: true, filter: true },
         { headerName: "Max Tickets", field: "maxTickets", sortable: true, filter: true },
         {
+            headerName: "Tickets Left",
+            valueGetter: function (params) {
+                return params.data.maxTickets - params.data.ticketsSold;
+            }
+        },
+        {
             field: "",
             headerName: "",
             cellRenderer: ({ data }) => <Button color={"warning"} onClick={() => handleEdit(data)}>Edit<EditIcon /></Button>
@@ -131,11 +140,6 @@ const ListEvents = () => {
             field: "",
             headerName: "",
             cellRenderer: ({ data }) => <Button color={"error"} onClick={() => handleDelete(data)}>Delete<DeleteIcon /></Button>
-        },
-        {
-            field: "",
-            headerName: "",
-            cellRenderer: ({ data }) => <Button color={"success"}>Sell Tickets<ShoppingCartIcon /></Button>
         },
         {
             field: "",
