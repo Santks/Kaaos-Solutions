@@ -21,12 +21,10 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Event_id")
-    // @NotNull
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "Venue_id", referencedColumnName = "Venue_id")
-    @JsonBackReference
     @NotNull
     private Venue venue;
 
