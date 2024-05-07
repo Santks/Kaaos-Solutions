@@ -22,6 +22,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
 import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.EventRepository;
+import com.example.TicketGuru.domain.Venue;
+import com.example.TicketGuru.domain.VenueRepository;
 
 
 @RestController
@@ -31,6 +33,7 @@ public class RestEventController {
 	
 	@Autowired
 	private EventRepository eventRepo;
+	private VenueRepository venueRepo;
 	
 	
 	// GET (all)
@@ -42,10 +45,14 @@ public class RestEventController {
     
     // GET (id)
     @GetMapping("/events/{id}")
-    Event getEventById(@PathVariable Long id) {
+    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
         log.info("Get event by id");
-        return eventRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
+        Event event = eventRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
+        Venue venue = venueRepo.findById(event.getVenue().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
+        event.setVenue(venue);
+        return new ResponseEntity<>(event, HttpStatus.OK); // 200: OK!
     }
+
     
     // GET (date)
     @GetMapping("/events/date/{date}")
