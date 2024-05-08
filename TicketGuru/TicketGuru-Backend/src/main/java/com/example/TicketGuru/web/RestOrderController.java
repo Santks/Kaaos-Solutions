@@ -1,5 +1,6 @@
 package com.example.TicketGuru.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -43,6 +44,14 @@ public class RestOrderController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
         }
+    }
+
+    // GET all orders associated with an event
+    @GetMapping("/orders/event/{eventId}")
+    public ResponseEntity<Iterable<Order>> getAllOrdersByEventId(@PathVariable Long eventId) {
+        log.info("Get all orders");
+        List<Order> orders = orderRepo.findByTickets_EventId(eventId);
+        return new ResponseEntity<>(orders, HttpStatus.OK); // 200: OK!
     }
 
     // POST (create new order)

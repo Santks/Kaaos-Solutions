@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepository extends CrudRepository<Order, Long>{
 	 List<Order> findByOrderPaid(boolean orderPaid);
 
+	 // Test
+	 List<Order> findByTickets_EventId(Long eventId);
 }
