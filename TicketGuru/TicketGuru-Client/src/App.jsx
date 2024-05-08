@@ -19,6 +19,7 @@ import ListTicketTypes from "./pages/TicketTypes";
 import EventReport from "./components/EventReport";
 import ListUsers from "./pages/Users";
 import Login from "./components/Login";
+import OrderReport from "./components/OrderReport";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="/tickettypes" element={<ListTicketTypes />} />
           <Route path="/users" element={<ListUsers />} />
           <Route path="/eventreport/:eventId" element={<EventReport />} />
+          <Route path="/orderreport/:eventId" element={<OrderReport />} />
         </Routes>
       </Box>
       <Login open={loginOpen} onClose={() => setLoginOpen(false)} onLogin={handleLogin} />

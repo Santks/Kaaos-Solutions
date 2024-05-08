@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
-import { fetchEventTickets } from './EventHandler';
+import { fetchEventTickets } from './ReportHandler';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import { Button } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const EventReport = () => {
 
@@ -42,7 +42,7 @@ const EventReport = () => {
             />
         </div>
         <h3>Total Tickets: {ticketInfo ? ticketInfo.length : 0}</h3>
-        <Button style={{ marginLeft: "10px", marginTop: "40px" }} color="primary" variant="contained">Order List <ReceiptLongIcon/></Button>
+        <Button style={{ marginLeft: "10px", marginTop: "40px" }} color="primary" variant="contained" component={Link} to={`/orderreport/${eventId}`}>Order List <ReceiptLongIcon/></Button>
         </>
     );
 };
