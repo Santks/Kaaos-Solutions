@@ -8,6 +8,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import { fetchTicketTypes, addTicketType, editTicketType, deleteTicketType } from "../components/TicketTypeHandler";
+import { fetchEvents } from "../components/EventHandler";
+import { useParams } from 'react-router-dom';
 
 const ListTicketTypes = () => {
     const [rowData, setRowData] = useState([]);
@@ -17,8 +19,19 @@ const ListTicketTypes = () => {
     const [selectedTicketType, setSelectedTicketType] = useState(null);
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [editMode, setEditMode] = useState(false);
+    const [eventName, setEventName] = useState("");
+    const { eventId } = useParams();
 
     useEffect(() => {
+        fetchEvents(eventId)
+        .then(events => {
+            if (events) {
+                const event = events.find(event => event.id === Number(eventId));
+                setEventName(event.name)
+            }
+        })
+        .catch(error => console.error('Error:', error));
+
         fetchTicketTypes()
             .then(data => setRowData(data))
             .catch(error => console.error('Error:', error));
@@ -104,6 +117,7 @@ const ListTicketTypes = () => {
 
     return (
         <>
+        <h1>Ticket Types / {eventName}</h1>
             <Button style={{ marginBottom: "10px", marginLeft: "10px" }} color="primary" variant="contained" onClick={handleOpen}>Add New Ticket Type<AddchartIcon /></Button>
             <div className="ag-theme-material" style={{ height: "800px", width: "100%", margin: "auto" }}>
                 <AgGridReact

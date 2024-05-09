@@ -82,10 +82,6 @@ const ListEvents = () => {
         setDeleteDialogOpen(false);
     };
 
-    const handleReport = (eventId) => {
-        window.open(`/eventreport/${eventId}`, '_blank');
-    };
-
     useEffect(() => {
         fetchEvents()
             .then(data => setRowData(data))
@@ -148,7 +144,7 @@ const ListEvents = () => {
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"info"} onClick={handleTicketTypeDialog}>Ticket types<ConfirmationNumberIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"info"} component={Link} to={`/tickettypes/${data.id}`}>Ticket types<ConfirmationNumberIcon /></Button>
         },
         {
             field: "",
