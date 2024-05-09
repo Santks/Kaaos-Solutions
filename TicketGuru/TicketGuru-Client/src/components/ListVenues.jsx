@@ -33,7 +33,7 @@ const ListVenues = () => {
         "phone": "",
         "email": "",
         "capacity": 0,
-    };    
+    };
 
     useEffect(() => {
         fetchVenues()

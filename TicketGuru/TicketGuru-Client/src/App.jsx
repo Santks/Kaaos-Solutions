@@ -10,8 +10,6 @@ import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
 import StadiumIcon from '@mui/icons-material/Stadium';
-
-
 import HomePage from "./components/HomePage";
 import ListEvents from "./components/ListEvents";
 import Ticketbuy from "./pages/Ticketbuy";
@@ -51,7 +49,7 @@ function App() {
           <Route path="/users" element={<ListUsers />} />
           <Route path="/eventreport/:eventId" element={<EventReport />} />
           <Route path="/orderreport/:eventId" element={<OrderReport />} />
-          <Route path="/venues" element={<ListVenues />} /> {/* Added route for ListVenues */}
+          <Route path="/venues" element={<ListVenues />} />
         </Routes>
       </Box>
       <Login open={loginOpen} onClose={() => setLoginOpen(false)} onLogin={handleLogin} />

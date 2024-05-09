@@ -192,23 +192,22 @@ const ListEvents = () => {
                         }
                         handleClose();
                     }}>
-<TextField
-    id="venue"
-    type="text"
-    select
-    label="Venue"
-    required
-    style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
-    // Convert venue.id to a string
-    value={venue ? venue.id.toString() : ""}
-    onChange={(e) => setVenue(venues.find(v => v.id.toString() === e.target.value))}
-    helperText="Please select your venue">
-    {venues.map((venue) => (
-        <MenuItem key={venue.id} value={venue.id.toString()}>
-            {venue.name}
-        </MenuItem>
-    ))}
-</TextField>
+                        <TextField
+                            id="venue"
+                            type="text"
+                            select
+                            label="Venue"
+                            required
+                            style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
+                            value={venue ? venue.id.toString() : ""}
+                            onChange={(e) => setVenue(venues.find(v => v.id.toString() === e.target.value))}
+                            helperText="Please select your venue">
+                            {venues.map((venue) => (
+                                <MenuItem key={venue.id} value={venue.id.toString()}>
+                                    {venue.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Name" name="name" required defaultValue={editMode ? selectedEvent.name : ""} />
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Description" name="description" required defaultValue={editMode ? selectedEvent.description : ""} />
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Event Category" name="eventCategory" required defaultValue={editMode ? selectedEvent.eventCategory : ""} />

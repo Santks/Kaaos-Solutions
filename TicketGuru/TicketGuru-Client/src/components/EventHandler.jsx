@@ -6,7 +6,6 @@ const headers = {
 
 const errorMessage = "Homma meni ihan wilduks!";
 
-
 export const fetchVenues = () => {
     return fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/venues', { headers })
         .then(response => {
@@ -86,7 +85,7 @@ export const fetchEvents = () => {
             return response.json();
         })
         .then(events => {
-            return Promise.all(events.map(event => 
+            return Promise.all(events.map(event =>
                 fetchEventTickets(event.id)
                     .then(tickets => ({ ...event, ticketsSold: tickets.length }))
                     .catch(error => {
