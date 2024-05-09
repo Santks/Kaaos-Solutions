@@ -1,6 +1,8 @@
 package com.example.TicketGuru.web;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.TicketGuru.domain.Event;
 import com.example.TicketGuru.domain.Ticket;
+import com.example.TicketGuru.domain.TicketDTO;
 import com.example.TicketGuru.domain.TicketRepository;
+import com.example.TicketGuru.domain.TicketType;
+import com.example.TicketGuru.domain.TicketTypeDTO;
 
 @RestController
 public class RestTicketController {
@@ -33,17 +38,24 @@ public class RestTicketController {
 	
 	// GET all tickets associated with an event
 	@GetMapping("/tickets/event/{eventid}")
-    public ResponseEntity<Iterable<Ticket>> getAllTicketsByEventId(@PathVariable Long eventid) {
-        log.info("Get all events");
-        return new ResponseEntity<>(ticketRepo.findAllByEventId(eventid), HttpStatus.OK); // 200: OK!
+    public ResponseEntity<Iterable<TicketDTO>> getAllTicketsByEventId(@PathVariable Long eventid) {
+        log.info("Get all tickets in event");
+        Iterable<Ticket> tickettypes = ticketRepo.findAllByEventId(eventid);
+        List<TicketDTO> ticketsDTO = new ArrayList<>();
+        for (Ticket tickettype : tickettypes) {
+        	TicketDTO ticketDTO = new TicketDTO(tickettype);
+        	ticketsDTO.add(ticketDTO);
+        }
+        return new ResponseEntity<>(ticketsDTO, HttpStatus.OK); // 200: OK!
     }
     
 	// GET ticket by it's own id
 	@GetMapping("tickets/{ticketid}")
-	public ResponseEntity<Ticket> getTicketByTicketId(@PathVariable Long ticketid) {
-		Optional<Ticket> ticket = ticketRepo.findById(ticketid);
-		if (ticket.isPresent()) {
-			return new ResponseEntity<>(ticket.get(), HttpStatus.OK); // 200: OK!
+	public ResponseEntity<TicketDTO> getTicketByTicketId(@PathVariable Long ticketid) {
+		Ticket ticket = ticketRepo.findById(ticketid).orElse(null);
+		if (ticket != null) {
+			TicketDTO stripped = new TicketDTO(ticket);
+			return new ResponseEntity<>(stripped, HttpStatus.OK); // 200: OK!
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 		}
@@ -51,10 +63,11 @@ public class RestTicketController {
 	
 	// GET ticket by UUID
 	@GetMapping("/tickets/uuid/{uuid}")
-	public ResponseEntity<Ticket> getTicketByUuid(@PathVariable UUID uuid) {
-	    Optional<Ticket> ticket = ticketRepo.findByUuid(uuid);
-	    if (ticket.isPresent()) {
-	        return new ResponseEntity<>(ticket.get(), HttpStatus.OK); // 200: OK!
+	public ResponseEntity<TicketDTO> getTicketByUuid(@PathVariable UUID uuid) {
+	    Ticket ticket = ticketRepo.findByUuid(uuid).orElse(null);
+	    if (ticket != null) {
+	    	TicketDTO stripped = new TicketDTO(ticket);
+			return new ResponseEntity<>(stripped, HttpStatus.OK); // 200: OK!
 	    } else {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404: Not Found!
 	    }
@@ -63,9 +76,9 @@ public class RestTicketController {
 	// POST create a new ticket
 	@PostMapping("/tickets")
 	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket newTicket) {
-	    if (newTicket.getPrice() == null) {
-	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
-	    }
+//	    if (newTicket.getPrice() == null) {
+//	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
+//	    }
 	    try {
 	        return new ResponseEntity<>(ticketRepo.save(newTicket), HttpStatus.CREATED); // 201: Created!
 	    } catch (Exception e) {
@@ -77,9 +90,9 @@ public class RestTicketController {
 	// PUT edit pre-existing ticket
 	@PutMapping("/tickets/{ticketid}")
 	public ResponseEntity<Ticket> editTicket(@RequestBody Ticket editedTicket, @PathVariable Long ticketid) {
-		if (editedTicket.getPrice() == null) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
-		}
+//		if (editedTicket.getPrice() == null) {
+//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request!
+//		}
 		editedTicket.setTicketId(ticketid);
 		return new ResponseEntity<>(ticketRepo.save(editedTicket), HttpStatus.OK); // 200: OK!
 	}

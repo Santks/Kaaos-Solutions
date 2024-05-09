@@ -40,9 +40,9 @@ public class Ticket {
 	@NotNull
 	private Order order;
 
-	@Column(name = "Price")
-	@NotNull
-	private Double price;
+//	@Column(name = "Price")
+//	@NotNull
+//	private Double price;
 
 	@Column(name = "ticketUsed", columnDefinition="DATETIME")
 	@NotNull
@@ -81,13 +81,13 @@ public class Ticket {
 		this.order = order;
 	}
 
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+//	public Double getPrice() {
+//		return price;
+//	}
+//
+//	public void setPrice(Double price) {
+//		this.price = price;
+//	}
 
 	public @NotNull LocalDateTime getTicketUsed() {
 		return ticketUsed;
@@ -103,8 +103,7 @@ public class Ticket {
 	
 	@Override
 	public String toString() {
-		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", ticketType=" + ticketType + ", price=" + price
-				+ ", ticketUsed=" + ticketUsed + "]";
+		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", ticketType=" + ticketType + ", ticketUsed=" + ticketUsed + "]";
 	}
 
 	public Ticket() {
@@ -112,27 +111,27 @@ public class Ticket {
 		this.ticketUsed = (ticketUsed != null) ? ticketUsed : LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC);
 	}
 	
-	public Ticket(Long ticketId, Event event, TicketType ticketType, Order order, Double price, @NotNull LocalDateTime ticketUsed) {
+	public Ticket(Long ticketId, Event event, TicketType ticketType, Order order, @NotNull LocalDateTime ticketUsed) {
 		super();
 		this.ticketId = ticketId;
 		this.event = event;
 		this.ticketType = ticketType;
 		this.order = order;
-		this.price = price;
+//		this.price = price;
 		this.ticketUsed = (ticketUsed != null) ? ticketUsed : LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC);
 	}
 	
-	public Ticket(Event event, TicketType ticketType, Order order, Double price, @NotNull LocalDateTime ticketUsed) {
+	public Ticket(Event event, TicketType ticketType, Order order, @NotNull LocalDateTime ticketUsed) {
 		super();
 		this.event = event;
 		this.ticketType = ticketType;
 		this.order = order;
-		this.price = price;
+//		this.price = price;
 		this.ticketUsed = (ticketUsed != null) ? ticketUsed : LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC);
 	}
-	public Ticket(Double price, @NotNull LocalDateTime ticketUsed) {
+	public Ticket(@NotNull LocalDateTime ticketUsed) {
 		super();
-		this.price = price;
+//		this.price = price;
 		this.ticketUsed = (ticketUsed != null) ? ticketUsed : LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC);
 	}
 }

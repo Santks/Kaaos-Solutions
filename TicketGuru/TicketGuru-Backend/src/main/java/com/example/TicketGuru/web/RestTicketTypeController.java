@@ -67,6 +67,19 @@ public class RestTicketTypeController {
     	return ResponseEntity.ok(stripped);
     	
     }
+    
+    @GetMapping("/tickettype/event/{eventId}")
+    Iterable<TicketTypeDTO> getTicketTypeByEventId(@PathVariable Long eventId) {
+    	log.info("Get tickettypes by event");
+    	Iterable<TicketType> tickettypes = ticketTypeRepo.findByEventId(eventId);
+    	List<TicketTypeDTO> tickettypesDTO = new ArrayList<>();
+        for (TicketType tickettype : tickettypes) {
+        	TicketTypeDTO tickettypeDTO = new TicketTypeDTO(tickettype);
+        	tickettypesDTO.add(tickettypeDTO);
+        }
+    	return tickettypesDTO;
+    }
+    
 
 	//POST
 	@PostMapping("/tickettype")

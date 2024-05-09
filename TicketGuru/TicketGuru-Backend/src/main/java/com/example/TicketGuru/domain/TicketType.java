@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -29,6 +30,23 @@ public class TicketType {
 	@OneToMany(mappedBy = "ticketType", cascade=CascadeType.PERSIST)
 	@JsonManagedReference(value="ticket-tickettype")
 	private List<Ticket> tickets;
+	
+	@Column(name = "Price")
+	@NotNull
+	private Double price;
+	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "Event_id")
+	@JsonBackReference(value="tickettype-event")
+	private Event event;
 
 	public Long getTicketTypeId() {
 		return ticketTypeId;
@@ -53,7 +71,10 @@ public class TicketType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
+	public Event getEvent() {
+		return event;
+	}
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -79,11 +100,13 @@ public class TicketType {
 		this.tickets = tickets;
 	}
 
-	public TicketType(String name, String description, List<Ticket> tickets) {
+	public TicketType(String name, String description, List<Ticket> tickets, Double price,Event event) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.tickets = tickets;
+		this.event = event;
+		this.price = price;
 	}
 
 }

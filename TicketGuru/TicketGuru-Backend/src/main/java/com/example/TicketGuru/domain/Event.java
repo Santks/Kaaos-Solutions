@@ -1,9 +1,13 @@
 package com.example.TicketGuru.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -55,8 +60,25 @@ public class Event {
     @Column(name = "maxTickets")
     @NotNull
     private long maxTickets;
+    
+    @OneToMany(mappedBy = "event", cascade=CascadeType.ALL)
+    @JsonManagedReference(value="event-tickettype")
+    private List<TicketType> tickettypes;
+    
+    public List<TicketTypeDTO> getTickettypes() {
+		List<TicketTypeDTO> returnedList = new ArrayList<>();
+		for (TicketType tickettype : tickettypes) {
+        	TicketTypeDTO tickettypeDTO = new TicketTypeDTO(tickettype);
+        	returnedList.add(tickettypeDTO);
+        }
+        return returnedList;
+	}
 
-    public Event() {
+	public void setTickettypes(List<TicketType> tickettypes) {
+		this.tickettypes = tickettypes;
+	}
+
+	public Event() {
         super();
     }
 
@@ -88,7 +110,7 @@ public class Event {
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
-
+ 
     public String getName() {
         return name;
     }
