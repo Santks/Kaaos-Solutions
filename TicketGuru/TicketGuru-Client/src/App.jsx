@@ -9,6 +9,7 @@ import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
+import StadiumIcon from '@mui/icons-material/Stadium';
 
 
 import HomePage from "./components/HomePage";
@@ -20,7 +21,7 @@ import EventReport from "./components/EventReport";
 import ListUsers from "./pages/Users";
 import Login from "./components/Login";
 import OrderReport from "./components/OrderReport";
-
+import ListVenues from "./components/ListVenues";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -50,13 +51,13 @@ function App() {
           <Route path="/users" element={<ListUsers />} />
           <Route path="/eventreport/:eventId" element={<EventReport />} />
           <Route path="/orderreport/:eventId" element={<OrderReport />} />
+          <Route path="/venues" element={<ListVenues />} /> {/* Added route for ListVenues */}
         </Routes>
       </Box>
       <Login open={loginOpen} onClose={() => setLoginOpen(false)} onLogin={handleLogin} />
     </Router>
   );
 }
-
 
 function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
   const location = useLocation();
@@ -82,7 +83,9 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
     case "/users":
       value = 5;
       break;
-
+    case "/venues":
+      value = 6;
+      break;
     default:
       value = false;
   }
@@ -105,6 +108,7 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
           <Tab label="Ticketcheck" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" />
           <Tab label="Ticket Types" icon={<ConfirmationNumberIcon />} component={Link} to="/tickettypes" />
           <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" />
+          <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" />
         </Tabs>
         {user ? (
           <>

@@ -47,6 +47,9 @@ const ListEvents = () => {
         setEditMode(false);
         setSelectedEvent(null);
         setTicketTypeDialog(false)
+        setStartDate(new Date());
+        setEndDate(new Date());
+        setVenue(null);
     };
 
     const handleEdit = (event) => {
@@ -54,16 +57,10 @@ const ListEvents = () => {
         setStartDate(new Date(event.startDate));
         setEndDate(new Date(event.endDate));
         setEditMode(true);
-
-        fetchVenues()
-            .then(data => {
-                setVenues(data);
-                const venue = data.find(v => v.id === event.venueId);
-                setVenue(venue);
-                handleOpen();
-            })
-            .catch(error => console.error('Error:', error));
+        setVenue(event.venue);
+        handleOpen();
     };
+
 
     const handleDelete = (event) => {
         setSelectedEvent(event);
@@ -112,7 +109,7 @@ const ListEvents = () => {
     const columnDefs = [
         { headerName: "Name", field: "name", sortable: true, filter: true },
         { headerName: "Description", field: "description", sortable: true, filter: true },
-        { headerName: "Venue", field: "venue.name", sortable: true, filter: true},
+        { headerName: "Venue", field: "venue.name", sortable: true, filter: true },
         { headerName: "Category", field: "eventCategory", sortable: true, filter: true },
         {
             headerName: "Date", sortable: true, filter: true,
@@ -195,25 +192,26 @@ const ListEvents = () => {
                         }
                         handleClose();
                     }}>
-                        <TextField
-                            id="venue"
-                            select
-                            label="Venue"
-                            required
-                            style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
-                            value={venue ? venue.id : ""}
-                            onChange={(e) => setVenue(venues.find(v => v.id === e.target.value))}
-                            helperText="Please select your venue">
-                            {venues.map((venue) => (
-                                <MenuItem key={venue.id} value={venue.id}>
-                                    {venue.name}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-
-                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Name" name="name" required defaultValue={editMode ? selectedEvent.name : ""} />
-                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Description" name="description" required defaultValue={editMode ? selectedEvent.description : ""} />
-                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Event Category" name="eventCategory" required defaultValue={editMode ? selectedEvent.eventCategory : ""} />
+<TextField
+    id="venue"
+    type="text"
+    select
+    label="Venue"
+    required
+    style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
+    // Convert venue.id to a string
+    value={venue ? venue.id.toString() : ""}
+    onChange={(e) => setVenue(venues.find(v => v.id.toString() === e.target.value))}
+    helperText="Please select your venue">
+    {venues.map((venue) => (
+        <MenuItem key={venue.id} value={venue.id.toString()}>
+            {venue.name}
+        </MenuItem>
+    ))}
+</TextField>
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Name" name="name" required defaultValue={editMode ? selectedEvent.name : ""} />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Description" name="description" required defaultValue={editMode ? selectedEvent.description : ""} />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Event Category" name="eventCategory" required defaultValue={editMode ? selectedEvent.eventCategory : ""} />
                         <TextField
                             style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
                             label="Start Date"
@@ -228,15 +226,14 @@ const ListEvents = () => {
                             style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
                             label="End Date"
                             type="date"
+                            InputLabelProps={{ shrink: true }}
+                            inputProps={{ min: startDate.toISOString().substring(0, 10) }}
                             value={endDate.toISOString().substring(0, 10)}
                             onChange={(e) => setEndDate(new Date(e.target.value))}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                         />
-                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Event Status" name="eventStatus" required defaultValue={editMode ? selectedEvent.eventStatus : ""} />
-                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Organiser Name" name="organiserName" required defaultValue={editMode ? selectedEvent.organiserName : ""} />
-                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Max Tickets" name="maxTickets" required defaultValue={editMode ? selectedEvent.maxTickets : ""} />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Event Status" name="eventStatus" required inputProps={{ maxLength: 1 }} defaultValue={editMode ? selectedEvent.eventStatus : ""} />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Organiser Name" name="organiserName" required defaultValue={editMode ? selectedEvent.organiserName : ""} />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="number" label="Max Tickets" name="maxTickets" required inputProps={{ max: venue ? venue.capacity : "" }} defaultValue={editMode ? selectedEvent.maxTickets : ""} />
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Close<CloseIcon /></Button>
                             <Button type="submit" variant="contained" color="success">{editMode ? "Edit Event" : "Add Event"}<CheckBoxIcon /></Button>

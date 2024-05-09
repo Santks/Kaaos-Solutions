@@ -12,8 +12,12 @@ function HomePage() {
             .then(data => {
                 const upcomingEvents = data.filter(event => new Date(event.startDate) >= new Date());
                 const sortedEvents = upcomingEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-                setEvents(sortedEvents);
-                setFilteredEvents(sortedEvents);
+                const eventsWithImages = sortedEvents.map(event => ({
+                    ...event,
+                    imageNum: Math.floor(Math.random() * 8) + 1
+                }));
+                setEvents(eventsWithImages);
+                setFilteredEvents(eventsWithImages);
 
                 const uniqueCategories = [...new Set(sortedEvents.map(event => event.eventCategory))];
                 setCategories(uniqueCategories);
@@ -60,9 +64,10 @@ function HomePage() {
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={`${Math.floor(Math.random() * 8) + 1}.jpg`}
+                                image={`${event.imageNum}.jpg`}
                                 alt={event.name}
                             />
+
                             <CardContent>
                                 <Typography variant="h5">{event.name}</Typography>
                                 <Typography variant="body2">{new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</Typography>
