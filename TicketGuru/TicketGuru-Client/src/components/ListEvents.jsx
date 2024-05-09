@@ -95,7 +95,7 @@ const ListEvents = () => {
             .then(data => {
                 setVenues(data);
                 if (editMode && selectedEvent) {
-                    const venue = data.find(v => v.id === selectedEvent.venueId);
+                    const venue = data.find(v => v.id === selectedEvent.venue.id);
                     setVenue(venue);
                 }
             })
@@ -105,6 +105,13 @@ const ListEvents = () => {
             .then(data => setTicketTypes(data))
             .catch(error => console.error('Error', error))
     }, []);
+
+    useEffect(() => {
+        if (editMode) {
+            const venue = venues.find(v => v.id === selectedEvent.venue.id)
+            setVenue(venue);
+        }
+    }, [editMode]);
 
     const columnDefs = [
         { headerName: "Name", field: "name", sortable: true, filter: true },
