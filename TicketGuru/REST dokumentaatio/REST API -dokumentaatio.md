@@ -125,6 +125,54 @@ Vastauskoodi: 200 OK.
 **DELETE /payments/{paymentId}**
 Vastauskoodi: 200 OK.
 
+## Tickets
+
+#### Endpointit
+
+**GET /tickets/event/{eventid}**
+Hae kaikki liput tapahtuman id:n perusteella
+
+**GET /tickets/{ticketid}**
+Hae yksittäinen lippu id:n perusteella
+
+**GET /tickets/uuid/{uuid}**
+Hae yksittäinen lippu UUID:n perusteella
+
+**POST /tickets**
+Lisää uusi lippu
+
+**PUT /tickets/{ticketid}**
+Päivitä lippu
+
+**DELETE /tickets/{ticketid}**
+Poista lippu
+
+**PATCH /tickets/uuid/{uuid}**
+Päivitä lipun käyttöpäiväys
+
+#### Toimivuus
+
+**GET /tickets/event/{eventid}**
+Vastauskoodi: 200 OK.
+
+**GET /tickets/{ticketid}**
+Vastauskoodi: 200 OK.
+
+**GET /tickets/uuid/{uuid}**
+Vastauskoodi: 200 OK.
+
+**POST /tickets**
+Vastauskoodi: 200 OK.
+
+**PUT /tickets/{ticketid}**
+Vastauskoodi: 200 OK.
+
+**DELETE /tickets/{ticketid}**
+Vastauskoodi: 200 OK.
+
+**PATCH /tickets/uuid/{uuid}**
+Vastauskoodi: 200 OK.
+
 ## Ticket Types
 
 #### Endpointit
@@ -134,6 +182,9 @@ Hae kaikki lipputyypit
 
 **GET /tickettype/id/{tickettypeid}**
 Hae yksittäinen lipputyyppi
+
+**GET /tickettype/event/{eventid}**
+Hae kaikki yhteen tapahtumaan liittyvät lipputyypit
 
 **POST /tickettype**
 Lisää uusi lipputyyppi
