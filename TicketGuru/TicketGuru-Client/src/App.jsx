@@ -6,7 +6,6 @@ import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
 import StadiumIcon from '@mui/icons-material/Stadium';
@@ -45,7 +44,7 @@ function App() {
           <Route path="/events" element={<ListEvents />} />
           <Route path="/ticketbuy" element={<Ticketbuy />} />
           <Route path="/ticketcheck" element={<Ticketcheck />} />
-          <Route path="/tickettypes" element={<ListTicketTypes />} />
+          <Route path="/tickettypes/:eventId" element={<ListTicketTypes />} />
           <Route path="/users" element={<ListUsers />} />
           <Route path="/eventreport/:eventId" element={<EventReport />} />
           <Route path="/orderreport/:eventId" element={<OrderReport />} />
@@ -75,14 +74,11 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
     case "/ticketcheck":
       value = 3;
       break;
-    case "/tickettypes":
+    case "/users":
       value = 4;
       break;
-    case "/users":
-      value = 5;
-      break;
     case "/venues":
-      value = 6;
+      value = 5;
       break;
     default:
       value = false;
@@ -104,7 +100,6 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
           <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" />
           <Tab label="Buy tickets" icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" />
           <Tab label="Ticketcheck" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" />
-          <Tab label="Ticket Types" icon={<ConfirmationNumberIcon />} component={Link} to="/tickettypes" />
           <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" />
           <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" />
         </Tabs>
