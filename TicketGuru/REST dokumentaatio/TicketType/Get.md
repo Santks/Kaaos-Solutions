@@ -6,6 +6,7 @@ Käyttäjä voi hakea kaikki lipputyypit tai vaihtoehtoisesti yksittäisen lippu
 **Endpointit**:
 - `/api/tickettype` (Hae kaikki lipputyypit)
 - `/api/tickettype/id/{id}` (Hae lipputyyppi id:n perusteella)
+- `/api/tickettype/event/{eventid}` (Hae tapahtumaan liittyvät lipputyypit)
 
 **Metodi:** `GET`
 

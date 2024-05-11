@@ -6,7 +6,8 @@ Käyttäjä voi hakea yhden tietyn lipun sen id:n perusteella.
 
 **Endpointit**:
 - `/api/tickets/event/{eventid}` (Hae kaikki tapahtumaan liittyvät liput)
-- `/api/tickets/{ticketid}` (Hae tapahtuma id:n perusteella)
+- `/api/tickets/{ticketid}` (Hae lippu id:n perusteella)
+- `/api/tickets/uuid/{uuid}` (Hae lippu uuid:n perusteella)
 
 **Metodi:** `GET`
 
@@ -14,7 +15,7 @@ Käyttäjä voi hakea yhden tietyn lipun sen id:n perusteella.
 
 Parametri | Tyyppi | Kuvaus
 --- | --- | ---
-{eventid} | Long | Haettavan tapahtuman id.
+{eventid} | Long | Haettavan lipun id.
 {ticketid} | Long | Haettavan lipun id.
 
 **Responses**
