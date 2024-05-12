@@ -21,6 +21,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -64,17 +66,18 @@ public class WebSecurityConfig {
 				.anyRequest().authenticated())
 		.httpBasic(Customizer.withDefaults())
 		.formLogin(formLogin -> formLogin
-			    .loginProcessingUrl("/api/login")
-			    .successHandler((request, response, authentication) -> {
-			        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			        response.getWriter().append("{\"success\":true, \"username\":\"" + userDetails.getUsername() + "\", \"authorities\":" + userDetails.getAuthorities().toString() + "}");
-			        response.setStatus(200);
-			    })
-			    .failureHandler((request, response, exception) -> {
-			        response.getWriter().append("{\"success\":false}");
-			        response.setStatus(401);
-			    }))
-
+				.loginProcessingUrl("/api/login")
+				.successHandler((request, response, authentication) -> {
+					UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+					ObjectMapper mapper = new ObjectMapper();
+					String authoritiesJson = mapper.writeValueAsString(userDetails.getAuthorities());
+					response.getWriter().append("{\"success\":true, \"username\":\"" + userDetails.getUsername() + "\", \"authorities\":" + authoritiesJson + "}");
+					response.setStatus(200);
+				})
+				.failureHandler((request, response, exception) -> {
+					response.getWriter().append("{\"success\":false}");
+					response.setStatus(401);
+				}))
 		.logout(logout -> logout
 				.logoutUrl("/api/logout")
 				.logoutSuccessHandler((request, response, authentication) -> {
