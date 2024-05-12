@@ -9,14 +9,13 @@ const Login = ({ open, onClose, onLogin }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // Jotain hienoa taikuutta
-        onLogin(username);
+        onLogin(username, password);
     };
+
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Login (ei vielä valmis)</DialogTitle>
+            <DialogTitle>Login</DialogTitle>
             <DialogContent>
                 <form onSubmit={handleSubmit}>
                     <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Username" value={username} onChange={(e) => setUsername(e.target.value)} />

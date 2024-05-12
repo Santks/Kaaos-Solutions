@@ -24,16 +24,39 @@ function App() {
   const [user, setUser] = useState(null);
   const [loginOpen, setLoginOpen] = useState(false);
 
-  const handleLogout = () => {
-    // Jotain hienoa taikuutta
-    setUser(null);
-  };
+  async function handleLogin(username, password) {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+  
+    const response = await fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/api/login', {
+      method: 'POST',
+      body: formData
+    });
+  
+    if (response.ok) {
+      const user = await response.json();
+      setUser(user);
+    } else {
+      console.error('Failed to login');
+    }
+  }
+  
 
-  const handleLogin = (username) => {
-    // Jotain hienoa taikuutta
-    setUser(username);
-    setLoginOpen(false);
-  };
+
+
+  async function handleLogout() {
+    const response = await fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/api/logout', {
+      method: 'POST',
+    });
+
+    if (response.ok) {
+      setUser(null);
+    } else {
+      console.error('Failed to logout');
+    }
+  }
+
 
   return (
     <Router basename="/Kaaos-Solutions/">
@@ -84,6 +107,8 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
       value = false;
   }
 
+  const userRole = user?.authorities[0];
+
   return (
     <AppBar position="static" color="primary">
       <Box display="flex" justifyContent="flex-start" alignItems="center">
@@ -97,16 +122,16 @@ function Navigation({ user, onLogout, onLogin, setLoginOpen }) {
         </Typography>
         <Tabs value={value} variant="fullWidth" textColor="inherit" style={{ marginLeft: "75px" }} TabIndicatorProps={{ style: { backgroundColor: "white" } }}>
           <Tab color="secondary" label="Homepage" icon={<HomeIcon />} component={Link} to="/" />
-          <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" />
-          <Tab label="Buy tickets" icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" />
-          <Tab label="Ticketcheck" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" />
-          <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" />
-          <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" />
+          {userRole === 'ROLE_EVENT_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" /> : null}
+          {userRole === 'ROLE_SELLER' || userRole === 'ROLE_ADMIN' ? <Tab label="Buy tickets" icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" /> : null}
+          {userRole === 'ROLE_TICKET_INSPECTOR' || userRole === 'ROLE_ADMIN' ? <Tab label="Ticketcheck" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" /> : null}
+          {userRole === 'ROLE_ADMIN' ? <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" /> : null}
+          {userRole === 'ROLE_EVENT_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" /> : null}
         </Tabs>
         {user ? (
           <>
-            <Typography style={{ marginLeft: "auto" }}>Logged in as {user}</Typography>
-            <Button color="inherit" onClick={onLogout}>Logout</Button>
+            <Typography style={{ marginLeft: "auto" }}>Logged in as {user.username}</Typography>
+            <Button color="primary" variant="contained" style={{ marginLeft: "auto", marginRight: "20px" }} onClick={onLogout}>Logout</Button>
           </>
         ) : (
           <Button
