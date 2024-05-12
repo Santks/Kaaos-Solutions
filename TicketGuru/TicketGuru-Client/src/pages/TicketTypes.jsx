@@ -16,6 +16,7 @@ const ListTicketTypes = () => {
     const [open, setOpen] = useState(false);
     const [typeName, setTypeName] = useState("");
     const [desc, setDesc] = useState("");
+    const [price, setPrice] = useState("");
     const [selectedTicketType, setSelectedTicketType] = useState(null);
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [editMode, setEditMode] = useState(false);
@@ -32,10 +33,10 @@ const ListTicketTypes = () => {
         })
         .catch(error => console.error('Error:', error));
 
-        fetchTicketTypes()
+        fetchTicketTypes(eventId)
             .then(data => setRowData(data))
             .catch(error => console.error('Error:', error));
-    }, []);
+    }, [eventId]);
 
     const handleOpen = () => {
         setOpen(true);
@@ -47,12 +48,14 @@ const ListTicketTypes = () => {
         setSelectedTicketType(null);
         setTypeName("");
         setDesc("");
+        setPrice("");
     };
 
     const handleEdit = (ticketType) => {
         setSelectedTicketType(ticketType);
         setTypeName(ticketType.name);
         setDesc(ticketType.description);
+        setPrice(ticketType.price);
         setEditMode(true);
         setOpen(true);
     };
@@ -65,7 +68,7 @@ const ListTicketTypes = () => {
     const confirmDelete = () => {
         deleteTicketType(selectedTicketType.ticketTypeId)
             .then(() => {
-                fetchTicketTypes().then(data => setRowData(data));
+                fetchTicketTypes(eventId).then(data => setRowData(data));
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -76,6 +79,7 @@ const ListTicketTypes = () => {
     const columnDefs = [
         { field: "name", headerName: "Name", sortable: true, filter: true },
         { field: "description", headerName: "Description", sortable: true, filter: true },
+        { field: "price", headerName: "Price", sortable: true, filter: true },
         {
             field: "",
             headerName: "Actions",
@@ -93,12 +97,14 @@ const ListTicketTypes = () => {
         e.preventDefault();
         const newData = {
             name: typeName,
-            description: desc
+            description: desc,
+            price: price,
+            event: { id: Number(eventId) }
         };
         if (editMode) {
             editTicketType(selectedTicketType.ticketTypeId, newData)
                 .then(() => {
-                    fetchTicketTypes().then(data => setRowData(data));
+                    fetchTicketTypes(eventId).then(data => setRowData(data));
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -106,7 +112,7 @@ const ListTicketTypes = () => {
         } else {
             addTicketType(newData)
                 .then(() => {
-                    fetchTicketTypes().then(data => setRowData(data));
+                    fetchTicketTypes(eventId).then(data => setRowData(data));
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -131,8 +137,9 @@ const ListTicketTypes = () => {
                 <DialogTitle>{editMode ? "Edit Ticket Type" : "Add New Ticket Type"}</DialogTitle>
                 <DialogContent>
                     <form onSubmit={handleSubmit}>
-                        <TextField label="Name" value={typeName} onChange={(e) => setTypeName(e.target.value)} fullWidth required />
-                        <TextField label="Description" value={desc} onChange={(e) => setDesc(e.target.value)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Name" value={typeName} onChange={(e) => setTypeName(e.target.value)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Description" value={desc} onChange={(e) => setDesc(e.target.value)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Price" type="number" value={price} onChange={(e) => setPrice(e.target.value)} fullWidth required />
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Cancel<CloseIcon /></Button>
                             <Button type="submit" variant="contained" color="success">{editMode ? "Save Changes" : "Add Ticket Type"}</Button>

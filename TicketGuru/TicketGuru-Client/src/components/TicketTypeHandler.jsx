@@ -4,8 +4,8 @@ const headers = {
     'Authorization': 'Basic ' + btoa('admin:admin')
 };
 
-export const fetchTicketTypes = () => {
-    return fetch(apiUrl, { headers })
+export const fetchTicketTypes = (eventId) => {
+    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype/event/${eventId}`, { headers })
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.statusText)
@@ -51,12 +51,10 @@ export const editTicketType = (id, data) => {
 export const deleteTicketType = (id) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'DELETE',
-        headers: headers
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(response.statusText)
-            }
-            return response.json()
-        });
+        headers
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error(errorMessage);
+        }
+    });
 };

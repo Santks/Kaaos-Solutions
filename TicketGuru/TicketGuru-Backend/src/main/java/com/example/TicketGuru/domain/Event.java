@@ -62,7 +62,7 @@ public class Event {
     private long maxTickets;
     
     @OneToMany(mappedBy = "event", cascade=CascadeType.ALL)
-    @JsonManagedReference(value="event-tickettype")
+    @JsonBackReference(value="event-tickettype")
     private List<TicketType> tickettypes;
     
     public List<TicketTypeDTO> getTickettypes() {
