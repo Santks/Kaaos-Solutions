@@ -12,12 +12,13 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "TG_PostalCode")
 public class PostalCode {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "PostalCode_id")
+//    // @NotNull
+//    private Long Id;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PostalCode_id")
-    // @NotNull
-    private Long Id;
-
     @Column(name = "PostalCode")
     private String postalCode;
 
@@ -32,13 +33,13 @@ public class PostalCode {
         super();
     }
 
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
+//    public Long getId() {
+//        return Id;
+//    }
+//
+//    public void setId(Long id) {
+//        Id = id;
+//    }
 
     public String getPostalCode() {
         return postalCode;
@@ -64,12 +65,12 @@ public class PostalCode {
         this.country = country;
     }
 
-    public PostalCode(Long id, String postalCode, String city, String country) {
-        Id = id;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.country = country;
-    }
+//    public PostalCode(Long id, String postalCode, String city, String country) {
+//        Id = id;
+//        this.postalCode = postalCode;
+//        this.city = city;
+//        this.country = country;
+//    }
 
     public PostalCode(String postalCode, String city, String country) {
         this.postalCode = postalCode;
@@ -77,8 +78,12 @@ public class PostalCode {
         this.country = country;
     }
 
+//    @Override
+//    public String toString() {
+//    	return "Postal [Id=" + Id + ", postalCode=" + postalCode + ", city=" + city + ", country=" + country + "]";
+//    }
     @Override
     public String toString() {
-        return "Postal [Id=" + Id + ", postalCode=" + postalCode + ", city=" + city + ", country=" + country + "]";
+    	return "Postal [ postalCode=" + postalCode + ", city=" + city + ", country=" + country + "]";
     }
 }
