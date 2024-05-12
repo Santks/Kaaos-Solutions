@@ -151,6 +151,11 @@ const ListEvents = () => {
             headerName: "",
             cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
         },
+        {
+            field: "",
+            headerName: "",
+            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={{pathname:`/ticketbuy/${data.id}` }}>Buy tickets<AssessmentIcon /></Button>
+        },
     ];
 
     return (

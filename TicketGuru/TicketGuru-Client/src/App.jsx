@@ -41,6 +41,7 @@ function App() {
     if (response.ok) {
       const user = await response.json();
       setUser(user);
+      console.log(user)
       return true;
     } else {
       return false;
@@ -73,6 +74,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/events" element={<ProtectedRoute user={user}><ListEvents /></ProtectedRoute>} />
           <Route path="/ticketbuy" element={<ProtectedRoute user={user}><Ticketbuy /></ProtectedRoute>} />
+          <Route path="/ticketbuy/:eventId" element={<ProtectedRoute user={user}><Ticketbuy /></ProtectedRoute>} />
           <Route path="/ticketcheck" element={<ProtectedRoute user={user}><Ticketcheck /></ProtectedRoute>} />
           <Route path="/tickettypes/:eventId" element={<ProtectedRoute user={user}><ListTicketTypes /></ProtectedRoute>} />
           <Route path="/users" element={<ProtectedRoute user={user}><ListUsers /></ProtectedRoute>} />
@@ -122,7 +124,6 @@ function Navigation({ user, onLogout, setLoginOpen }) {
         <Tabs value={value} variant="fullWidth" textColor="inherit" style={{ marginLeft: "75px" }} TabIndicatorProps={{ style: { backgroundColor: "white" } }}>
           <Tab color="secondary" label="Homepage" icon={<HomeIcon />} component={Link} to="/" />
           {userRole === 'ROLE_EVENT_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" /> : null}
-          {userRole === 'ROLE_SELLER' || userRole === 'ROLE_ADMIN' ? <Tab label="Tickets" icon={<ShoppingCartIcon />} component={Link} to="/ticketbuy" /> : null}
           {userRole === 'ROLE_TICKET_INSPECTOR' || userRole === 'ROLE_ADMIN' ? <Tab label="Check" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" /> : null}
           {userRole === 'ROLE_ADMIN' ? <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" /> : null}
           {userRole === 'ROLE_EVENT_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" /> : null}
