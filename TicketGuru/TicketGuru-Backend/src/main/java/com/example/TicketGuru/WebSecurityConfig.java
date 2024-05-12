@@ -10,6 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -63,15 +64,17 @@ public class WebSecurityConfig {
 				.anyRequest().authenticated())
 		.httpBasic(Customizer.withDefaults())
 		.formLogin(formLogin -> formLogin
-				.loginProcessingUrl("/api/login")
-				.successHandler((request, response, authentication) -> {
-					response.getWriter().append("{\"success\":true}");
-					response.setStatus(200);
-				})
-				.failureHandler((request, response, exception) -> {
-					response.getWriter().append("{\"success\":false}");
-					response.setStatus(401);
-				}))
+			    .loginProcessingUrl("/api/login")
+			    .successHandler((request, response, authentication) -> {
+			        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			        response.getWriter().append("{\"success\":true, \"username\":\"" + userDetails.getUsername() + "\", \"authorities\":" + userDetails.getAuthorities().toString() + "}");
+			        response.setStatus(200);
+			    })
+			    .failureHandler((request, response, exception) -> {
+			        response.getWriter().append("{\"success\":false}");
+			        response.setStatus(401);
+			    }))
+
 		.logout(logout -> logout
 				.logoutUrl("/api/logout")
 				.logoutSuccessHandler((request, response, authentication) -> {
