@@ -21,3 +21,13 @@ export const fetchEventOrders = (eventid) => {
             return response.json();
         });
 };
+
+export const fetchTicketTypes = (eventId) => {
+    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype/event/${eventId}`, { headers })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            return response.json()
+        });
+};
