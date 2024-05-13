@@ -7,6 +7,7 @@ Palauttaa listan kaikista käyttäjärooleista
 
 **Metodi**: `GET`
 
+**Path-parametrit**: 
 Parametri | Tyyppi | Kuvaus
 --- | --- | ---
 {id} | Long | Käyttäjäroolin id
