@@ -32,7 +32,7 @@ public class User {
 
 	@Column(name = "Phone")
 	private String phone;
-	
+
 	@Column(name = "Email", nullable = false)
 	@Email
 	private String email;
@@ -47,10 +47,20 @@ public class User {
 	@JoinColumn(name = "PostalCode")
 	private PostalCode postalCode;
 
-	@ManyToOne
-	@JoinColumn(name = "userRoleId")
-	@NotNull
-	private UserRole userRole;
+    @ManyToOne
+    @JoinColumn(name = "UserRole_id")
+    private UserRole userRole;
+
+	@Column(name = "Password", nullable = false)
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -123,7 +133,7 @@ public class User {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
-	
+
 	public User() {
 		super();
 	}
@@ -141,7 +151,7 @@ public class User {
 		this.activeUser = activeUser;
 
 	}
-	
+
 	public User(String firstName, String lastName, String email, UserRole userRole) {
 		super();
 		this.firstName = firstName;
@@ -156,6 +166,6 @@ public class User {
 				+ ", email=" + email + ", address=" + address + ", activeUser=" + activeUser + ", postalCode="
 				+ postalCode + ", userRole=" + userRole + "]";
 	}
-	
+
 
 }

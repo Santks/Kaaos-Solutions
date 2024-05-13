@@ -54,7 +54,6 @@ public class RestTicketTypeController {
     }
     
     
-    
     // GET (id)
     @GetMapping("/tickettype/id/{tickettypeid}")
     ResponseEntity<TicketTypeDTO> getTicketTypeById(@PathVariable Long tickettypeid) {
