@@ -6,6 +6,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem } from '@mui/material';
 import { addEvent, fetchEvents, fetchVenues, editEvent, deleteEvent } from './EventHandler';
+import { format, parseISO } from 'date-fns';
 import { fetchTicketTypes } from './TicketTypeHandler';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,17 +17,18 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
+
 // ListEvents component
 const ListEvents = () => {
-    
+
     // State variables for storing row data, dialog open state, ticket info, venues, selected venue, start date, end date, selected event, 
     // edit mode state, delete dialog open state, ticket type dialog state, ticket types, and tickets sold.
     const [rowData, setRowData] = useState([]);
     const [open, setOpen] = useState(false);
     const [venues, setVenues] = useState([]);
     const [venue, setVenue] = useState(null);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd'T'HH:mm"));
+    const [endDate, setEndDate] = useState(format(new Date(), "yyyy-MM-dd'T'HH:mm"));
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -44,20 +46,25 @@ const ListEvents = () => {
         setOpen(false);
         setEditMode(false);
         setSelectedEvent(null);
-        setStartDate(new Date());
-        setEndDate(new Date());
+        setStartDate(format(new Date(), "yyyy-MM-dd'T'HH:mm"));
+        setEndDate(format(new Date(), "yyyy-MM-dd'T'HH:mm"));
         setVenue(null);
     };
+
+
+
 
     // Function to handle editing an event
     const handleEdit = (event) => {
         setSelectedEvent(event);
-        setStartDate(new Date(event.startDate));
-        setEndDate(new Date(event.endDate));
+        setStartDate(format(parseISO(event.startDate), "yyyy-MM-dd'T'HH:mm"));
+        setEndDate(format(parseISO(event.endDate), "yyyy-MM-dd'T'HH:mm"));
         setEditMode(true);
         setVenue(event.venue);
         handleOpen();
     };
+
+
 
     // Function to handle deleting an event
     const handleDelete = (event) => {
@@ -109,12 +116,19 @@ const ListEvents = () => {
         { headerName: "Venue", field: "venue.name", sortable: true, filter: true },
         { headerName: "Category", field: "eventCategory", sortable: true, filter: true },
         {
-            headerName: "Date", sortable: true, filter: true,
+            headerName: "Start Date", sortable: true, filter: true,
             valueGetter: function (params) {
                 const startDate = params.data.startDate;
+                const format = date => date.split('T')[0].split('-').reverse().join('.') + ' ' + date.split('T')[1].substring(0, 5);
+                return format(startDate);
+            }
+        },
+        {
+            headerName: "End Date", sortable: true, filter: true,
+            valueGetter: function (params) {
                 const endDate = params.data.endDate;
-                const format = date => date.split('-').reverse().join('.');
-                return `${format(startDate)} - ${format(endDate)}`;
+                const format = date => date.split('T')[0].split('-').reverse().join('.') + ' ' + date.split('T')[1].substring(0, 5);
+                return format(endDate);
             }
         },
         { headerName: "Organiser", field: "organiserName", sortable: true, filter: true },
@@ -208,9 +222,9 @@ const ListEvents = () => {
                         <TextField
                             style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
                             label="Start Date"
-                            type="date"
-                            value={startDate.toISOString().substring(0, 10)}
-                            onChange={(e) => setStartDate(new Date(e.target.value))}
+                            type="datetime-local"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -218,11 +232,11 @@ const ListEvents = () => {
                         <TextField
                             style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }}
                             label="End Date"
-                            type="date"
+                            type="datetime-local"
                             InputLabelProps={{ shrink: true }}
-                            inputProps={{ min: startDate.toISOString().substring(0, 10) }}
-                            value={endDate.toISOString().substring(0, 10)}
-                            onChange={(e) => setEndDate(new Date(e.target.value))}
+                            inputProps={{ min: startDate }}
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
                         />
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Event Status" name="eventStatus" required inputProps={{ maxLength: 1 }} defaultValue={editMode ? selectedEvent.eventStatus : ""} />
                         <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} type="text" label="Organiser Name" name="organiserName" required defaultValue={editMode ? selectedEvent.organiserName : ""} />
