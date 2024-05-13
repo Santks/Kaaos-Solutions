@@ -69,11 +69,11 @@ function App() {
   }
 
 
-  const userRole = user?.authorities.find(auth => auth.authority === 'ROLE_ROLE_ADMIN') ? 'ROLE_ROLE_ADMIN' :
-    user?.authorities.find(auth => auth.authority === 'ROLE_ROLE_MANAGER') ? 'ROLE_ROLE_MANAGER' :
-      user?.authorities.find(auth => auth.authority === 'ROLE_ROLE_SELLER') ? 'ROLE_ROLE_SELLER' :
-        user?.authorities.find(auth => auth.authority === 'ROLE_ROLE_TICKET_INSPECTOR') ? 'ROLE_ROLE_TICKET_INSPECTOR' :
-          'ROLE_ROLE_USER';
+  const userRole = user?.authorities.find(auth => auth.authority === 'ROLE_ADMIN') ? 'ROLE_ADMIN' :
+    user?.authorities.find(auth => auth.authority === 'ROLE_MANAGER') ? 'ROLE_MANAGER' :
+      user?.authorities.find(auth => auth.authority === 'ROLE_SELLER') ? 'ROLE_SELLER' :
+        user?.authorities.find(auth => auth.authority === 'ROLE_TICKET_INSPECTOR') ? 'ROLE_TICKET_INSPECTOR' :
+          'ROLE_USER';
 
   return (
     <Router basename="/Kaaos-Solutions/">
@@ -103,14 +103,14 @@ function Navigation({ user, onLogout, setLoginOpen }) {
   const currentPath = location.pathname;
 
   const paths = {
-    'ROLE_ROLE_ADMIN': ["/", "/events", "/ticketcheck", "/users", "/venues"],
-    'ROLE_ROLE_MANAGER': ["/", "/events", "/venues"],
-    'ROLE_ROLE_SELLER': ["/", "/events", "ticketcheck"],
-    'ROLE_ROLE_TICKET_INSPECTOR': ["/", "/ticketcheck"],
-    'ROLE_ROLE_USER': ["/"]
+    'ROLE_ADMIN': ["/", "/events", "/ticketcheck", "/users", "/venues"],
+    'ROLE_MANAGER': ["/", "/events", "/venues"],
+    'ROLE_SELLER': ["/", "/events", "ticketcheck"],
+    'ROLE_TICKET_INSPECTOR': ["/", "/ticketcheck"],
+    'ROLE_USER': ["/"]
   };
 
-  const userRole = user?.authorities.find(auth => auth.authority)?.authority || 'ROLE_ROLE_USER';
+  const userRole = user?.authorities.find(auth => auth.authority)?.authority || 'ROLE_USER';
 
   const userPaths = paths[userRole] || [];
 
@@ -129,10 +129,10 @@ function Navigation({ user, onLogout, setLoginOpen }) {
         </Typography>
         <Tabs value={value} variant="fullWidth" textColor="inherit" style={{ marginLeft: "75px" }} TabIndicatorProps={{ style: { backgroundColor: "white" } }}>
           <Tab color="secondary" label="Homepage" icon={<HomeIcon />} component={Link} to="/" />
-          {userRole === 'ROLE_ROLE_MANAGER' || userRole === 'ROLE_ROLE_ADMIN' ? <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" /> : null}
-          {userRole === 'ROLE_ROLE_TICKET_INSPECTOR' || userRole === 'ROLE_ROLE_ADMIN' ? <Tab label="Check" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" /> : null}
-          {userRole === 'ROLE_ROLE_ADMIN' ? <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" /> : null}
-          {userRole === 'ROLE_ROLE_MANAGER' || userRole === 'ROLE_ROLE_ADMIN' ? <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" /> : null}
+          {userRole === 'ROLE_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" /> : null}
+          {userRole === 'ROLE_TICKET_INSPECTOR' || userRole === 'ROLE_ADMIN' ? <Tab label="Check" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" /> : null}
+          {userRole === 'ROLE_ADMIN' ? <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" /> : null}
+          {userRole === 'ROLE_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" /> : null}
         </Tabs>
         {user ? (
           <>
