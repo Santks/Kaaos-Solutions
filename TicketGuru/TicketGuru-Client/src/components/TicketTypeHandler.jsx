@@ -1,11 +1,14 @@
+// The base URL for the API
 const apiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype'
 
+// Headers for the API requests, including the Authorization header
 const headers = {
     'Authorization': 'Basic ' + btoa('admin@example.com:admin')
 };
 
-export const fetchTicketTypes = (eventId) => {
-    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype/event/${eventId}`, { headers })
+// Function to fetch ticket types for a specific event from the API
+export const fetchTicketTypesAll = () => {
+    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype`, { headers })
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.statusText)
@@ -14,6 +17,7 @@ export const fetchTicketTypes = (eventId) => {
         });
 };
 
+// Function to add a new ticket type to the API
 export const addTicketType = (data) => {
     return fetch(apiUrl, {
         method: 'POST',
@@ -31,6 +35,7 @@ export const addTicketType = (data) => {
         });
 };
 
+// Function to edit an existing ticket type in the API
 export const editTicketType = (id, data) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'PUT',
@@ -48,13 +53,14 @@ export const editTicketType = (id, data) => {
         });
 };
 
+// Function to delete a ticket type from the API
 export const deleteTicketType = (id) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'DELETE',
         headers
     }).then(response => {
         if (!response.ok) {
-            throw new Error(errorMessage);
+            throw new Error(response.statusText)
         }
     });
 };

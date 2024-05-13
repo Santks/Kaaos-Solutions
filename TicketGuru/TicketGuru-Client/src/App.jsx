@@ -72,7 +72,7 @@ function App() {
   const userRole = user?.authorities.find(auth => auth.authority === 'ROLE_ADMIN') ? 'ROLE_ADMIN' :
     user?.authorities.find(auth => auth.authority === 'ROLE_MANAGER') ? 'ROLE_MANAGER' :
       user?.authorities.find(auth => auth.authority === 'ROLE_SELLER') ? 'ROLE_SELLER' :
-        user?.authorities.find(auth => auth.authority === 'ROLE_TICKET_INSPECTOR') ? 'ROLE_TICKET_INSPECTOR' :
+        user?.authorities.find(auth => auth.authority === 'ROLE_INSPECTOR') ? 'ROLE_INSPECTOR' :
           'ROLE_USER';
 
   return (
@@ -106,7 +106,7 @@ function Navigation({ user, onLogout, setLoginOpen }) {
     'ROLE_ADMIN': ["/", "/events", "/ticketcheck", "/users", "/venues"],
     'ROLE_MANAGER': ["/", "/events", "/venues"],
     'ROLE_SELLER': ["/", "/events", "ticketcheck"],
-    'ROLE_TICKET_INSPECTOR': ["/", "/ticketcheck"],
+    'ROLE_INSPECTOR': ["/", "/ticketcheck"],
     'ROLE_USER': ["/"]
   };
 
@@ -130,7 +130,7 @@ function Navigation({ user, onLogout, setLoginOpen }) {
         <Tabs value={value} variant="fullWidth" textColor="inherit" style={{ marginLeft: "75px" }} TabIndicatorProps={{ style: { backgroundColor: "white" } }}>
           <Tab color="secondary" label="Homepage" icon={<HomeIcon />} component={Link} to="/" />
           {userRole === 'ROLE_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Events" icon={<TheaterComedyIcon />} component={Link} to="/events" /> : null}
-          {userRole === 'ROLE_TICKET_INSPECTOR' || userRole === 'ROLE_ADMIN' ? <Tab label="Check" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" /> : null}
+          {userRole === 'ROLE_INSPECTOR' || userRole === 'ROLE_ADMIN' ? <Tab label="Check" icon={<QrCodeScannerIcon />} component={Link} to="/ticketcheck" /> : null}
           {userRole === 'ROLE_ADMIN' ? <Tab label="Users" icon={<PersonIcon />} component={Link} to="/users" /> : null}
           {userRole === 'ROLE_MANAGER' || userRole === 'ROLE_ADMIN' ? <Tab label="Venues" icon={<StadiumIcon />} component={Link} to="/venues" /> : null}
         </Tabs>

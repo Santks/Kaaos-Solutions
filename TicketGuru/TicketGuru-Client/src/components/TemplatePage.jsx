@@ -1,7 +1,10 @@
+// Importing necessary libraries
 import React from 'react';
 
+// TemplatePage component
 function TemplatePage() {
 
+// Rendering the component
     return (
         <div>
             <h2>This is TemplatePage.</h2>

@@ -1,11 +1,12 @@
+// Importing necessary libraries and components
 import React, { useEffect, useState } from 'react';
 import { AgGridReact } from "ag-grid-react";
 import { Link } from 'react-router-dom';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel, List, ListItem, ListItemText } from '@mui/material';
-
+import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
+import { fetchTicketTypes, fetchTicketTypesAll } from './TicketTypeHandler';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,10 +16,11 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
-import { fetchTicketTypes } from './TicketTypeHandler';
-
+// ListEvents component
 const ListEvents = () => {
+    
+    // State variables for storing row data, dialog open state, ticket info, venues, selected venue, start date, end date, selected event, 
+    // edit mode state, delete dialog open state, ticket type dialog state, ticket types, and tickets sold.
     const [rowData, setRowData] = useState([]);
     const [open, setOpen] = useState(false);
     const [ticketInfo, setTicketInfo] = useState(null);
@@ -34,7 +36,7 @@ const ListEvents = () => {
     const [ticketTypes, setTicketTypes] = useState([]);
     const [ticketsSold, setTicketsSold] = useState([]);
 
-
+    // Function to handle opening the dialog
     const handleOpen = () => {
         if (!editMode) {
             setVenue(null);
@@ -42,6 +44,7 @@ const ListEvents = () => {
         setOpen(true);
     };
 
+    // Function to handle closing the dialog
     const handleClose = () => {
         setOpen(false);
         setEditMode(false);
@@ -52,6 +55,7 @@ const ListEvents = () => {
         setVenue(null);
     };
 
+    // Function to handle editing an event
     const handleEdit = (event) => {
         setSelectedEvent(event);
         setStartDate(new Date(event.startDate));
@@ -61,16 +65,18 @@ const ListEvents = () => {
         handleOpen();
     };
 
-
+    // Function to handle deleting an event
     const handleDelete = (event) => {
         setSelectedEvent(event);
         setDeleteDialogOpen(true);
     };
 
+    // Function to handle opening the ticket type dialog
     const handleTicketTypeDialog = () => {
         setTicketTypeDialog(true);
     };
 
+    // Function to confirm deleting an event
     const confirmDelete = () => {
         deleteEvent(selectedEvent.id)
             .then(() => {
@@ -82,6 +88,7 @@ const ListEvents = () => {
         setDeleteDialogOpen(false);
     };
 
+    // Fetching the events, venues, and ticket types when the component mounts
     useEffect(() => {
         fetchEvents()
             .then(data => setRowData(data))
@@ -97,11 +104,12 @@ const ListEvents = () => {
             })
             .catch(error => console.error('Error:', error));
 
-        fetchTicketTypes()
+        fetchTicketTypesAll()
             .then(data => setTicketTypes(data))
             .catch(error => console.error('Error', error))
     }, []);
 
+    // Setting the venue when the edit mode is enabled
     useEffect(() => {
         if (editMode) {
             const venue = venues.find(v => v.id === selectedEvent.venue.id)
@@ -109,6 +117,7 @@ const ListEvents = () => {
         }
     }, [editMode]);
 
+    // Column definitions for the Ag-Grid table
     const columnDefs = [
         { headerName: "Name", field: "name", sortable: true, filter: true },
         { headerName: "Description", field: "description", sortable: true, filter: true },
@@ -133,31 +142,20 @@ const ListEvents = () => {
         },
         {
             field: "",
-            headerName: "",
-            cellRenderer: ({ data }) => <Button color={"warning"} onClick={() => handleEdit(data)}>Edit<EditIcon /></Button>
-        },
-        {
-            field: "",
-            headerName: "",
-            cellRenderer: ({ data }) => <Button color={"error"} onClick={() => handleDelete(data)}>Delete<DeleteIcon /></Button>
-        },
-        {
-            field: "",
-            headerName: "",
-            cellRenderer: ({ data }) => <Button color={"info"} component={Link} to={`/tickettypes/${data.id}`}>Ticket types<ConfirmationNumberIcon /></Button>
-        },
-        {
-            field: "",
-            headerName: "",
-            cellRenderer: ({ data }) => <Button color={"success"} component={Link} to={{ pathname: `/ticketbuy/${data.id}` }}>Buy tickets<ShoppingCartIcon /></Button>
-        },
-        {
-            field: "",
-            headerName: "",
-            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
-        },
+            headerName: "Actions",
+            cellRenderer: ({ data }) => (
+                <>
+                    <Button color="warning" onClick={() => handleEdit(data)}>Edit <EditIcon /></Button>
+                    <Button color="error" onClick={() => handleDelete(data)}>Delete <DeleteIcon /></Button>
+                    <Button color="info" component={Link} to={`/tickettypes/${data.id}`}>Ticket types<ConfirmationNumberIcon /></Button>
+                    <Button color="success" component={Link} to={{ pathname: `/ticketbuy/${data.id}` }}>Buy tickets<ShoppingCartIcon /></Button>
+                    <Button color="secondary" component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
+                </>
+            )
+        }
     ];
 
+    // Rendering the component
     return (
         <>
             <Button style={{ marginBottom: "10px", marginLeft: "10px" }} color="primary" variant="contained" onClick={handleOpen}>Add New Event<AddchartIcon /></Button>

@@ -1,11 +1,15 @@
+// The base URL for the API
 const ApiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events';
 
+// Headers for the API requests, including the Authorization header
 const headers = {
     'Authorization': 'Basic ' + btoa('admin@example.com:admin')
 };
 
-const errorMessage = "Homma meni ihan wilduks!";
+// Default error message
+const errorMessage = "Tapahtui virhe!";
 
+// Function to fetch all venues from the API
 export const fetchVenues = () => {
     return fetch('https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/venues', { headers })
         .then(response => {
@@ -16,6 +20,7 @@ export const fetchVenues = () => {
         });
 };
 
+// Function to add a new event to the API
 export const addEvent = (data, callback) => {
     return fetch(ApiUrl, {
         method: 'POST',
@@ -35,6 +40,7 @@ export const addEvent = (data, callback) => {
     });
 };
 
+// Function to edit an existing event in the API
 export const editEvent = (id, data, callback) => {
     return fetch(`${ApiUrl}/${id}`, {
         method: 'PUT',
@@ -54,7 +60,7 @@ export const editEvent = (id, data, callback) => {
     });
 };
 
-
+// Function to delete an event from the API
 export const deleteEvent = (id) => {
     return fetch(`${ApiUrl}/${id}`, {
         method: 'DELETE',
@@ -66,6 +72,7 @@ export const deleteEvent = (id) => {
     });
 };
 
+// Function to fetch tickets for a specific event from the API
 export const fetchEventTickets = (eventid) => {
     return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/event/${eventid}`, { headers })
         .then(response => {
@@ -76,6 +83,7 @@ export const fetchEventTickets = (eventid) => {
         });
 };
 
+// Function to fetch all events from the API + the number of tickets sold (total)
 export const fetchEvents = () => {
     return fetch(ApiUrl, { headers })
         .then(response => {

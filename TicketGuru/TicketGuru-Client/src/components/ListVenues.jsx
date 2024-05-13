@@ -1,18 +1,20 @@
+// Importing necessary libraries and components
 import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { fetchVenues, addVenue, editVenue, deleteVenue } from "../components/VenueHandler";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-import { fetchVenues, addVenue, editVenue, deleteVenue } from "../components/VenueHandler";
-
+// ListVenues component
 const ListVenues = () => {
+
+    // State variables for storing row data, dialog open state, selected venue, delete dialog open state, edit mode state, and venue.
     const [rowData, setRowData] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedVenue, setSelectedVenue] = useState(null);
@@ -32,6 +34,7 @@ const ListVenues = () => {
         }
     });
 
+    // Default venue object
     const defaultVenue = {
         "id": "",
         "name": "",
@@ -46,7 +49,7 @@ const ListVenues = () => {
         }
     };
 
-
+    // Fetching the venues when the component mounts
     useEffect(() => {
         fetchVenues()
             .then(data => {
@@ -55,12 +58,12 @@ const ListVenues = () => {
             .catch(error => console.error("Error:", error));
     }, []);
 
-
-
+    // Function to handle opening the dialog
     const handleOpen = () => {
         setOpen(true);
     };
 
+    // Function to handle closing the dialog
     const handleClose = () => {
         setOpen(false);
         setEditMode(false);
@@ -68,6 +71,7 @@ const ListVenues = () => {
         setVenue(defaultVenue);
     };
 
+    // Function to handle editing a venue
     const handleEdit = (venue) => {
         setSelectedVenue(venue);
         setVenue(venue);
@@ -75,11 +79,13 @@ const ListVenues = () => {
         setOpen(true);
     };
 
+    // Function to handle deleting a venue
     const handleDelete = (venue) => {
         setSelectedVenue(venue);
         setDeleteDialog(true);
     };
 
+    // Function to confirm deleting a venue
     const confirmDelete = () => {
         deleteVenue(selectedVenue.id)
             .then(() => {
@@ -91,40 +97,29 @@ const ListVenues = () => {
         setDeleteDialog(false);
     };
 
+    // Column definitions for the Ag-Grid table
     const columnDefs = [
         { field: "name", headerName: "Name", sortable: true, filter: true },
-        {
-            field: "address",
-            headerName: "Address",
-            sortable: true,
-            filter: true,
-            valueGetter: params => {
-                if (params.data.postalCode) {
-                    return `${params.data.address}, ${params.data.postalCode.postalCode} ${params.data.postalCode.city}, ${params.data.postalCode.country}`;
-                } else {
-                    return params.data.address;
-                }
-            }
-        },
+        { field: "address", headerName: "Address", sortable: true, filter: true },
+        { field: "postalCode.postalCode", headerName: "Postal Code", sortable: true, filter: true },
+        { field: "postalCode.city", headerName: "City", sortable: true, filter: true },
+        { field: "postalCode.country", headerName: "Country", sortable: true, filter: true },
         { field: "phone", headerName: "Phone", sortable: true, filter: true },
         { field: "email", headerName: "Email", sortable: true, filter: true },
         { field: "capacity", headerName: "Capacity", sortable: true, filter: true },
         {
             field: "",
-            headerName: "Edit",
+            headerName: "Actions",
             cellRenderer: ({ data }) => (
-                <Button color="warning" onClick={() => handleEdit(data)}>Edit <EditIcon /></Button>
-            )
-        },
-        {
-            field: "",
-            headerName: "Delete",
-            cellRenderer: ({ data }) => (
-                <Button color="error" onClick={() => handleDelete(data)}>Delete <DeleteIcon /></Button>
+                <>
+                    <Button color="warning" onClick={() => handleEdit(data)}>Edit <EditIcon /></Button>
+                    <Button color="error" onClick={() => handleDelete(data)}>Delete <DeleteIcon /></Button>
+                </>
             )
         }
     ];
 
+    // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -148,6 +143,7 @@ const ListVenues = () => {
         handleClose();
     };
 
+    // Function to handle changes in the venue form
     const handleChangeVenue = (e) => {
         if (e.target.name === "postalCode" || e.target.name === "city" || e.target.name === "country") {
             setVenue(prevVenue => ({
@@ -165,7 +161,7 @@ const ListVenues = () => {
         }
     }
 
-
+    // Rendering the component
     return (
         <>
             <Button style={{ marginBottom: "10px", marginLeft: "10px" }} color="primary" variant="contained" onClick={handleOpen}>Add New Venue<AddchartIcon /></Button>

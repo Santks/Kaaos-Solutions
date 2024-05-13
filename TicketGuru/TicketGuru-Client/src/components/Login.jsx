@@ -1,13 +1,18 @@
+// Importing necessary libraries and components
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
 import LoginIcon from "@mui/icons-material/Login";
 import CloseIcon from '@mui/icons-material/Close';
 
+// Login component
 const Login = ({ open, onClose, onLogin }) => {
+    
+    // State variables for storing username, password, and error
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
+    // Function to handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         const success = await onLogin(username, password);
@@ -21,6 +26,7 @@ const Login = ({ open, onClose, onLogin }) => {
         }
     };
 
+    // Function to handle closing the dialog
     const handleClose = () => {
         setUsername('');
         setPassword('');
@@ -28,6 +34,7 @@ const Login = ({ open, onClose, onLogin }) => {
         onClose();
     };
 
+    // Rendering the component
     return (
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Login</DialogTitle>

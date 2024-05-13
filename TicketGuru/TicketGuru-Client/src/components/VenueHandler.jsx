@@ -1,9 +1,15 @@
+// The base URL for the API
 const apiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/venues'
 
+// Headers for the API requests, including the Authorization header
 const headers = {
     'Authorization': 'Basic ' + btoa('admin@example.com:admin')
 };
 
+// Default error message
+const errorMessage = "Tapahtui virhe!";
+
+// Function to fetch all venues from the API
 export const fetchVenues = () => {
     return fetch(apiUrl, { headers })
         .then(response => {
@@ -14,6 +20,7 @@ export const fetchVenues = () => {
         });
 };
 
+// Function to add a new venue to the API
 export const addVenue = (data) => {
     return fetch(apiUrl, {
         method: 'POST',
@@ -31,6 +38,7 @@ export const addVenue = (data) => {
         });
 };
 
+// Function to edit an existing venue in the API
 export const editVenue = (id, data) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'PUT',
@@ -48,6 +56,7 @@ export const editVenue = (id, data) => {
         });
 };
 
+// Function to delete a venue from the API
 export const deleteVenue = (id) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'DELETE',
