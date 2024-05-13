@@ -14,29 +14,29 @@ const EventReport = () => {
     const [ticketTypes, setTicketTypes] = useState([]);
     const [eventName, setEventName] = useState('');
     const { eventId } = useParams();
-    
+
     useEffect(() => {
         fetchEvents(eventId)
-        .then(events => {
-            if (events) {
-                const event = events.find(event => event.id === Number(eventId));
-                setEventName(event.name)
-            }
-        })
-        .catch(error => console.error('Error:', error));
+            .then(events => {
+                if (events) {
+                    const event = events.find(event => event.id === Number(eventId));
+                    setEventName(event.name)
+                }
+            })
+            .catch(error => console.error('Error:', error));
 
         fetchTicketTypes(eventId)
-        .then(data => setTicketTypes(data))
-        .catch(error => console.error('Error:', error));
+            .then(data => setTicketTypes(data))
+            .catch(error => console.error('Error:', error));
 
         fetchEventTickets(eventId)
             .then(data => setTicketInfo(data))
-            .catch(error => console.error('Error:', error));    
+            .catch(error => console.error('Error:', error));
     }, [eventId]);
 
     const ticketTypeName = (ticketTypeId) => {
         const ticketType = ticketTypes.find(t => t.ticketTypeId === ticketTypeId);
-        return ticketType ? ticketType.name: 'Unknown';
+        return ticketType ? ticketType.name : 'Unknown';
     }
 
     const totalTickets = (ticketTypeId) => {
@@ -58,11 +58,12 @@ const EventReport = () => {
     }
 
     const columnDefs = [
-        { headerName: 'Ticket Type', field: 'ticketTypeId', valueGetter: params => ticketTypeName(params.data.ticketTypeId)},
-        { headerName: 'Total Tickets', valueGetter: params => totalTickets(params.data.ticketTypeId)},
-        { headerName: 'Total Price', valueGetter: params => {
-            const price = totalPrice(params.data.ticketTypeId);
-            return `${price} €`;
+        { headerName: 'Ticket Type', field: 'ticketTypeId', valueGetter: params => ticketTypeName(params.data.ticketTypeId) },
+        { headerName: 'Total Tickets', valueGetter: params => totalTickets(params.data.ticketTypeId) },
+        {
+            headerName: 'Total Price', valueGetter: params => {
+                const price = totalPrice(params.data.ticketTypeId);
+                return `${price} €`;
             }
         }
     ];
@@ -73,18 +74,18 @@ const EventReport = () => {
 
     return (
         <>
-        <h1>Sales Report / {eventName}</h1>
-        <div className="ag-theme-material" style={{ height: 500, width: '100%'}}>
-            <AgGridReact
-                rowData={ticketTypes}
-                columnDefs={columnDefs}
-                defaultColDef={defaultColDef}
-                pagination={true}
-                paginationAutoPageSize={true}
-            />
-        </div>
-        <h3>Total Tickets: {ticketInfo ? ticketInfo.length : 0}</h3>
-        <Button style={{ marginLeft: "10px", marginTop: "40px" }} color="primary" variant="contained" component={Link} to={`/orderreport/${eventId}`}>Order List <ReceiptLongIcon/></Button>
+            <h1>Sales Report / {eventName}</h1>
+            <div className="ag-theme-material" style={{ height: 400, width: '30%' }}>
+                <AgGridReact
+                    rowData={ticketTypes}
+                    columnDefs={columnDefs}
+                    defaultColDef={defaultColDef}
+                    pagination={true}
+                    paginationAutoPageSize={true}
+                />
+            </div>
+            <h3>Total Tickets: {ticketInfo ? ticketInfo.length : 0}</h3>
+            <Button style={{ marginLeft: "10px", marginTop: "40px" }} color="primary" variant="contained" component={Link} to={`/orderreport/${eventId}`}>Order List <ReceiptLongIcon /></Button>
         </>
     );
 };
