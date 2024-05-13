@@ -2,12 +2,10 @@ package com.example.TicketGuru;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.TicketGuru.domain.Event;
@@ -27,8 +25,8 @@ public class EventTest {
         venue1 = new Venue("Olympiastadion", "Paavo Nurmen tie 1", "040123456789", "demoevent@demomail.com", 36200,
                 pcode1);
 
-        event1 = new Event(venue1, "Cool event", "Cool event example", "Cool event", LocalDate.parse("2024-02-22"),
-                LocalDate.parse("2024-02-24"),
+        event1 = new Event(venue1, "Cool event", "Cool event example", "Cool event", LocalDateTime.parse("2024-02-22T10:15:30"),
+        		LocalDateTime.parse("2024-02-24T18:30:00"),
                 'U', "Cool events org.", 36000L);
     }
 
@@ -54,12 +52,12 @@ public class EventTest {
 
     @Test
     public void EventStartDate() {
-        assertEquals(LocalDate.parse("2024-02-22"), event1.getStartDate());
+        assertEquals(LocalDateTime.parse("2024-02-22T10:15:30"), event1.getStartDate());
     }
 
     @Test
     public void EventEndDate() {
-        assertEquals(LocalDate.parse("2024-02-24"), event1.getEndDate());
+        assertEquals(LocalDateTime.parse("2024-02-24T18:30:00"), event1.getEndDate());
     }
 
     @Test

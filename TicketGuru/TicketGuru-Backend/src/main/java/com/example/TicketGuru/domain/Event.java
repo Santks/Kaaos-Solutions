@@ -1,7 +1,8 @@
 package com.example.TicketGuru.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -45,11 +46,11 @@ public class Event {
 
     @Column(name = "StartDate")
     @NotNull
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "EndDate")
     @NotNull
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @Column(name = "eventStatus")
     private char eventStatus;
@@ -82,7 +83,7 @@ public class Event {
         super();
     }
 
-    public Event(Venue venue, String name, String description, String eventCategory, LocalDate startDate, LocalDate endDate,
+    public Event(Venue venue, String name, String description, String eventCategory, LocalDateTime startDate, LocalDateTime endDate,
             char eventStatus, String organiserName, long maxTickets) {
         this.venue = venue;
         this.name = name;
@@ -135,19 +136,19 @@ public class Event {
         this.eventCategory = eventCategory;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
