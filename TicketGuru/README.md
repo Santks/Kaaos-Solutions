@@ -199,8 +199,9 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 
 
 ## Testaus
-- Projektissa testataan ohjelmistoa jatkuvasti, jotta saadaan varmistettua ohjelmiston toimivuus uusien ominaisuuksien lisäysten tai päivitysten jälkeen. 
-- Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi: 
+Projektissa testataan ohjelmistoa jatkuvasti, jotta saadaan varmistettua ohjelmiston toimivuus uusien ominaisuuksien lisäysten tai päivitysten jälkeen. 
+
+Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi: 
 * Yksikkötestaus yksittäisiä komponentteja ja niiden toimintaa varten
 * Integraatiotestaus uusien ominaisuuksien lisäystä varten
 * End to end testaus client puolen käyttöliittymää/sovellusta varten
@@ -208,13 +209,13 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 #### Testauksen teknologiat
 - Ohjelmiston yksikkötestit ovat toteutettu Javan JUnit testeinä
 - Integraatiotestauksessa on käytetty Spring Bootin tarjoamaa SpringBootTest toiminnallisuutta.
-- End to end testit on toteutettu RobotFramework testeinä ja testauksessa on käytetty apuna. Selenium-kirjastoa.
+- End to end testit on toteutettu RobotFramework testeinä ja testauksessa on käytetty apuna Selenium-kirjastoa.
 
 
 ## Asennustiedot
 
 ### Järjestelmän asennus uuteen kehitysympäristöön
-- Järjestelmän voi asentaa toiselle koneelle ainakin kahdella eri tavalla:
+Järjestelmän voi asentaa toiselle koneelle ainakin kahdella eri tavalla:
 * Kloonaamalla projektin Github:ista omalle koneelleen
 * Lataamalla projektin lähdekoodin zip-tiedostona projektin Github-repositoriosta
 * [Projektin Github-repositorio](https://github.com/Santks/Kaaos-Solutions)
@@ -222,7 +223,6 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 * Tämän jälkeen avaa kehitysympäristö ja tuo projektin kansio editoriin
 
 ### Järjestelmän asennus uuteen tuotantoympäristöön
-
 1. Valmistelut: Ennen asennuksen aloittamista varmista, että tuotantoympäristö täyttää kaikki järjestelmän vaatimukset, kuten riittävän kapasiteetin, käyttöjärjestelmäversion ja riippuvuuksien asennuksen.
 
 2. Lähdekoodin hankkiminen: Hanki järjestelmän lähdekoodi valitsemallasi tavalla, esimerkiksi kloonaamalla projektin GitHubista tai lataamalla zip-tiedosto. ([Projektin Github-repositorio](https://github.com/Santks/Kaaos-Solutions))
@@ -243,7 +243,8 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 ### Käynnistys
 - Avaa sovellus osoitteesta [https://santks.github.io/Kaaos-Solutions/](https://santks.github.io/Kaaos-Solutions/)
 - Kirjaudu sisään käyttäjällesi 
-- Sovelluksen käytettävyys on rajoitettu roolien mukaan, joten et ehkä pysty käyttäämään kaikkia toiminnallisuuksia riippuen käyttäjätilisi roolista
+
+Sovelluksen käytettävyys on rajoitettu roolien mukaan, joten et ehkä pysty käyttäämään kaikkia toiminnallisuuksia riippuen käyttäjätilisi roolista
 
 - Jos roolisi on *admin*, voit käyttää sovellusta ilman rajoitteita.
 - Jos roolisi on *ticket inspector*, voit tarkastaa lippuja.
