@@ -7,8 +7,8 @@ const headers = {
 };
 
 // Function to fetch ticket types for a specific event from the API
-export const fetchTicketTypes = () => {
-    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype`, { headers })
+export const fetchTicketTypes = (eventId) => {
+    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype/event/${eventId}`, { headers })
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.statusText)
