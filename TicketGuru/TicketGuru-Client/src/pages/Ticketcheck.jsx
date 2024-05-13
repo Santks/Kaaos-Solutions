@@ -82,7 +82,7 @@ const Ticketcheck = () => {
               Lipun ID: {ticketInfo.ticketId}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Hinta: {ticketInfo.price} euroa
+              Hinta: {ticketInfo.price || ticketInfo.ticketPrice} euroa
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Käytetty?: {ticketInfo.ticketUsed === "1970-01-01T00:00:00" ? 'Ei' : 'Kyllä'}
