@@ -1,3 +1,4 @@
+// Importing necessary libraries and components
 import React, { useEffect, useState, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -13,6 +14,7 @@ import { useReactToPrint } from 'react-to-print';
 import PrintIcon from '@mui/icons-material/Print';
 import QRCode from 'qrcode.react';
 
+// Functional component PrintTickets
 const PrintTickets = React.forwardRef(({ completedOrder }, ref) => {
     return (
         <Box ref={ref}>
@@ -27,7 +29,10 @@ const PrintTickets = React.forwardRef(({ completedOrder }, ref) => {
     );
 });
 
+// TicketBuy component
 export default function Ticketbuy() {
+
+    // State variables for managing component state
     const { eventId } = useParams();
     const [isLoadingEvents, setIsLoadingEvents] = useState(true);
     const [orderDone, setOrderDone] = useState(false);
@@ -36,10 +41,12 @@ export default function Ticketbuy() {
     const [ticketTypes, setTicketTypes] = useState([])
     const componentRef = useRef(null);
 
+    // Function to handle printing
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
 
+    // Initialize current date
     const currDate = new Date();
     // set empty order
     const [order, setOrder] = useState({
@@ -156,6 +163,7 @@ export default function Ticketbuy() {
         }
     }
 
+    // Rendering the component
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
             {isLoadingEvents ? <Card>getting data...</Card>
@@ -195,7 +203,7 @@ export default function Ticketbuy() {
 
             }
 
-
+            {/* Display order completion message and print functionality */}
             {!orderDone ? <></> : <>Order success!
                 <div>{'Order date:' + completedOrder.date}</div>
                 <div>{'Order id:' + completedOrder.orderId}</div>

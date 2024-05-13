@@ -1,3 +1,4 @@
+// Importing necessary libraries and components
 import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -11,7 +12,10 @@ import { fetchTicketTypes, addTicketType, editTicketType, deleteTicketType } fro
 import { fetchEvents } from "../components/EventHandler";
 import { useParams } from 'react-router-dom';
 
+// ListTicketTypes component
 const ListTicketTypes = () => {
+
+    // State variables for storing ticket type data, dialog states, input values, selected ticket type, and edit mode
     const [rowData, setRowData] = useState([]);
     const [open, setOpen] = useState(false);
     const [typeName, setTypeName] = useState("");
@@ -23,6 +27,7 @@ const ListTicketTypes = () => {
     const [eventName, setEventName] = useState("");
     const { eventId } = useParams();
 
+    // Fetching the events and ticket types when the component mounts
     useEffect(() => {
         fetchEvents(eventId)
         .then(events => {
@@ -38,10 +43,12 @@ const ListTicketTypes = () => {
             .catch(error => console.error('Error:', error));
     }, [eventId]);
 
+    // Function to handle opening the dialog
     const handleOpen = () => {
         setOpen(true);
     };
 
+    // Function to handle closing the dialog
     const handleClose = () => {
         setOpen(false);
         setEditMode(false);
@@ -51,6 +58,7 @@ const ListTicketTypes = () => {
         setPrice("");
     };
 
+    // Function to handle editing a ticket type
     const handleEdit = (ticketType) => {
         setSelectedTicketType(ticketType);
         setTypeName(ticketType.name);
@@ -60,11 +68,13 @@ const ListTicketTypes = () => {
         setOpen(true);
     };
 
+    // Function to handle deleting a ticket type
     const handleDelete = (ticketType) => {
         setSelectedTicketType(ticketType);
         setDeleteDialog(true);
     };
 
+    // Function to confirm ticket type deletion
     const confirmDelete = () => {
         deleteTicketType(selectedTicketType.ticketTypeId)
             .then(() => {
@@ -76,6 +86,7 @@ const ListTicketTypes = () => {
         setDeleteDialog(false);
     };
 
+    // Column definitions for the Ag-Grid table
     const columnDefs = [
         { field: "name", headerName: "Name", sortable: true, filter: true },
         { field: "description", headerName: "Description", sortable: true, filter: true },
@@ -93,6 +104,7 @@ const ListTicketTypes = () => {
         }
     ];
 
+    // Function to handle form submission for adding/editing ticket type
     const handleSubmit = (e) => {
         e.preventDefault();
         const newData = {
@@ -121,6 +133,7 @@ const ListTicketTypes = () => {
         handleClose();
     };
 
+    // Rendering the component
     return (
         <>
         <h1>Ticket Types / {eventName}</h1>
