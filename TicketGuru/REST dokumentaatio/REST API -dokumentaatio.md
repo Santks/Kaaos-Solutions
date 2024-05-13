@@ -295,3 +295,33 @@ Vastauskoodi: 200 OK.
 
 **DELETE /venues/{venueId}**
 Vastauskoodi: 200 OK.
+
+## UserRole
+
+#### Endpointit
+
+**GET /api/userroles**
+Hae kaikki käyttäjäroolit
+
+**POST /api/userroles**
+Lisää uusi käyttäjärooli
+
+**PUT /api/userroles/{id}**
+Käyttäjäroolin päivittäminen
+
+**DELETE /api/userroles/{id}**
+Käyttäjäroolin poisto
+
+#### Toimivuus
+
+**GET /api/userroles**
+Vastauskoodi: 200 OK.
+
+**POST /api/userroles**
+Vastauskoodi: 200 OK.
+
+**PUT /api/userroles/{id}**
+Vastauskoodi: 200 OK.
+
+**DELETE /api/userroles/{id}**
+Vastauskoodi: 200 OK.
