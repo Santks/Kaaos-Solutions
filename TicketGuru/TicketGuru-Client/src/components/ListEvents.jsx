@@ -16,7 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
-import { fetchTicketTypes } from './TicketTypeHandler';
+import { fetchTicketTypes, fetchTicketTypesAll } from './TicketTypeHandler';
 
 const ListEvents = () => {
     const [rowData, setRowData] = useState([]);
@@ -97,7 +97,7 @@ const ListEvents = () => {
             })
             .catch(error => console.error('Error:', error));
 
-        fetchTicketTypes()
+        fetchTicketTypesAll()
             .then(data => setTicketTypes(data))
             .catch(error => console.error('Error', error))
     }, []);
