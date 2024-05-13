@@ -4,9 +4,9 @@ import { AgGridReact } from "ag-grid-react";
 import { Link } from 'react-router-dom';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel, List, ListItem, ListItemText } from '@mui/material';
-import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
-import { fetchTicketTypes, fetchTicketTypesAll } from './TicketTypeHandler';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem } from '@mui/material';
+import { addEvent, fetchEvents, fetchVenues, editEvent, deleteEvent } from './EventHandler';
+import { fetchTicketTypes } from './TicketTypeHandler';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,8 +23,6 @@ const ListEvents = () => {
     // edit mode state, delete dialog open state, ticket type dialog state, ticket types, and tickets sold.
     const [rowData, setRowData] = useState([]);
     const [open, setOpen] = useState(false);
-    const [ticketInfo, setTicketInfo] = useState(null);
-    const [ticketDialogOpen, setTicketDialogOpen] = useState(false);
     const [venues, setVenues] = useState([]);
     const [venue, setVenue] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
@@ -32,9 +30,6 @@ const ListEvents = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-    const [ticketTypeDialog, setTicketTypeDialog] = useState(false);
-    const [ticketTypes, setTicketTypes] = useState([]);
-    const [ticketsSold, setTicketsSold] = useState([]);
 
     // Function to handle opening the dialog
     const handleOpen = () => {
@@ -49,7 +44,6 @@ const ListEvents = () => {
         setOpen(false);
         setEditMode(false);
         setSelectedEvent(null);
-        setTicketTypeDialog(false)
         setStartDate(new Date());
         setEndDate(new Date());
         setVenue(null);
@@ -69,11 +63,6 @@ const ListEvents = () => {
     const handleDelete = (event) => {
         setSelectedEvent(event);
         setDeleteDialogOpen(true);
-    };
-
-    // Function to handle opening the ticket type dialog
-    const handleTicketTypeDialog = () => {
-        setTicketTypeDialog(true);
     };
 
     // Function to confirm deleting an event
@@ -103,10 +92,6 @@ const ListEvents = () => {
                 }
             })
             .catch(error => console.error('Error:', error));
-
-        fetchTicketTypesAll()
-            .then(data => setTicketTypes(data))
-            .catch(error => console.error('Error', error))
     }, []);
 
     // Setting the venue when the edit mode is enabled
@@ -255,24 +240,6 @@ const ListEvents = () => {
                 <DialogActions>
                     <Button onClick={() => setDeleteDialogOpen(false)} variant="contained" color="error">Cancel<CloseIcon /></Button>
                     <Button onClick={confirmDelete} variant="contained" color="success">Delete<DeleteIcon /></Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog open={ticketTypeDialog} onClose={handleClose}>
-                <DialogTitle>Available Ticket Types</DialogTitle>
-                <DialogContent>
-                    <List>
-                        {ticketTypes.map(ticketType => (
-                            <ListItem key={ticketType.ticketTypeId}>
-                                <ListItemText
-                                    primary={ticketType.name}
-                                    secondary={ticketType.description}
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setTicketTypeDialog(false)} variant="contained" color="error">Close<CloseIcon /></Button>
                 </DialogActions>
             </Dialog>
         </>
