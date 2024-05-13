@@ -3,11 +3,12 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
-import AddchartIcon from '@mui/icons-material/Addchart';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CloseIcon from '@mui/icons-material/Close';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import AddchartIcon from "@mui/icons-material/Addchart";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 import { fetchVenues, addVenue, editVenue, deleteVenue } from "../components/VenueHandler";
 
@@ -24,6 +25,11 @@ const ListVenues = () => {
         "phone": "",
         "email": "",
         "capacity": 0,
+        "postalCode": {
+            "postalCode": "",
+            "city": "",
+            "country": ""
+        }
     });
 
     const defaultVenue = {
@@ -33,13 +39,23 @@ const ListVenues = () => {
         "phone": "",
         "email": "",
         "capacity": 0,
+        "postalCode": {
+            "postalCode": "",
+            "city": "",
+            "country": ""
+        }
     };
+
 
     useEffect(() => {
         fetchVenues()
-            .then(data => setRowData(data))
-            .catch(error => console.error('Error:', error));
+            .then(data => {
+                setRowData(data);
+            })
+            .catch(error => console.error("Error:", error));
     }, []);
+
+
 
     const handleOpen = () => {
         setOpen(true);
@@ -70,14 +86,26 @@ const ListVenues = () => {
                 fetchVenues().then(data => setRowData(data));
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error("Error:", error);
             });
         setDeleteDialog(false);
     };
 
     const columnDefs = [
         { field: "name", headerName: "Name", sortable: true, filter: true },
-        { field: "address", headerName: "Address", sortable: true, filter: true },
+        {
+            field: "address",
+            headerName: "Address",
+            sortable: true,
+            filter: true,
+            valueGetter: params => {
+                if (params.data.postalCode) {
+                    return `${params.data.address}, ${params.data.postalCode.postalCode} ${params.data.postalCode.city}, ${params.data.postalCode.country}`;
+                } else {
+                    return params.data.address;
+                }
+            }
+        },
         { field: "phone", headerName: "Phone", sortable: true, filter: true },
         { field: "email", headerName: "Email", sortable: true, filter: true },
         { field: "capacity", headerName: "Capacity", sortable: true, filter: true },
@@ -106,7 +134,7 @@ const ListVenues = () => {
                     fetchVenues().then(data => setRowData(data));
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error("Error:", error);
                 });
         } else {
             addVenue(venue)
@@ -114,18 +142,29 @@ const ListVenues = () => {
                     fetchVenues().then(data => setRowData(data));
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error("Error:", error);
                 });
         }
         handleClose();
     };
 
     const handleChangeVenue = (e) => {
-        setVenue(prevVenue => ({
-            ...prevVenue,
-            [e.target.name]: e.target.value
-        }));
+        if (e.target.name === "postalCode" || e.target.name === "city" || e.target.name === "country") {
+            setVenue(prevVenue => ({
+                ...prevVenue,
+                postalCode: {
+                    ...prevVenue.postalCode,
+                    [e.target.name]: e.target.value
+                }
+            }));
+        } else {
+            setVenue(prevVenue => ({
+                ...prevVenue,
+                [e.target.name]: e.target.value
+            }));
+        }
     }
+
 
     return (
         <>
@@ -137,22 +176,28 @@ const ListVenues = () => {
                     pagination={true}
                     sortable={true}
                     paginationPageSize={10}
+                    paginationPageSizeSelectorValues={[10, 25, 50, 100]}
                     animateRows={true}
+                    autoSizeStrategy={{ type: 'fitCellContents' }}
                 />
+
             </div>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{editMode ? "Edit Venue" : "Add New Venue"}</DialogTitle>
                 <DialogContent>
                     <form onSubmit={handleSubmit}>
-                        <TextField disabled label="ID" name="id" id="id" value={venue.id} onChange={(e) => handleChangeVenue(e)} fullWidth required />
-                        <TextField label="Name" name="name" id="name" value={venue.name} onChange={(e) => handleChangeVenue(e)} fullWidth required />
-                        <TextField label="Address" name="address" id="address" value={venue.address} onChange={(e) => handleChangeVenue(e)} fullWidth required />
-                        <TextField label="Phone" name="phone" id="phone" value={venue.phone} onChange={(e) => handleChangeVenue(e)} fullWidth required />
-                        <TextField label="Email" name="email" id="email" value={venue.email} onChange={(e) => handleChangeVenue(e)} fullWidth required />
-                        <TextField label="Capacity" name="capacity" id="capacity" value={venue.capacity} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Name" name="name" id="name" value={venue.name} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Address" name="address" id="address" value={venue.address} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Phone" name="phone" id="phone" value={venue.phone} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Email" name="email" id="email" value={venue.email} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Capacity" name="capacity" id="capacity" value={venue.capacity} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Postal Code" name="postalCode" id="postalCode" value={venue.postalCode.postalCode} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="City" name="city" id="city" value={venue.postalCode.city} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+                        <TextField style={{ marginBottom: "5px", marginRight: "5px", marginTop: "5px" }} label="Country" name="country" id="country" value={venue.postalCode.country} onChange={(e) => handleChangeVenue(e)} fullWidth required />
+
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Cancel<CloseIcon /></Button>
-                            <Button type="submit" variant="contained" color="success">{editMode ? "Save Changes" : "Add Venue"}</Button>
+                            <Button type="submit" variant="contained" color="success">{editMode ? "Edit Venue" : "Add Venue"} <CheckBoxIcon /></Button>
                         </DialogActions>
                     </form>
                 </DialogContent>

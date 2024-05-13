@@ -5,7 +5,8 @@ import { fetchEvents } from './EventHandler';
 function HomePage() {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState(['All']);
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
     useEffect(() => {
         fetchEvents()
@@ -27,12 +28,14 @@ function HomePage() {
 
     const handleCategoryChange = (event) => {
         const category = event.target.value;
-        if (category === 'All') {
+        setSelectedCategory(category);
+        if (category === 'All' || category === undefined) {
             setFilteredEvents(events);
         } else {
             setFilteredEvents(events.filter(event => event.eventCategory === category));
         }
     };
+
 
     return (
         <div>
@@ -43,12 +46,14 @@ function HomePage() {
             <br />
             <h2>Upcoming Events</h2>
             <Box sx={{ width: 150, marginBottom: 3 }}>
-                <FormControl fullWidth>
+                <FormControl variant="outlined" fullWidth>
                     <InputLabel id="select-category-label">Categories:</InputLabel>
                     <Select
                         labelId="select-category-label"
                         id="select-category"
+                        value={selectedCategory}
                         onChange={handleCategoryChange}
+                        label="Categories"
                     >
                         <MenuItem value="All">All</MenuItem>
                         {categories.map(category => (
@@ -56,6 +61,7 @@ function HomePage() {
                         ))}
                     </Select>
                 </FormControl>
+
             </Box>
             <Grid container spacing={3}>
                 {filteredEvents.map(event => (

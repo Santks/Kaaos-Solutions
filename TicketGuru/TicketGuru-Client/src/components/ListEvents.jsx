@@ -149,12 +149,12 @@ const ListEvents = () => {
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"success"} component={Link} to={{ pathname: `/ticketbuy/${data.id}` }}>Buy tickets<ShoppingCartIcon /></Button>
         },
         {
             field: "",
             headerName: "",
-            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={{pathname:`/ticketbuy/${data.id}` }}>Buy tickets<AssessmentIcon /></Button>
+            cellRenderer: ({ data }) => <Button color={"secondary"} component={Link} to={`/eventreport/${data.id}`}>Report<AssessmentIcon /></Button>
         },
     ];
 
@@ -166,10 +166,13 @@ const ListEvents = () => {
                     columnDefs={columnDefs}
                     rowData={rowData}
                     pagination={true}
-                    paginationPageSize={25}
                     sortable={true}
+                    paginationPageSize={10}
+                    paginationPageSizeSelectorValues={[10, 25, 50, 100]}
                     animateRows={true}
+                    autoSizeStrategy={{ type: 'fitCellContents' }}
                 />
+
             </div>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{editMode ? "Edit Event" : "Add a new event"}</DialogTitle>

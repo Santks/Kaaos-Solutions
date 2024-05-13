@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import { Box, AppBar, Tabs, Tab, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Alert } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -28,6 +28,13 @@ function App() {
   const [user, setUser] = useState(null);
   const [loginOpen, setLoginOpen] = useState(false);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   async function handleLogin(username, password) {
     const formData = new FormData();
     formData.append('username', username);
@@ -41,7 +48,8 @@ function App() {
     if (response.ok) {
       const user = await response.json();
       setUser(user);
-      console.log(user)
+      // Store user data in local storage
+      localStorage.setItem('user', JSON.stringify(user));
       return true;
     } else {
       return false;
@@ -55,10 +63,13 @@ function App() {
 
     if (response.ok) {
       setUser(null);
+      // Remove user data from local storage
+      localStorage.removeItem('user');
     } else {
       console.error('Failed to logout');
     }
   }
+
 
   const userRole = user?.authorities.find(auth => auth.authority === 'ROLE_ADMIN') ? 'ROLE_ADMIN' :
     user?.authorities.find(auth => auth.authority === 'ROLE_EVENT_MANAGER') ? 'ROLE_EVENT_MANAGER' :
@@ -94,9 +105,9 @@ function Navigation({ user, onLogout, setLoginOpen }) {
   const currentPath = location.pathname;
 
   const paths = {
-    'ROLE_ADMIN': ["/", "/events", "/ticketbuy", "/ticketcheck", "/users", "/venues"],
+    'ROLE_ADMIN': ["/", "/events", "/ticketcheck", "/users", "/venues"],
     'ROLE_EVENT_MANAGER': ["/", "/events", "/venues"],
-    'ROLE_SELLER': ["/", "/ticketbuy"],
+    'ROLE_SELLER': ["/", "/events", "ticketcheck"],
     'ROLE_TICKET_INSPECTOR': ["/", "/ticketcheck"],
     'ROLE_USER': ["/"]
   };
@@ -105,10 +116,7 @@ function Navigation({ user, onLogout, setLoginOpen }) {
 
   const userPaths = paths[userRole];
 
-  let value = userPaths.indexOf(currentPath);
-  if (value === -1) {
-    value = false;
-  }
+  let value = userPaths.includes(currentPath) ? userPaths.indexOf(currentPath) : false;
 
   return (
     <AppBar position="static" color="primary">

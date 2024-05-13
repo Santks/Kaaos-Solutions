@@ -17,7 +17,7 @@ const Login = ({ open, onClose, onLogin }) => {
             setError(null);
             onClose();
         } else {
-            setError('Wrong username or password');
+            setError('Error: Wrong username or password!');
         }
     };
 

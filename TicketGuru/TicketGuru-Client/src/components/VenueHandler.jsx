@@ -51,12 +51,10 @@ export const editVenue = (id, data) => {
 export const deleteVenue = (id) => {
     return fetch(`${apiUrl}/${id}`, {
         method: 'DELETE',
-        headers: headers
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(response.statusText)
-            }
-            return response.json()
-        });
+        headers: headers,
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error(errorMessage);
+        }
+    });
 };

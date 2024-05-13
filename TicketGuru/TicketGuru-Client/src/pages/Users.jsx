@@ -9,23 +9,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import { fetchUsers, addUser, editUser, deleteUser } from "../components/UserHandler";
 
-//example data
-// {
-//     "userId": 1,
-//     "firstName": "John",
-//     "lastName": "Doe",
-//     "phone": null,
-//     "email": "john@doe.com",
-//     "address": null,
-//     "activeUser": false,
-//     "postalCode": null,
-//     "userRole": {
-//         "userRoleId": 1,
-//         "userRoleName": "customer",
-//         "roleDesc": null,
-//         "user": null
-//     }
-// }
 const ListUsers = () => {
     const [rowData, setRowData] = useState([]);
     const [open, setOpen] = useState(false);
@@ -181,6 +164,8 @@ const ListUsers = () => {
                     sortable={true}
                     paginationPageSize={10}
                     animateRows={true}
+                    autoSizeStrategy={{ type: 'fitCellContents' }}
+
                 />
             </div>
             <Dialog open={open} onClose={handleClose}>
