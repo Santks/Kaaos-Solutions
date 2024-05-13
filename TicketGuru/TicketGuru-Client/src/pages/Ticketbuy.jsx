@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -9,6 +9,23 @@ import { Alert, Divider, FormControl, InputLabel, MenuItem, Select } from '@mui/
 import { useParams } from 'react-router-dom';
 import { fetchTicketTypes } from '../components/TicketTypeHandler';
 import { fetchEvents } from '../components/EventHandler';
+import { useReactToPrint } from 'react-to-print';
+import PrintIcon from '@mui/icons-material/Print';
+
+const PrintTickets = React.forwardRef(({ completedOrder }, ref) => {
+    return (
+        <Box ref={ref}>
+            {completedOrder.tickets.map((ticket, index) => (
+                <Card key={index}>
+                    <h4>{'Ticket id: ' + ticket.ticketId}</h4>
+                    <div>{'UUID: ' + ticket.uuid}</div>
+                </Card>
+            ))}
+        </Box>
+    );
+});
+
+
 
 export default function Ticketbuy() {
     const { eventId } = useParams();
@@ -17,7 +34,11 @@ export default function Ticketbuy() {
     const [completedOrder, setCompletedOrder] = useState(null)
     const [event, setEvent] = useState(null);
     const [ticketTypes, setTicketTypes] = useState([])
+    const componentRef = useRef(null);
 
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
     const currDate = new Date();
     // set empty order
@@ -74,7 +95,6 @@ export default function Ticketbuy() {
         if (order.tickets.length === 0) {
             return alert("Select tickets to add to order first.")
         }
-        
 
         const url = "https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/orders"
         headers.set('Content-Type', 'application/json')
@@ -136,9 +156,6 @@ export default function Ticketbuy() {
         }
     }
 
-
-
- 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
             {isLoadingEvents ? <Card>getting data...</Card>
@@ -150,8 +167,8 @@ export default function Ticketbuy() {
                         <br />
                         {ticketTypes.length === 0 ? <>No ticket types found. Create new types first.</> :
 
-                            ticketTypes.map((item) => (
-                                <>
+                            ticketTypes.map((item, index) => (
+                                <div key={index}>
                                     <label>{'Type: ' + item.name}
                                         <br />
                                         <text>{'Desc: ' + item.description}</text>
@@ -164,7 +181,7 @@ export default function Ticketbuy() {
                                             onChange={(e) => handleInputChange(e, item)} />
                                     </label>
                                     <br />
-                                </>
+                                </div>
                             ))}
 
                         <br />
@@ -183,15 +200,8 @@ export default function Ticketbuy() {
                 <div>{'Order date:' + completedOrder.date}</div>
                 <div>{'Order id:' + completedOrder.orderId}</div>
                 <div>{'Order total:' + completedOrder.totalPrice}</div>
-                {completedOrder.tickets.map((ticket) => {
-                    return (
-                        <Card>
-                            <h4>{'Ticket id: ' + ticket.ticketId}</h4>
-                            <div>{'UUID: ' + ticket.uuid}</div>
-                        </Card>
-
-                    )
-                })}
+                <PrintTickets ref={componentRef} completedOrder={completedOrder} />
+                <Button onClick={handlePrint}> <PrintIcon /> </Button>
             </>}
         </Box>
     )
