@@ -1,7 +1,7 @@
 const ApiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/events';
 
 const headers = {
-    'Authorization': 'Basic ' + btoa('admin:admin')
+    'Authorization': 'Basic ' + btoa('admin@example.com:admin')
 };
 
 const errorMessage = "Homma meni ihan wilduks!";

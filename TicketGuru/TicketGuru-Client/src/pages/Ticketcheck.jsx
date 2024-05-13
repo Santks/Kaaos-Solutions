@@ -12,7 +12,7 @@ const Ticketcheck = () => {
   const [ticketInfo, setTicketInfo] = useState(null);
   const [error, setError] = useState(null);
 
-  const username = 'Admin';
+  const username = 'admin@example.com';
   const password = 'admin';
   const headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));

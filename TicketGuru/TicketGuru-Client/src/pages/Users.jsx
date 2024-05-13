@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem } from '@mui/material';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,6 +17,8 @@ const ListUsers = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [editMode, setEditMode] = useState(false);
+
+
     const [user, setUser] = useState({
         "userId": null,
         "firstName": "",
@@ -28,7 +30,8 @@ const ListUsers = () => {
         "postalCode": null,
         "userRole": {
             "userRoleId": 1,
-        }
+        },
+        "password": "",
     })
     const defaultUser = {
         "userId": null,
@@ -41,7 +44,8 @@ const ListUsers = () => {
         "postalCode": null,
         "userRole": {
             "userRoleId": 1,
-        }
+        },
+        "password": "",
     }
 
     useEffect(() => {
@@ -179,7 +183,13 @@ const ListUsers = () => {
                         <TextField label="Phone" name="phone" id="phone" value={user.phone} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <TextField label="Address" name="address" id="address" value={user.address} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         {/* <TextField label="Postal Code" name="postalCode" id="postalCode" value={user.postalCode} onChange={(e) => handleChangeUser(e)} fullWidth required /> */}
-                        <TextField label="User Role ID" name="userRoleId" id="userRoleId" value={user.userRole.userRoleId} onChange={(e) => handleChangeUser(e)} fullWidth required />
+                        <Select label="User Role ID" name="userRoleId" id="userRoleId" value={user.userRole.userRoleId} onChange={(e) => handleChangeUser(e)} fullWidth required>
+                            <MenuItem value={57}>Admin</MenuItem>
+                            <MenuItem value={58}>Seller</MenuItem>
+                            <MenuItem value={59}>Inspector</MenuItem>
+                            <MenuItem value={60}>Manager</MenuItem>
+                        </Select>
+                        <TextField label="Password" name="password" id="password" value={user.password} onChange={(e) => handleChangeUser(e)} fullWidth required />
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="error">Cancel<CloseIcon /></Button>
                             <Button type="submit" variant="contained" color="success">{editMode ? "Save Changes" : "Add User"}</Button>

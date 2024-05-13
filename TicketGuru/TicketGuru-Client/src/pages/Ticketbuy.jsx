@@ -35,7 +35,7 @@ export default function Ticketbuy() {
 
     //
     // headers+auth
-    const username = 'Admin';
+    const username = 'admin@example.com';
     const password = 'admin';
     const headers = new Headers();
     headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));

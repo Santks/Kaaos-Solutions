@@ -1,7 +1,7 @@
 const apiUrl = 'https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype'
 
 const headers = {
-    'Authorization': 'Basic ' + btoa('admin:admin')
+    'Authorization': 'Basic ' + btoa('admin@example.com:admin')
 };
 
 export const fetchTicketTypes = (eventId) => {

@@ -1,5 +1,5 @@
 const headers = {
-    'Authorization': 'Basic ' + btoa('admin:admin')
+    'Authorization': 'Basic ' + btoa('admin@example.com:admin')
 };
 
 export const fetchEventTickets = (eventid) => {
