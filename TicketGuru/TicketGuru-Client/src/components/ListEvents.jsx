@@ -16,13 +16,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-<<<<<<< HEAD
 // ListEvents component
-=======
-import { addEvent, fetchEvents, fetchEventTickets, fetchVenues, editEvent, deleteEvent } from './EventHandler';
-import { fetchTicketTypes, fetchTicketTypesAll } from './TicketTypeHandler';
-
->>>>>>> 6c6b0b891dea13d879a6b722712607eddad2fb4d
 const ListEvents = () => {
     
     // State variables for storing row data, dialog open state, ticket info, venues, selected venue, start date, end date, selected event, 

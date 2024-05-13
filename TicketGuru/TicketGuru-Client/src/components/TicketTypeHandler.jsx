@@ -16,15 +16,6 @@ export const fetchTicketTypesAll = () => {
             return response.json()
         });
 };
-export const fetchTicketTypesAll = () => {
-    return fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickettype`, { headers })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(response.statusText)
-            }
-            return response.json()
-        });
-};
 
 // Function to add a new ticket type to the API
 export const addTicketType = (data) => {
