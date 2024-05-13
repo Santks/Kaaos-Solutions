@@ -197,25 +197,59 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 - Järjestelmän turvallisuus on toteutettu Spring Securityn Basic Authenticationin avulla. [(Dokumentaatio)](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)
 - Järjestelmään on myös toteutettu CORS-konfiguraatio, josta lisää tietoa [CORS-dokumentaatiossa](../TicketGuru/REST%20dokumentaatio/CORS.md)
 
-### Tämän lisäksi
-- ohjelmakoodin tulee olla kommentoitua
-- luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa johdonmukaisia nimeämiskäytäntöjä
-- ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta vältytään
 
 ## Testaus
-Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa. Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan erillisiin dokumentteihin.
+Projektissa testataan ohjelmistoa jatkuvasti, jotta saadaan varmistettua ohjelmiston toimivuus uusien ominaisuuksien lisäysten tai päivitysten jälkeen. 
 
-Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu.
+Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi: 
+* Yksikkötestaus yksittäisiä komponentteja ja niiden toimintaa varten
+* Integraatiotestaus uusien ominaisuuksien lisäystä varten
+* End to end testaus client puolen käyttöliittymää/sovellusta varten
+
+#### Testauksen teknologiat
+- Ohjelmiston yksikkötestit ovat toteutettu Javan JUnit testeinä
+- Integraatiotestauksessa on käytetty Spring Bootin tarjoamaa SpringBootTest toiminnallisuutta.
+- End to end testit on toteutettu RobotFramework testeinä ja testauksessa on käytetty apuna Selenium-kirjastoa.
+
 
 ## Asennustiedot
-Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta:
 
-- Järjestelmän kehitysympäristö: miten järjestelmän kehitysympäristön saisi rakennettua johonkin toiseen koneeseen
-- Järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi asennettua johonkin uuteen ympäristöön.
+### Järjestelmän asennus uuteen kehitysympäristöön
+Järjestelmän voi asentaa toiselle koneelle ainakin kahdella eri tavalla:
+* Kloonaamalla projektin Github:ista omalle koneelleen
+* Lataamalla projektin lähdekoodin zip-tiedostona projektin Github-repositoriosta
+* [Projektin Github-repositorio](https://github.com/Santks/Kaaos-Solutions)
+* Latauksen jälkeen pura zip-tiedosto haluamaasi hakemistoon koneellasi
+* Tämän jälkeen avaa kehitysympäristö ja tuo projektin kansio editoriin
 
-Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.).
+### Järjestelmän asennus uuteen tuotantoympäristöön
+1. Valmistelut: Ennen asennuksen aloittamista varmista, että tuotantoympäristö täyttää kaikki järjestelmän vaatimukset, kuten riittävän kapasiteetin, käyttöjärjestelmäversion ja riippuvuuksien asennuksen.
+
+2. Lähdekoodin hankkiminen: Hanki järjestelmän lähdekoodi valitsemallasi tavalla, esimerkiksi kloonaamalla projektin GitHubista tai lataamalla zip-tiedosto. ([Projektin Github-repositorio](https://github.com/Santks/Kaaos-Solutions))
+
+3. Ympäristön asetukset: Määritä tarvittavat ympäristömuuttujat ja konfiguraatiot, kuten tietokantayhteydet ja ulkoiset palvelut, jotka järjestelmä tarvitsee toimiakseen.
+
+4. Riippuvuuksien asennus: Asenna järjestelmän kaikki puuttuvat riippuvuudet. Avaa komentokehote ja navigoi kansioon, jossa projekti on. Projektin kansion löydettyä vaihda sen sisällä "TicketGuru-Client" kansioon ja kirjoita komento *npm install*. Huom! Katso myös, että pom.xml tiedostossa ovat kaikki tarvittavat riippuvuudet.
+
+5. Tietokannan alustaminen: Projektissa on MySQL-tietokanta. TicketGuru-Backend kansion DBSchema.SQL tiedosto alustaa tietokannan, jos sitä ei ole vielä olemassa.
+
+6. Käynnistäminen ja testaus: Käynnistä järjestelmä tuotantoympäristössä ja suorita kattavat testit varmistaaksesi, että asennus onnistui ja järjestelmä toimii odotetusti.
+
+**Virhetilanteiden ilmetessä ota yhteyttä IT-tukeen: kaaossolutions@support.fi**
+
 
 ## Käynnistys- ja käyttöohje
-Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä.
 
-Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat järjestelmän pariin!
+### Käynnistys
+- Avaa sovellus osoitteesta [https://santks.github.io/Kaaos-Solutions/](https://santks.github.io/Kaaos-Solutions/)
+- Kirjaudu sisään käyttäjällesi 
+
+Sovelluksen käytettävyys on rajoitettu roolien mukaan, joten et ehkä pysty käyttäämään kaikkia toiminnallisuuksia riippuen käyttäjätilisi roolista
+
+- Jos roolisi on *admin*, voit käyttää sovellusta ilman rajoitteita.
+- Jos roolisi on *ticket inspector*, voit tarkastaa lippuja.
+- Jos roolisi on *manager*, voit hallita ja tarkastella tapahtumia sekä tapahtumapaikkoja.
+- Jos roolisi on *seller*, voit tarkastella tapahtumia sekä myydä tai tarkistaa lippuja.
+- Jos roolisi on *user*, voit nähdä vain etusivun.
+
+**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä, jonka saa käyttöön ottamalla yhteyttä IT-tukeen: kaaossolutions@support.fi**
