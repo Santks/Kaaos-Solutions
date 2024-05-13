@@ -200,14 +200,14 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 - Järjestelmän backend on toteutettu Javalla, Spring Bootilla ja MySQL tietokannalla. Järjestelmän client on tehty Reactilla ja Vitellä.
 - Käytetyiden teknologioiden versiot: Java 17, React.js 18.2.0, Vite v5.2.8
 - REST-rajapinnan kuvaus löytyy järjestelmän [REST-dokumentaatiosta](../TicketGuru/REST%20dokumentaatio/)
-- Järjestelmän turvallisuus on toteutettu Spring Securityn Basic Authenticationin avulla. [(Dokumentaatio)](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)
-- Järjestelmään on myös toteutettu CORS-konfiguraatio, josta lisää tietoa [CORS-dokumentaatiossa](../TicketGuru/REST%20dokumentaatio/CORS.md)
+- Järjestelmän turvallisuus on toteutettu Spring Securityn Basic Authenticationin avulla. [Dokumentaatio.](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)
+- Järjestelmään on myös toteutettu CORS-konfiguraatio, josta lisää tietoa [CORS-dokumentaatiossa.](../TicketGuru/REST%20dokumentaatio/CORS.md)
 
 
 ## Testaus
 Projektissa testataan ohjelmistoa jatkuvasti, jotta saadaan varmistettua ohjelmiston toimivuus uusien ominaisuuksien lisäysten tai päivitysten jälkeen. 
 
-Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi: 
+#### Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi: 
 * Yksikkötestaus yksittäisiä komponentteja ja niiden toimintaa varten
 * Integraatiotestaus uusien ominaisuuksien lisäystä varten
 * End to end testaus client puolen käyttöliittymää/sovellusta varten
@@ -222,9 +222,8 @@ Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi:
 
 ### Järjestelmän asennus uuteen kehitysympäristöön
 Järjestelmän voi asentaa toiselle koneelle ainakin kahdella eri tavalla:
-* Kloonaamalla projektin Github:ista omalle koneelleen
-* Lataamalla projektin lähdekoodin zip-tiedostona projektin Github-repositoriosta
-* [Projektin Github-repositorio](https://github.com/Santks/Kaaos-Solutions)
+* Kloonaamalla projekti Githubista omalle päätelaitteelle
+* Lataamalla projektin lähdekoodi zip-tiedostona projektin [Github-repositoriosta](https://github.com/Santks/Kaaos-Solutions)
 * Latauksen jälkeen pura zip-tiedosto haluamaasi hakemistoon koneellasi
 * Tämän jälkeen avaa kehitysympäristö ja tuo projektin kansio editoriin
 
@@ -258,4 +257,4 @@ Sovelluksen käytettävyys on rajoitettu roolien mukaan, joten et ehkä pysty k�
 - Jos roolisi on *seller*, voit tarkastella tapahtumia sekä myydä tai tarkistaa lippuja.
 - Jos roolisi on *user*, voit nähdä vain etusivun.
 
-**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä, jonka saa käyttöön ottamalla yhteyttä IT-tukeen: kaaossolutions@support.fi**
+**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä jonka autentikointitiedot löytyvät [autentikointidokumentaatiosta.](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)**
