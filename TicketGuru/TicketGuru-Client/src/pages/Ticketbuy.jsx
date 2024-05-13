@@ -70,8 +70,11 @@ export default function Ticketbuy() {
         event.preventDefault()
         if (order.event.id === '') {
             return alert("Select event")
-
         }
+        if (order.tickets.length === 0) {
+            return alert("Select tickets to add to order first.")
+        }
+        
 
         const url = "https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/orders"
         headers.set('Content-Type', 'application/json')
@@ -135,15 +138,7 @@ export default function Ticketbuy() {
 
 
 
-    const getEvents = async () => {
-        try {
-            // Call fetchEvents to get events data
-            const events = await fetchEvents();
-            return events;
-        } catch (e) {
-
-        }
-    }
+ 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
             {isLoadingEvents ? <Card>getting data...</Card>
