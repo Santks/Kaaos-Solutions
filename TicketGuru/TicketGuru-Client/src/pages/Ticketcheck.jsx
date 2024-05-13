@@ -6,11 +6,13 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import dayjs from 'dayjs'
+import QRCode from 'qrcode.react';
 
 const Ticketcheck = () => {
   const [ticketId, setTicketId] = useState('');
   const [ticketInfo, setTicketInfo] = useState(null);
   const [error, setError] = useState(null);
+  const [showQR, setShowQR] = useState(false);
 
   const username = 'admin@example.com';
   const password = 'admin';
@@ -61,6 +63,10 @@ const Ticketcheck = () => {
     return date
   }
 
+  const handleShowQR = () => {
+    setShowQR(!showQR);
+  }
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
       <h1 id='header'>Ticketguru lipuntarkastus</h1>
@@ -73,6 +79,7 @@ const Ticketcheck = () => {
       />
       <Button id='search' variant="contained" onClick={fetchTicketInfo}>Hae lippu</Button>
       <Button id='patch' variant="contained" onClick={patchTicketInfo}>Merkitse käytetyksi</Button>
+      <Button variant="contained" onClick={handleShowQR}>{showQR ? 'Piilota QR Code' : 'Näytä QR Code'}</Button>
       {error && <Typography id='error' variant="h6" color="error">Virhe: {error}</Typography>}
       {ticketInfo &&
         <Card id='ticketInfo'>
@@ -91,6 +98,7 @@ const Ticketcheck = () => {
               Käytetty (pvm): {ticketInfo.ticketUsed === "1970-01-01T00:00:00" ? "Lippua ei ole käytetty" : formattedDate()}
             </Typography>
           </CardContent>
+          {showQR && ticketInfo && <QRCode value={ticketInfo.uuid} />}
         </Card>
       }
     </Box>

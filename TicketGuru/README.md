@@ -195,7 +195,7 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 
 
 ## Tekninen kuvaus
-- Järjestelmän backend sekä tietokanta toimivat CSC:n rahti palvelun avulla, joka pitää kyseiset osat käynnissä. Järjestelmän client on tällä hetkellä vain saatavilla paikallisesti ajettavana react sovelluksena. 
+- Järjestelmän backend sekä tietokanta toimivat CSC:n rahti palvelun avulla, joka pitää kyseiset osat käynnissä. Järjestelmän client on tällä hetkellä saatavilla paikallisesti ajettavana react sovelluksena, tai [github-pages](https://santks.github.io/Kaaos-Solutions/). 
 - Palvelimena toimii edellisessä kohdassa mainittu rahti ympäristö. TicketGuru-järjestelmä on julkaistu sinne tämän Github-repositorion master haaran pohjalta ja järjestelmä päivittyy automaattisesti, kun master haaraan tulee muutoksia.
 - Järjestelmän backend on toteutettu Javalla, Spring Bootilla ja MySQL tietokannalla. Järjestelmän client on tehty Reactilla ja Vitellä.
 - Käytetyiden teknologioiden versiot: Java 17, React.js 18.2.0, Vite v5.2.8
@@ -257,4 +257,8 @@ Sovelluksen käytettävyys on rajoitettu roolien mukaan, joten et ehkä pysty k�
 - Jos roolisi on *seller*, voit tarkastella tapahtumia sekä myydä tai tarkistaa lippuja.
 - Jos roolisi on *user*, voit nähdä vain etusivun.
 
+<<<<<<< HEAD
 **Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä jonka autentikointitiedot löytyvät [autentikointidokumentaatiosta.](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)**
+=======
+**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä, jonka saa käyttöön ottamalla yhteyttä IT-tukeen: kaaossolutions@support.fi**
+>>>>>>> ee234fd9cf16543f76a2a30fc1c692d9ce1e89d5
