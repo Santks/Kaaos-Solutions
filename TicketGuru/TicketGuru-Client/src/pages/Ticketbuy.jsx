@@ -25,8 +25,6 @@ const PrintTickets = React.forwardRef(({ completedOrder }, ref) => {
     );
 });
 
-
-
 export default function Ticketbuy() {
     const { eventId } = useParams();
     const [isLoadingEvents, setIsLoadingEvents] = useState(true);

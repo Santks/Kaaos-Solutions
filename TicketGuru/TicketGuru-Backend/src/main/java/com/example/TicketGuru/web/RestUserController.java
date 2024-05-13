@@ -74,9 +74,6 @@ public class RestUserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request
         } 
         try {
-            String password = UUID.randomUUID().toString();
-            newUser.setPassword(password);
-
             User savedUser = userService.registerNewUser(newUser);
             
             // Lähetä käyttäjälle salasana (email, txt, savumerkki)
