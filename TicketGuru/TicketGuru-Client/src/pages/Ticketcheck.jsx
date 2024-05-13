@@ -8,17 +8,22 @@ import CardContent from '@mui/material/CardContent';
 import dayjs from 'dayjs'
 import QRCode from 'qrcode.react';
 
+// TicketCheck component
 const Ticketcheck = () => {
+
+  // State variables for the ticket ID, ticket information, error, and QR code display
   const [ticketId, setTicketId] = useState('');
   const [ticketInfo, setTicketInfo] = useState(null);
   const [error, setError] = useState(null);
   const [showQR, setShowQR] = useState(false);
 
+  // Username and password for API request, including the Authorization header
   const username = 'admin@example.com';
   const password = 'admin';
   const headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
 
+  // Function to fetch ticket information
   const fetchTicketInfo = async () => {
     try {
       const response = await fetch(`https://kaaos-solutions-kaaosticketguru.rahtiapp.fi/tickets/${ticketId}`, { headers });
@@ -33,6 +38,7 @@ const Ticketcheck = () => {
     }
   };
 
+  // Function ticket set used
   const patchTicketInfo = async () => {
     try {
       const dateNow = new Date().toISOString();
@@ -58,15 +64,20 @@ const Ticketcheck = () => {
     }
   };
 
+  // Function to format date
   const formattedDate = () => {
     const date = dayjs(ticketInfo.ticketUsed).format("DD.MM.YYYY - HH:mm");
     return date
   }
 
+  // Function to toggle QR code display
   const handleShowQR = () => {
+    if (ticketInfo) {
     setShowQR(!showQR);
+    }
   }
 
+  // Rendering the component
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
       <h1 id='header'>Ticketguru lipuntarkastus</h1>
