@@ -11,6 +11,7 @@ import { fetchTicketTypes } from '../components/TicketTypeHandler';
 import { fetchEvents } from '../components/EventHandler';
 import { useReactToPrint } from 'react-to-print';
 import PrintIcon from '@mui/icons-material/Print';
+import QRCode from 'qrcode.react';
 
 const PrintTickets = React.forwardRef(({ completedOrder }, ref) => {
     return (
@@ -19,6 +20,7 @@ const PrintTickets = React.forwardRef(({ completedOrder }, ref) => {
                 <Card key={index}>
                     <h4>{'Ticket id: ' + ticket.ticketId}</h4>
                     <div>{'UUID: ' + ticket.uuid}</div>
+                    <QRCode value={ticket.uuid} />
                 </Card>
             ))}
         </Box>
