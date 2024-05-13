@@ -81,11 +81,12 @@ TG_Event sisältää tapahtumat. TG_Event on yhteydessä TG_Venue -luokkaan (Man
 |Name|C/100|Tapahtuman nimi|
 |Description|C/1000|Tapahtuman kuvaus|
 |EventCategory|C/50|Tapahtuman kategoria|
-|StartDate|LocalDate|Alkamispäivä|
-|EndDate|LocalDate|Päättymispäivä|
-|EventStatus|C/50|Tapahtuman status|
+|StartDate|LocalDateTime|Alkamispäivä|
+|EndDate|LocalDateTime|Päättymispäivä|
+|EventStatus|C/1|Tapahtuman status|
 |OrganiserName|C/100|Järjestäjän nimi|
 |MaxTickets|N|Lippujen maksimimäärä|
+|TicketTypes|List|Lipputyypit|
 
 
 ### TG_Order
@@ -99,6 +100,7 @@ TG_Order sisältää tilaukset. TG_Order on yhteydessä TG_User -luokkaan (ManyT
 |TotalPrice|Double|Kokonaishinta|
 |OrderPaid|Boolean|Onko tilaus maksettu? (True/False)|
 |Seller_id| N (FK)|Myyjän id|
+|Tickets|List|Liput|
 
 
 ### TG_Payment
@@ -107,7 +109,7 @@ TG_Payment sisältää maksut. TG_Payment on yhteydessä TG_User ja TG_Order -lu
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
 |Payment_id|AN (PK)|Maksun id|
-|Customer_id|N (FK)|Asiakkaan id|
+|User_id|N (FK)|Asiakkaan id|
 |Order_id|N (FK)|Tilauksen id|
 |Amount|Double|Summa|
 |PaymentDate|LocalDate|Maksupäivä|
@@ -120,10 +122,10 @@ TG_Ticket sisältää liput. TG_Ticket on yhteydessä Event, TicketType ja Order
 | Kenttä | Tyyppi | Kuvaus |
 |--------|--------|--------|
 |Ticket_id|AN (PK)|Lipun id|
+|UUID|uuid|Lipun UUID|
 |Event_id|N (FK)|Tapahtuman id|
 |TicketType_id|N (FK)|Lipputyypin id|
 |Order_id|N (FK)|Tilauksen id|
-|Price|Double|Lipun hinta|
 |TicketUsed|LocalDateTime|Aikaleima lipulle (jos käytetty)|
 
 
@@ -141,6 +143,7 @@ TG_User sisältää käyttäjät. TG_User on yhteydessä PostalCode ja UserRole 
 |PostalCode|N (FK)|Postinumeron id|
 |ActiveUser|Boolean|Onko käyttäjä aktiivinen? (True/False)|
 |UserRoleId|N (FK)|Käyttäjäroolin id|
+|Password|C/50|Salasana|
 
 
 ### TG_Venue
@@ -176,6 +179,9 @@ TG_TicketType sisältää lipputyypit. TG_TicketType on yhteydessä Ticket -luok
 |TicketType_id|AN (PK)|Lipputyypin id|
 |Name|C/100|Lipputyyppi|
 |Description|C/1000|Lipputyypin kuvaus|
+|Tickets|List|Liput|
+|Event|N (FK)|Tapahtuman id|
+|Price|Double|Lipputyypin hinta|
 
 
 ### TG_UserRole
