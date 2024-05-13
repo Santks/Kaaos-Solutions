@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem } from '@mui/material';
-import { addEvent, fetchEvents, fetchVenues, editEvent, deleteEvent } from './EventHandler';
+import { addEvent, fetchEvents, fetchVenues, editEvent, deleteEvent, fetchEventTickets } from './EventHandler';
 import { format, parseISO } from 'date-fns';
 import { fetchTicketTypes } from './TicketTypeHandler';
 import AddchartIcon from '@mui/icons-material/Addchart';
@@ -74,6 +74,12 @@ const ListEvents = () => {
 
     // Function to confirm deleting an event
     const confirmDelete = () => {
+        fetchEventTickets(selectedEvent.id).then(data => {
+            if (data && data.length > 0) {
+                setDeleteDialogOpen(false)
+                alert('can not remove an event with existing tickets')
+                return;
+    } else
         deleteEvent(selectedEvent.id)
             .then(() => {
                 fetchEvents().then(data => setRowData(data));
@@ -82,7 +88,7 @@ const ListEvents = () => {
                 console.error('Error:', error);
             });
         setDeleteDialogOpen(false);
-    };
+    })};
 
     // Fetching the events, venues, and ticket types when the component mounts
     useEffect(() => {
