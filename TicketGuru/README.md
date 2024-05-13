@@ -195,7 +195,7 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 
 
 ## Tekninen kuvaus
-- Järjestelmän backend sekä tietokanta toimivat CSC:n rahti palvelun avulla, joka pitää kyseiset osat käynnissä. Järjestelmän client on tällä hetkellä vain saatavilla paikallisesti ajettavana react sovelluksena. 
+- Järjestelmän backend sekä tietokanta toimivat CSC:n rahti palvelun avulla, joka pitää kyseiset osat käynnissä. Järjestelmän client on tällä hetkellä saatavilla paikallisesti ajettavana react sovelluksena, tai [github-pages](https://santks.github.io/Kaaos-Solutions/). 
 - Palvelimena toimii edellisessä kohdassa mainittu rahti ympäristö. TicketGuru-järjestelmä on julkaistu sinne tämän Github-repositorion master haaran pohjalta ja järjestelmä päivittyy automaattisesti, kun master haaraan tulee muutoksia.
 - Järjestelmän backend on toteutettu Javalla, Spring Bootilla ja MySQL tietokannalla. Järjestelmän client on tehty Reactilla ja Vitellä.
 - Käytetyiden teknologioiden versiot: Java 17, React.js 18.2.0, Vite v5.2.8
