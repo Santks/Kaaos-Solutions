@@ -30,61 +30,61 @@ import org.springframework.web.context.request.WebRequest;
 
 @RestController
 public class RestUserController {
-	
-	private static final Logger log = LoggerFactory.getLogger(RestUserController.class);
-	
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-	
+	private static final Logger log = LoggerFactory.getLogger(RestUserController.class);
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Autowired
 	private UserRepository userRepo;
-	
-	
+
+
 	// GET (all)
-    @GetMapping("/users")
-    Iterable<User> getAllEvents() {
-        log.info("Get all events");
-        return userRepo.findAll();
-    }
-    
-    // GET (id)
-    @GetMapping("/users/id/{id}")
-    User getUserById(@PathVariable Long id) {
-    	log.info("Get user by id");
-    	return userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
-    }
-    // GET (email)
-    @GetMapping("/users/email/{emailaddress}") // exact address, ignores case
-    User getUserById(@PathVariable String emailaddress) {
-    	log.info("Get user by email address");
-    	return userRepo.findByEmail(emailaddress).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
-    }
-    
-  
+	@GetMapping("/users")
+	Iterable<User> getAllEvents() {
+		log.info("Get all events");
+		return userRepo.findAll();
+	}
+
+	// GET (id)
+	@GetMapping("/users/id/{id}")
+	User getUserById(@PathVariable Long id) {
+		log.info("Get user by id");
+		return userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
+	}
+	// GET (email)
+	@GetMapping("/users/email/{emailaddress}") // exact address, ignores case
+	User getUserById(@PathVariable String emailaddress) {
+		log.info("Get user by email address");
+		return userRepo.findByEmail(emailaddress).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // 404: Not Found!
+	}
+
+
 	//POST
-    @PostMapping("/users")
-    @ResponseStatus(HttpStatus.CREATED) // 201: Created!
-    ResponseEntity<User> createEvent(@Validated @RequestBody User newUser) {
-        log.info("Create new user");
-        Optional<User> existingUser = userRepo.findByEmail(newUser.getEmail());
-        if (existingUser.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request
-        } 
-        try {
-            User savedUser = userService.registerNewUser(newUser);
-            
-            // Lähetä käyttäjälle salasana (email, txt, savumerkki)
-            
-            return new ResponseEntity<>(savedUser, HttpStatus.CREATED); // 200: OK
-        }
-        catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-	
+	@PostMapping("/users")
+	@ResponseStatus(HttpStatus.CREATED) // 201: Created!
+	ResponseEntity<User> createEvent(@Validated @RequestBody User newUser) {
+		log.info("Create new user");
+		Optional<User> existingUser = userRepo.findByEmail(newUser.getEmail());
+		if (existingUser.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400: Bad Request
+		} 
+		try {
+			User savedUser = userService.registerNewUser(newUser);
+
+			// Lähetä käyttäjälle salasana (email, txt, savumerkki)
+
+			return new ResponseEntity<>(savedUser, HttpStatus.CREATED); // 200: OK
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	//PUT
 	@PutMapping("/users/{id}")
 	ResponseEntity<User> editUserRest(@Validated @RequestBody User editedUser, @PathVariable Long id) {
@@ -94,13 +94,14 @@ public class RestUserController {
 		}
 		editedUser.setUserId(id);
 		try {
-		return new ResponseEntity<>(userRepo.save(editedUser), HttpStatus.OK); // 200: OK
+			editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
+			return new ResponseEntity<>(userRepo.save(editedUser), HttpStatus.OK); // 200: OK
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500: Error
 		}
 	}
-		
-	
+
+
 	//DELETE
 	@DeleteMapping("/users/{id}")
 	ResponseEntity<String> deleteEvent(@PathVariable Long id) {
