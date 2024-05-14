@@ -207,10 +207,25 @@ TG_UserRole sisältää käyttäjän roolit. TG_UserRole on yhteydessä User -lu
 ## Testaus
 Projektissa testataan ohjelmistoa jatkuvasti, jotta saadaan varmistettua ohjelmiston toimivuus uusien ominaisuuksien lisäysten tai päivitysten jälkeen. 
 
-#### Ohjelmistoa testataan eri testityypeillä, joita ovat esimerkiksi: 
-* Yksikkötestaus yksittäisiä komponentteja ja niiden toimintaa varten
-* Integraatiotestaus uusien ominaisuuksien lisäystä varten
-* End to end testaus client puolen käyttöliittymää/sovellusta varten
+#### Ohjelmistoa testattiin eri testityypeillä: 
+
+#### ClientTest (E2E-test) ####
+Testillä testattiin sivujen avautumista, lipputietojen hakemista, uuden tilauksen
+tekemistä ja lipun merkitsemistä käytetyksi. Testauksessa tarkasteltiin järjestelmää
+kokonaisuutena ja varmistettiin eri komponenttien toimivuutta yhdessä.
+
+#### EventTest (Unit-test) ####
+Testillä testattiin Event ja Venue -luokkien toiminnallisuutta.
+
+#### OrderTest (Unit-test) ####
+Testillä testattiin Order -luokan toiminnallisuutta.
+
+#### RestOrderControllerIntegrationTest (Integration test) ####
+Testillä testataan RestOrderController-luokan toimintaa. Testissä luodaan uusi Order-
+olio ja lähetetään se /orders -endpointtiin POST-pyynnöllä. Tämän jälkeen tehdään GET-
+pyyntö ja varmistetaan, että tilaus on tallennettu tietokantaan. Lopuksi tehdään
+DELETE-pyyntö ja poistetaan luotu tilaus ja varmistetaan samalla myös tilauksen
+poistuminen toisella GET-pyynnöllä.
 
 #### Testauksen teknologiat
 - Ohjelmiston yksikkötestit ovat toteutettu Javan JUnit testeinä
