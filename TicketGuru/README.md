@@ -240,7 +240,7 @@ Järjestelmän voi asentaa toiselle koneelle ainakin kahdella eri tavalla:
 
 6. Käynnistäminen ja testaus: Käynnistä järjestelmä tuotantoympäristössä ja suorita kattavat testit varmistaaksesi, että asennus onnistui ja järjestelmä toimii odotetusti.
 
-**Virhetilanteiden ilmetessä ota yhteyttä IT-tukeen: kaaossolutions@support.fi**
+**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä jonka autentikointitiedot löytyvät [autentikointidokumentaatiosta.](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)**
 
 
 ## Käynnistys- ja käyttöohje
@@ -256,9 +256,3 @@ Sovelluksen käytettävyys on rajoitettu roolien mukaan, joten et ehkä pysty k�
 - Jos roolisi on *manager*, voit hallita ja tarkastella tapahtumia sekä tapahtumapaikkoja.
 - Jos roolisi on *seller*, voit tarkastella tapahtumia sekä myydä tai tarkistaa lippuja.
 - Jos roolisi on *user*, voit nähdä vain etusivun.
-
-<<<<<<< HEAD
-**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä jonka autentikointitiedot löytyvät [autentikointidokumentaatiosta.](../TicketGuru/REST%20dokumentaatio/Autentikointi.md)**
-=======
-**Kehitys- ja testaustarkoitukseen on määritelty erikseen käyttäjä, jonka saa käyttöön ottamalla yhteyttä IT-tukeen: kaaossolutions@support.fi**
->>>>>>> ee234fd9cf16543f76a2a30fc1c692d9ce1e89d5
